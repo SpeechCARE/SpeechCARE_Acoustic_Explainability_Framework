@@ -20,9 +20,9 @@ class ModelWrapper:
         report(f'{self.device} is available', True)
     
 
-    def get_model(self, device, weights_path= None):
+    def get_model(self, weights_path= None):
         """Returns the model instance."""
-        model = TBNet(self.config).to(device)
+        model = TBNet(self.config).to(self.device)
         if weights_path!= None: model.load_state_dict(torch.load(weights_path))
         return model
     

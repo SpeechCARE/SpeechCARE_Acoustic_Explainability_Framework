@@ -7,11 +7,12 @@ from SpeechCARE_Acoustic_Explainability_Framework.models.ModelWrapper import Mod
 from SpeechCARE_Acoustic_Explainability_Framework.Config import Config
 
 def main():
-    # parser = argparse.ArgumentParser(description="Test Acoustic Explainability Framework")
-    # parser.add_argument("--feature_extractor", type=str, required=True,
-    #                     help="Path to the PyTorch model to use as the feature extractor")
+    parser = argparse.ArgumentParser(description="Test Acoustic Explainability Framework")
+    parser.add_argument("--model_checkpoint", type=str, required=True,
+                        help="Path to the PyTorch model to use as the pretrained model.")
 
-    # args = parser.parse_args()
+    args = parser.parse_args()
+
     SIMPLE_ATTENTION = 16
     config = Config()
     config.max_num_segments = 100
@@ -31,7 +32,7 @@ def main():
     config.demography_hidden_size = 128
 
     wrapper = ModelWrapper(config)
-    model = wrapper.get_model("model_checkpoint.pth")
+    model = wrapper.get_model(args.model_checkpoint)
 
 if __name__ == "__main__":
     main()
