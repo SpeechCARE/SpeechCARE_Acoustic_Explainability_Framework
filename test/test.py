@@ -3,10 +3,12 @@ sys.path.append("")
 
 import argparse
 import torch
+import librosa
 
 from SpeechCARE_Acoustic_Explainability_Framework.models.ModelWrapper import ModelWrapper
 from SpeechCARE_Acoustic_Explainability_Framework.Config import Config
 from SpeechCARE_Acoustic_Explainability_Framework.SHAP.Shap import AcousticShap
+from SpeechCARE_Acoustic_Explainability_Framework.pauseExtraction.Pause_extraction import PauseExtraction
 
 def main():
     parser = argparse.ArgumentParser(description="Test Acoustic Explainability Framework")
@@ -23,7 +25,6 @@ def main():
     args = parser.parse_args()
 
     SIMPLE_ATTENTION = 16
-    config = Config()
     config = Config()
     config.seed = 133
     config.bs = 4
@@ -48,7 +49,23 @@ def main():
     # Convert the scalar to a torch.Tensor
     demography_tensor = torch.tensor(args.demography_info,dtype=torch.float16).reshape(1, 1) 
 
-    modified_spectrogram, freq_shann_ent = shap.get_speech_spectrogram(args.audio_path,demography_tensor,config,fig_save_path = args.fig_save_path)
+    modified_spectrogram, freq_shann_ent = shap.get_speech_spectrogram(args.audio_path,demography_tensor,config,fig_save_path = None)
+
+    config_pause = Config()
+    config_pause.device  = "cpu"
+    config_pause.batch_size = 16
+    config_pause.compute_type = "int8"
+    config_pause.model_id = "large-v3"
+
+    pause_extractor = PauseExtraction(config_pause,args.audio_path)
+    pauses = pause_extractor.extract_pauses()
+    marked_pauses = pause_extractor.mark_pauses(pauses)
+
+    y, sr = librosa.load(args.audio_path,sr=48000)
+    # pause_extractor.plot_spec_pause(modified_spectrogram,sr,y,marked_pauses, save_path = args.fig_save_path)
+
+    refine_pause = pause_extractor.refine_pauses(marked_pauses, sr=sr, energy_threshold=0.001, min_pause_duration=0.2,expansion_threshold = 0.03)
+    pause_extractor.plot_spec_pause(modified_spectrogram,sr,y,refine_pause, save_path = args.fig_save_path)
 
 
 
