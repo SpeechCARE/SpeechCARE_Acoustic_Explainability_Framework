@@ -16,8 +16,10 @@ from scipy.signal import welch
 
 
 class AcousticShap():
+    
     def __init__(self,model):
-        self.mode = model
+        self.model = model
+        
     
     def get_speech_shap_results(
         self,
@@ -95,10 +97,10 @@ class AcousticShap():
             segment_length=segment_length,
             overlap=overlap,
             target_sr=target_sr,
-            device=self.device
+            device=self.model.device
         )
 
-        segments_tensor = torch.tensor(result["segments_tensor"]).to(self.device)  # Input tensor for SHAP
+        segments_tensor = torch.tensor(result["segments_tensor"]).to(self.model.device)  # Input tensor for SHAP
         predictions = result["predictions"]
 
         if baseline_type == 'zeros':
@@ -120,7 +122,7 @@ class AcousticShap():
                 # Instead of calling self.model.forward(x)
                 return self.model.speech_only_forward(x)
         
-        explainer = shap.DeepExplainer(ModelWrapper(self), baseline_data)
+        explainer = shap.DeepExplainer(ModelWrapper(self.model), baseline_data)
 
         shap_values = explainer.shap_values(segments_tensor, check_additivity=False)  # Disable additivity check
 
@@ -142,7 +144,8 @@ class AcousticShap():
         segment_length=5,
         overlap=0.2,
         target_sr=16000,
-        baseline_type='zeros'
+        baseline_type='zeros',
+        fig_save_path = None
     ):
         """
         Calculates SHAP values for the given audio file, then calculates the modified 
@@ -169,7 +172,7 @@ class AcousticShap():
             overlap=overlap,
             merge_frame_duration=frame_duration,
             formants_to_plot=formants_to_plot,
-            fig_save_path=None,
+            fig_save_path=fig_save_path,
         )
 
         freq_shann_ent = self.frequency_shannon_entropy(
@@ -387,8 +390,8 @@ class AcousticShap():
 
         # plt.colorbar(img, ax=ax, format="%+2.0f dB")
         if fig_save_path:
-            folder_path = os.path.dirname(fig_save_path)
-            os.makedirs(folder_path, exist_ok=True)
+            # folder_path = os.path.dirname(fig_save_path)
+            # os.makedirs(folder_path, exist_ok=True)
             plt.savefig(fig_save_path, dpi=600, bbox_inches="tight")
             
         return modified_log_S
