@@ -145,7 +145,9 @@ class AcousticShap():
         overlap=0.2,
         target_sr=16000,
         baseline_type='zeros',
-        fig_save_path = None
+        pauses = None,
+        fig_save_path = None,
+        plot=False
     ):
         """
         Calculates SHAP values for the given audio file, then calculates the modified 
@@ -172,7 +174,9 @@ class AcousticShap():
             overlap=overlap,
             merge_frame_duration=frame_duration,
             formants_to_plot=formants_to_plot,
+            pauses=pauses,
             fig_save_path=fig_save_path,
+            plot=plot
         )
 
         freq_shann_ent = self.frequency_shannon_entropy(
@@ -281,7 +285,9 @@ class AcousticShap():
         merge_frame_duration=0.3,
         formants_to_plot=None,
         fig_save_path=None,
-        ax=None
+        pauses = None,
+        ax=None,
+        plot=False
     ):
         """
         Visualize the spectrogram with intensity modified by SHAP values, with optional formant plotting.
@@ -296,7 +302,9 @@ class AcousticShap():
             merge_frame_duration (float): Duration of merged frames in seconds.
             formants_to_plot (list): List of formants to plot (e.g., ["F0", "F1", "F2", "F3"]).
             fig_save_path (str, optional): Path to save the figure.
+            pauses (list): List of pauses to plot. 
             ax (matplotlib.axes.Axes, optional): Axis to plot on for subplots. If None, creates a new plot.
+            plot (bool): Whether to display the plot. Default is False. 
 
         Returns:
             None: Displays or saves the spectrogram.
@@ -369,6 +377,15 @@ class AcousticShap():
 
         img = librosa.display.specshow(modified_log_S, sr=sr, x_axis="time", y_axis="mel", cmap="viridis", ax=ax)
         # ax.set_title(f"UID: {name}, Spectrogram with SHAP-Adjusted Intensity (Label: {labels[label]})")
+
+        # Determine max_mel from the y_coords of the spectrogram
+        max_mel = img.axes.yaxis.get_data_interval()[-1]  # Get the maximum y-axis value (mel frequency)
+
+        if pauses:
+            for start, end, _, _, _, _, mark in pauses:
+                color = "red" if mark else "yellow"
+                ax.plot([start, start, end, end, start], [0, max_mel, max_mel, 0, 0], color=color, linewidth=2)
+
         ax.set_xlabel("")
         ax.set_ylabel("Frequency (Hz)", fontsize=16)
         ax.set_xlim(0, audio_duration)
@@ -393,5 +410,8 @@ class AcousticShap():
             # folder_path = os.path.dirname(fig_save_path)
             # os.makedirs(folder_path, exist_ok=True)
             plt.savefig(fig_save_path, dpi=600, bbox_inches="tight")
+
+        if plot: 
+            plt.show()
             
         return modified_log_S

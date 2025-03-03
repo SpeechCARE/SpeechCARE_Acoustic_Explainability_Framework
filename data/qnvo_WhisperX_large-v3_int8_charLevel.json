@@ -1,0 +1,4359 @@
+{
+    "segments": [
+        {
+            "start": 0.051,
+            "end": 11.817,
+            "text": " from the cookie jar, and he's going to fall off the stool, and the sink in the bath and the kitchen is overflowing, and the mother is drying the dishes, and I see the backyard through the window, and what else?",
+            "words": [
+                {
+                    "word": "from",
+                    "start": 0.051,
+                    "end": 0.191,
+                    "score": 0.992
+                },
+                {
+                    "word": "the",
+                    "start": 0.231,
+                    "end": 0.311,
+                    "score": 0.829
+                },
+                {
+                    "word": "cookie",
+                    "start": 0.371,
+                    "end": 0.671,
+                    "score": 0.834
+                },
+                {
+                    "word": "jar,",
+                    "start": 0.711,
+                    "end": 0.911,
+                    "score": 0.88
+                },
+                {
+                    "word": "and",
+                    "start": 0.931,
+                    "end": 1.011,
+                    "score": 0.484
+                },
+                {
+                    "word": "he's",
+                    "start": 1.031,
+                    "end": 1.172,
+                    "score": 0.392
+                },
+                {
+                    "word": "going",
+                    "start": 1.192,
+                    "end": 1.332,
+                    "score": 0.392
+                },
+                {
+                    "word": "to",
+                    "start": 1.352,
+                    "end": 1.432,
+                    "score": 0.238
+                },
+                {
+                    "word": "fall",
+                    "start": 1.472,
+                    "end": 1.732,
+                    "score": 0.849
+                },
+                {
+                    "word": "off",
+                    "start": 1.792,
+                    "end": 1.912,
+                    "score": 0.964
+                },
+                {
+                    "word": "the",
+                    "start": 1.952,
+                    "end": 2.112,
+                    "score": 0.78
+                },
+                {
+                    "word": "stool,",
+                    "start": 2.132,
+                    "end": 2.532,
+                    "score": 0.846
+                },
+                {
+                    "word": "and",
+                    "start": 2.792,
+                    "end": 2.912,
+                    "score": 0.9
+                },
+                {
+                    "word": "the",
+                    "start": 2.952,
+                    "end": 3.093,
+                    "score": 0.892
+                },
+                {
+                    "word": "sink",
+                    "start": 3.193,
+                    "end": 3.493,
+                    "score": 0.919
+                },
+                {
+                    "word": "in",
+                    "start": 3.573,
+                    "end": 3.653,
+                    "score": 0.841
+                },
+                {
+                    "word": "the",
+                    "start": 3.673,
+                    "end": 3.753,
+                    "score": 0.809
+                },
+                {
+                    "word": "bath",
+                    "start": 3.813,
+                    "end": 4.073,
+                    "score": 0.96
+                },
+                {
+                    "word": "and",
+                    "start": 4.233,
+                    "end": 4.333,
+                    "score": 0.755
+                },
+                {
+                    "word": "the",
+                    "start": 4.353,
+                    "end": 4.433,
+                    "score": 0.831
+                },
+                {
+                    "word": "kitchen",
+                    "start": 4.493,
+                    "end": 4.833,
+                    "score": 0.854
+                },
+                {
+                    "word": "is",
+                    "start": 4.893,
+                    "end": 4.993,
+                    "score": 0.51
+                },
+                {
+                    "word": "overflowing,",
+                    "start": 5.094,
+                    "end": 5.734,
+                    "score": 0.787
+                },
+                {
+                    "word": "and",
+                    "start": 5.894,
+                    "end": 5.994,
+                    "score": 0.851
+                },
+                {
+                    "word": "the",
+                    "start": 6.014,
+                    "end": 6.094,
+                    "score": 0.827
+                },
+                {
+                    "word": "mother",
+                    "start": 6.134,
+                    "end": 6.414,
+                    "score": 0.888
+                },
+                {
+                    "word": "is",
+                    "start": 6.534,
+                    "end": 6.614,
+                    "score": 0.709
+                },
+                {
+                    "word": "drying",
+                    "start": 6.754,
+                    "end": 7.115,
+                    "score": 0.789
+                },
+                {
+                    "word": "the",
+                    "start": 7.155,
+                    "end": 7.235,
+                    "score": 0.821
+                },
+                {
+                    "word": "dishes,",
+                    "start": 7.295,
+                    "end": 7.735,
+                    "score": 0.808
+                },
+                {
+                    "word": "and",
+                    "start": 8.115,
+                    "end": 8.235,
+                    "score": 0.84
+                },
+                {
+                    "word": "I",
+                    "start": 8.315,
+                    "end": 8.395,
+                    "score": 0.764
+                },
+                {
+                    "word": "see",
+                    "start": 8.475,
+                    "end": 8.715,
+                    "score": 0.823
+                },
+                {
+                    "word": "the",
+                    "start": 8.735,
+                    "end": 8.895,
+                    "score": 0.725
+                },
+                {
+                    "word": "backyard",
+                    "start": 9.056,
+                    "end": 9.616,
+                    "score": 0.865
+                },
+                {
+                    "word": "through",
+                    "start": 9.656,
+                    "end": 9.876,
+                    "score": 0.863
+                },
+                {
+                    "word": "the",
+                    "start": 9.896,
+                    "end": 9.976,
+                    "score": 0.805
+                },
+                {
+                    "word": "window,",
+                    "start": 10.036,
+                    "end": 10.456,
+                    "score": 0.954
+                },
+                {
+                    "word": "and",
+                    "start": 10.476,
+                    "end": 10.916,
+                    "score": 0.827
+                },
+                {
+                    "word": "what",
+                    "start": 11.457,
+                    "end": 11.597,
+                    "score": 0.54
+                },
+                {
+                    "word": "else?",
+                    "start": 11.617,
+                    "end": 11.817,
+                    "score": 0.728
+                }
+            ],
+            "chars": [
+                {
+                    "char": " "
+                },
+                {
+                    "char": "f",
+                    "start": 0.051,
+                    "end": 0.071,
+                    "score": 0.988
+                },
+                {
+                    "char": "r",
+                    "start": 0.071,
+                    "end": 0.111,
+                    "score": 0.991
+                },
+                {
+                    "char": "o",
+                    "start": 0.111,
+                    "end": 0.131,
+                    "score": 0.993
+                },
+                {
+                    "char": "m",
+                    "start": 0.131,
+                    "end": 0.191,
+                    "score": 0.996
+                },
+                {
+                    "char": " ",
+                    "start": 0.191,
+                    "end": 0.231,
+                    "score": 0.577
+                },
+                {
+                    "char": "t",
+                    "start": 0.231,
+                    "end": 0.251,
+                    "score": 0.992
+                },
+                {
+                    "char": "h",
+                    "start": 0.251,
+                    "end": 0.271,
+                    "score": 0.992
+                },
+                {
+                    "char": "e",
+                    "start": 0.271,
+                    "end": 0.311,
+                    "score": 0.504
+                },
+                {
+                    "char": " ",
+                    "start": 0.311,
+                    "end": 0.371,
+                    "score": 0.687
+                },
+                {
+                    "char": "c",
+                    "start": 0.371,
+                    "end": 0.411,
+                    "score": 0.991
+                },
+                {
+                    "char": "o",
+                    "start": 0.411,
+                    "end": 0.491,
+                    "score": 0.989
+                },
+                {
+                    "char": "o",
+                    "start": 0.491,
+                    "end": 0.531,
+                    "score": 0.504
+                },
+                {
+                    "char": "k",
+                    "start": 0.531,
+                    "end": 0.611,
+                    "score": 0.998
+                },
+                {
+                    "char": "i",
+                    "start": 0.611,
+                    "end": 0.631,
+                    "score": 0.843
+                },
+                {
+                    "char": "e",
+                    "start": 0.631,
+                    "end": 0.671,
+                    "score": 0.677
+                },
+                {
+                    "char": " ",
+                    "start": 0.671,
+                    "end": 0.711,
+                    "score": 0.594
+                },
+                {
+                    "char": "j",
+                    "start": 0.711,
+                    "end": 0.831,
+                    "score": 0.989
+                },
+                {
+                    "char": "a",
+                    "start": 0.831,
+                    "end": 0.851,
+                    "score": 0.991
+                },
+                {
+                    "char": "r",
+                    "start": 0.851,
+                    "end": 0.911,
+                    "score": 0.66
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 0.911,
+                    "end": 0.931,
+                    "score": 0.03
+                },
+                {
+                    "char": "a",
+                    "start": 0.931,
+                    "end": 0.971,
+                    "score": 0.47
+                },
+                {
+                    "char": "n",
+                    "start": 0.971,
+                    "end": 0.991,
+                    "score": 0.958
+                },
+                {
+                    "char": "d",
+                    "start": 0.991,
+                    "end": 1.011,
+                    "score": 0.024
+                },
+                {
+                    "char": " ",
+                    "start": 1.011,
+                    "end": 1.031,
+                    "score": 0.307
+                },
+                {
+                    "char": "h",
+                    "start": 1.031,
+                    "end": 1.052,
+                    "score": 0.015
+                },
+                {
+                    "char": "e",
+                    "start": 1.052,
+                    "end": 1.092,
+                    "score": 0.783
+                },
+                {
+                    "char": "'",
+                    "start": 1.092,
+                    "end": 1.112,
+                    "score": 0.097
+                },
+                {
+                    "char": "s",
+                    "start": 1.112,
+                    "end": 1.172,
+                    "score": 0.675
+                },
+                {
+                    "char": " ",
+                    "start": 1.172,
+                    "end": 1.192,
+                    "score": 0.733
+                },
+                {
+                    "char": "g",
+                    "start": 1.192,
+                    "end": 1.212,
+                    "score": 0.0
+                },
+                {
+                    "char": "o",
+                    "start": 1.212,
+                    "end": 1.252,
+                    "score": 0.498
+                },
+                {
+                    "char": "i",
+                    "start": 1.252,
+                    "end": 1.272,
+                    "score": 0.943
+                },
+                {
+                    "char": "n",
+                    "start": 1.272,
+                    "end": 1.292,
+                    "score": 0.022
+                },
+                {
+                    "char": "g",
+                    "start": 1.292,
+                    "end": 1.332,
+                    "score": 0.499
+                },
+                {
+                    "char": " ",
+                    "start": 1.332,
+                    "end": 1.352,
+                    "score": 0.003
+                },
+                {
+                    "char": "t",
+                    "start": 1.352,
+                    "end": 1.412,
+                    "score": 0.475
+                },
+                {
+                    "char": "o",
+                    "start": 1.412,
+                    "end": 1.432,
+                    "score": 0.0
+                },
+                {
+                    "char": " ",
+                    "start": 1.432,
+                    "end": 1.472,
+                    "score": 0.499
+                },
+                {
+                    "char": "f",
+                    "start": 1.472,
+                    "end": 1.612,
+                    "score": 0.996
+                },
+                {
+                    "char": "a",
+                    "start": 1.612,
+                    "end": 1.632,
+                    "score": 0.934
+                },
+                {
+                    "char": "l",
+                    "start": 1.632,
+                    "end": 1.692,
+                    "score": 0.953
+                },
+                {
+                    "char": "l",
+                    "start": 1.692,
+                    "end": 1.732,
+                    "score": 0.513
+                },
+                {
+                    "char": " ",
+                    "start": 1.732,
+                    "end": 1.792,
+                    "score": 0.873
+                },
+                {
+                    "char": "o",
+                    "start": 1.792,
+                    "end": 1.812,
+                    "score": 0.977
+                },
+                {
+                    "char": "f",
+                    "start": 1.812,
+                    "end": 1.872,
+                    "score": 0.993
+                },
+                {
+                    "char": "f",
+                    "start": 1.872,
+                    "end": 1.912,
+                    "score": 0.922
+                },
+                {
+                    "char": " ",
+                    "start": 1.912,
+                    "end": 1.952,
+                    "score": 0.528
+                },
+                {
+                    "char": "t",
+                    "start": 1.952,
+                    "end": 1.992,
+                    "score": 0.726
+                },
+                {
+                    "char": "h",
+                    "start": 1.992,
+                    "end": 2.032,
+                    "score": 0.879
+                },
+                {
+                    "char": "e",
+                    "start": 2.032,
+                    "end": 2.112,
+                    "score": 0.736
+                },
+                {
+                    "char": " ",
+                    "start": 2.112,
+                    "end": 2.132,
+                    "score": 0.988
+                },
+                {
+                    "char": "s",
+                    "start": 2.132,
+                    "end": 2.212,
+                    "score": 0.757
+                },
+                {
+                    "char": "t",
+                    "start": 2.212,
+                    "end": 2.252,
+                    "score": 0.998
+                },
+                {
+                    "char": "o",
+                    "start": 2.252,
+                    "end": 2.392,
+                    "score": 0.853
+                },
+                {
+                    "char": "o",
+                    "start": 2.392,
+                    "end": 2.452,
+                    "score": 0.88
+                },
+                {
+                    "char": "l",
+                    "start": 2.452,
+                    "end": 2.532,
+                    "score": 0.744
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 2.532,
+                    "end": 2.792,
+                    "score": 0.928
+                },
+                {
+                    "char": "a",
+                    "start": 2.792,
+                    "end": 2.812,
+                    "score": 0.994
+                },
+                {
+                    "char": "n",
+                    "start": 2.812,
+                    "end": 2.852,
+                    "score": 0.972
+                },
+                {
+                    "char": "d",
+                    "start": 2.852,
+                    "end": 2.912,
+                    "score": 0.735
+                },
+                {
+                    "char": " ",
+                    "start": 2.912,
+                    "end": 2.952,
+                    "score": 0.702
+                },
+                {
+                    "char": "t",
+                    "start": 2.952,
+                    "end": 2.972,
+                    "score": 0.994
+                },
+                {
+                    "char": "h",
+                    "start": 2.972,
+                    "end": 3.032,
+                    "score": 0.69
+                },
+                {
+                    "char": "e",
+                    "start": 3.032,
+                    "end": 3.093,
+                    "score": 0.992
+                },
+                {
+                    "char": " ",
+                    "start": 3.093,
+                    "end": 3.193,
+                    "score": 0.801
+                },
+                {
+                    "char": "s",
+                    "start": 3.193,
+                    "end": 3.313,
+                    "score": 0.988
+                },
+                {
+                    "char": "i",
+                    "start": 3.313,
+                    "end": 3.353,
+                    "score": 0.985
+                },
+                {
+                    "char": "n",
+                    "start": 3.353,
+                    "end": 3.413,
+                    "score": 0.813
+                },
+                {
+                    "char": "k",
+                    "start": 3.413,
+                    "end": 3.493,
+                    "score": 0.892
+                },
+                {
+                    "char": " ",
+                    "start": 3.493,
+                    "end": 3.573,
+                    "score": 0.952
+                },
+                {
+                    "char": "i",
+                    "start": 3.573,
+                    "end": 3.593,
+                    "score": 0.99
+                },
+                {
+                    "char": "n",
+                    "start": 3.593,
+                    "end": 3.653,
+                    "score": 0.692
+                },
+                {
+                    "char": " ",
+                    "start": 3.653,
+                    "end": 3.673,
+                    "score": 1.0
+                },
+                {
+                    "char": "t",
+                    "start": 3.673,
+                    "end": 3.693,
+                    "score": 0.987
+                },
+                {
+                    "char": "h",
+                    "start": 3.693,
+                    "end": 3.733,
+                    "score": 0.496
+                },
+                {
+                    "char": "e",
+                    "start": 3.733,
+                    "end": 3.753,
+                    "score": 0.945
+                },
+                {
+                    "char": " ",
+                    "start": 3.753,
+                    "end": 3.813,
+                    "score": 0.667
+                },
+                {
+                    "char": "b",
+                    "start": 3.813,
+                    "end": 3.893,
+                    "score": 1.0
+                },
+                {
+                    "char": "a",
+                    "start": 3.893,
+                    "end": 3.993,
+                    "score": 0.976
+                },
+                {
+                    "char": "t",
+                    "start": 3.993,
+                    "end": 4.013,
+                    "score": 0.999
+                },
+                {
+                    "char": "h",
+                    "start": 4.013,
+                    "end": 4.073,
+                    "score": 0.865
+                },
+                {
+                    "char": " ",
+                    "start": 4.073,
+                    "end": 4.233,
+                    "score": 0.955
+                },
+                {
+                    "char": "a",
+                    "start": 4.233,
+                    "end": 4.253,
+                    "score": 0.721
+                },
+                {
+                    "char": "n",
+                    "start": 4.253,
+                    "end": 4.293,
+                    "score": 0.846
+                },
+                {
+                    "char": "d",
+                    "start": 4.293,
+                    "end": 4.333,
+                    "score": 0.697
+                },
+                {
+                    "char": " ",
+                    "start": 4.333,
+                    "end": 4.353,
+                    "score": 0.991
+                },
+                {
+                    "char": "t",
+                    "start": 4.353,
+                    "end": 4.373,
+                    "score": 0.995
+                },
+                {
+                    "char": "h",
+                    "start": 4.373,
+                    "end": 4.413,
+                    "score": 0.503
+                },
+                {
+                    "char": "e",
+                    "start": 4.413,
+                    "end": 4.433,
+                    "score": 0.995
+                },
+                {
+                    "char": " ",
+                    "start": 4.433,
+                    "end": 4.493,
+                    "score": 0.667
+                },
+                {
+                    "char": "k",
+                    "start": 4.493,
+                    "end": 4.573,
+                    "score": 1.0
+                },
+                {
+                    "char": "i",
+                    "start": 4.573,
+                    "end": 4.593,
+                    "score": 1.0
+                },
+                {
+                    "char": "t",
+                    "start": 4.593,
+                    "end": 4.653,
+                    "score": 0.982
+                },
+                {
+                    "char": "c",
+                    "start": 4.653,
+                    "end": 4.693,
+                    "score": 0.598
+                },
+                {
+                    "char": "h",
+                    "start": 4.693,
+                    "end": 4.753,
+                    "score": 0.736
+                },
+                {
+                    "char": "e",
+                    "start": 4.753,
+                    "end": 4.773,
+                    "score": 0.998
+                },
+                {
+                    "char": "n",
+                    "start": 4.773,
+                    "end": 4.833,
+                    "score": 0.664
+                },
+                {
+                    "char": " ",
+                    "start": 4.833,
+                    "end": 4.893,
+                    "score": 0.994
+                },
+                {
+                    "char": "i",
+                    "start": 4.893,
+                    "end": 4.933,
+                    "score": 0.596
+                },
+                {
+                    "char": "s",
+                    "start": 4.933,
+                    "end": 4.993,
+                    "score": 0.425
+                },
+                {
+                    "char": " ",
+                    "start": 4.993,
+                    "end": 5.094,
+                    "score": 0.762
+                },
+                {
+                    "char": "o",
+                    "start": 5.094,
+                    "end": 5.134,
+                    "score": 1.0
+                },
+                {
+                    "char": "v",
+                    "start": 5.134,
+                    "end": 5.194,
+                    "score": 0.995
+                },
+                {
+                    "char": "e",
+                    "start": 5.194,
+                    "end": 5.234,
+                    "score": 0.5
+                },
+                {
+                    "char": "r",
+                    "start": 5.234,
+                    "end": 5.334,
+                    "score": 0.804
+                },
+                {
+                    "char": "f",
+                    "start": 5.334,
+                    "end": 5.394,
+                    "score": 0.676
+                },
+                {
+                    "char": "l",
+                    "start": 5.394,
+                    "end": 5.514,
+                    "score": 0.999
+                },
+                {
+                    "char": "o",
+                    "start": 5.514,
+                    "end": 5.534,
+                    "score": 0.993
+                },
+                {
+                    "char": "w",
+                    "start": 5.534,
+                    "end": 5.614,
+                    "score": 0.665
+                },
+                {
+                    "char": "i",
+                    "start": 5.614,
+                    "end": 5.634,
+                    "score": 0.998
+                },
+                {
+                    "char": "n",
+                    "start": 5.634,
+                    "end": 5.674,
+                    "score": 0.518
+                },
+                {
+                    "char": "g",
+                    "start": 5.674,
+                    "end": 5.734,
+                    "score": 0.506
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 5.734,
+                    "end": 5.894,
+                    "score": 0.807
+                },
+                {
+                    "char": "a",
+                    "start": 5.894,
+                    "end": 5.914,
+                    "score": 0.979
+                },
+                {
+                    "char": "n",
+                    "start": 5.914,
+                    "end": 5.954,
+                    "score": 0.92
+                },
+                {
+                    "char": "d",
+                    "start": 5.954,
+                    "end": 5.994,
+                    "score": 0.655
+                },
+                {
+                    "char": " ",
+                    "start": 5.994,
+                    "end": 6.014,
+                    "score": 0.965
+                },
+                {
+                    "char": "t",
+                    "start": 6.014,
+                    "end": 6.034,
+                    "score": 0.991
+                },
+                {
+                    "char": "h",
+                    "start": 6.034,
+                    "end": 6.054,
+                    "score": 0.994
+                },
+                {
+                    "char": "e",
+                    "start": 6.054,
+                    "end": 6.094,
+                    "score": 0.497
+                },
+                {
+                    "char": " ",
+                    "start": 6.094,
+                    "end": 6.134,
+                    "score": 0.545
+                },
+                {
+                    "char": "m",
+                    "start": 6.134,
+                    "end": 6.214,
+                    "score": 0.901
+                },
+                {
+                    "char": "o",
+                    "start": 6.214,
+                    "end": 6.274,
+                    "score": 0.994
+                },
+                {
+                    "char": "t",
+                    "start": 6.274,
+                    "end": 6.294,
+                    "score": 1.0
+                },
+                {
+                    "char": "h",
+                    "start": 6.294,
+                    "end": 6.334,
+                    "score": 1.0
+                },
+                {
+                    "char": "e",
+                    "start": 6.334,
+                    "end": 6.374,
+                    "score": 0.502
+                },
+                {
+                    "char": "r",
+                    "start": 6.374,
+                    "end": 6.414,
+                    "score": 0.931
+                },
+                {
+                    "char": " ",
+                    "start": 6.414,
+                    "end": 6.534,
+                    "score": 0.979
+                },
+                {
+                    "char": "i",
+                    "start": 6.534,
+                    "end": 6.574,
+                    "score": 0.499
+                },
+                {
+                    "char": "s",
+                    "start": 6.574,
+                    "end": 6.614,
+                    "score": 0.919
+                },
+                {
+                    "char": " ",
+                    "start": 6.614,
+                    "end": 6.754,
+                    "score": 0.856
+                },
+                {
+                    "char": "d",
+                    "start": 6.754,
+                    "end": 6.814,
+                    "score": 0.801
+                },
+                {
+                    "char": "r",
+                    "start": 6.814,
+                    "end": 6.934,
+                    "score": 0.999
+                },
+                {
+                    "char": "y",
+                    "start": 6.934,
+                    "end": 6.994,
+                    "score": 0.996
+                },
+                {
+                    "char": "i",
+                    "start": 6.994,
+                    "end": 7.014,
+                    "score": 0.998
+                },
+                {
+                    "char": "n",
+                    "start": 7.014,
+                    "end": 7.055,
+                    "score": 0.503
+                },
+                {
+                    "char": "g",
+                    "start": 7.055,
+                    "end": 7.115,
+                    "score": 0.438
+                },
+                {
+                    "char": " ",
+                    "start": 7.115,
+                    "end": 7.155,
+                    "score": 0.5
+                },
+                {
+                    "char": "t",
+                    "start": 7.155,
+                    "end": 7.175,
+                    "score": 0.986
+                },
+                {
+                    "char": "h",
+                    "start": 7.175,
+                    "end": 7.195,
+                    "score": 0.986
+                },
+                {
+                    "char": "e",
+                    "start": 7.195,
+                    "end": 7.235,
+                    "score": 0.491
+                },
+                {
+                    "char": " ",
+                    "start": 7.235,
+                    "end": 7.295,
+                    "score": 0.666
+                },
+                {
+                    "char": "d",
+                    "start": 7.295,
+                    "end": 7.395,
+                    "score": 0.958
+                },
+                {
+                    "char": "i",
+                    "start": 7.395,
+                    "end": 7.455,
+                    "score": 0.999
+                },
+                {
+                    "char": "s",
+                    "start": 7.455,
+                    "end": 7.495,
+                    "score": 0.504
+                },
+                {
+                    "char": "h",
+                    "start": 7.495,
+                    "end": 7.595,
+                    "score": 1.0
+                },
+                {
+                    "char": "e",
+                    "start": 7.595,
+                    "end": 7.675,
+                    "score": 0.965
+                },
+                {
+                    "char": "s",
+                    "start": 7.675,
+                    "end": 7.735,
+                    "score": 0.423
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 7.735,
+                    "end": 8.115,
+                    "score": 0.894
+                },
+                {
+                    "char": "a",
+                    "start": 8.115,
+                    "end": 8.135,
+                    "score": 0.94
+                },
+                {
+                    "char": "n",
+                    "start": 8.135,
+                    "end": 8.175,
+                    "score": 0.844
+                },
+                {
+                    "char": "d",
+                    "start": 8.175,
+                    "end": 8.235,
+                    "score": 0.735
+                },
+                {
+                    "char": " ",
+                    "start": 8.235,
+                    "end": 8.315,
+                    "score": 0.99
+                },
+                {
+                    "char": "I",
+                    "start": 8.315,
+                    "end": 8.395,
+                    "score": 0.764
+                },
+                {
+                    "char": " ",
+                    "start": 8.395,
+                    "end": 8.475,
+                    "score": 0.841
+                },
+                {
+                    "char": "s",
+                    "start": 8.475,
+                    "end": 8.555,
+                    "score": 0.75
+                },
+                {
+                    "char": "e",
+                    "start": 8.555,
+                    "end": 8.635,
+                    "score": 1.0
+                },
+                {
+                    "char": "e",
+                    "start": 8.635,
+                    "end": 8.715,
+                    "score": 0.72
+                },
+                {
+                    "char": " ",
+                    "start": 8.715,
+                    "end": 8.735,
+                    "score": 0.993
+                },
+                {
+                    "char": "t",
+                    "start": 8.735,
+                    "end": 8.775,
+                    "score": 0.525
+                },
+                {
+                    "char": "h",
+                    "start": 8.775,
+                    "end": 8.835,
+                    "score": 0.903
+                },
+                {
+                    "char": "e",
+                    "start": 8.835,
+                    "end": 8.895,
+                    "score": 0.747
+                },
+                {
+                    "char": " ",
+                    "start": 8.895,
+                    "end": 9.056,
+                    "score": 0.864
+                },
+                {
+                    "char": "b",
+                    "start": 9.056,
+                    "end": 9.136,
+                    "score": 1.0
+                },
+                {
+                    "char": "a",
+                    "start": 9.136,
+                    "end": 9.156,
+                    "score": 1.0
+                },
+                {
+                    "char": "c",
+                    "start": 9.156,
+                    "end": 9.216,
+                    "score": 0.822
+                },
+                {
+                    "char": "k",
+                    "start": 9.216,
+                    "end": 9.336,
+                    "score": 0.807
+                },
+                {
+                    "char": "y",
+                    "start": 9.336,
+                    "end": 9.456,
+                    "score": 0.846
+                },
+                {
+                    "char": "a",
+                    "start": 9.456,
+                    "end": 9.476,
+                    "score": 1.0
+                },
+                {
+                    "char": "r",
+                    "start": 9.476,
+                    "end": 9.556,
+                    "score": 0.772
+                },
+                {
+                    "char": "d",
+                    "start": 9.556,
+                    "end": 9.616,
+                    "score": 0.67
+                },
+                {
+                    "char": " ",
+                    "start": 9.616,
+                    "end": 9.656,
+                    "score": 0.898
+                },
+                {
+                    "char": "t",
+                    "start": 9.656,
+                    "end": 9.676,
+                    "score": 1.0
+                },
+                {
+                    "char": "h",
+                    "start": 9.676,
+                    "end": 9.716,
+                    "score": 0.902
+                },
+                {
+                    "char": "r",
+                    "start": 9.716,
+                    "end": 9.756,
+                    "score": 0.684
+                },
+                {
+                    "char": "o",
+                    "start": 9.756,
+                    "end": 9.776,
+                    "score": 1.0
+                },
+                {
+                    "char": "u",
+                    "start": 9.776,
+                    "end": 9.796,
+                    "score": 0.988
+                },
+                {
+                    "char": "g",
+                    "start": 9.796,
+                    "end": 9.836,
+                    "score": 0.907
+                },
+                {
+                    "char": "h",
+                    "start": 9.836,
+                    "end": 9.876,
+                    "score": 0.56
+                },
+                {
+                    "char": " ",
+                    "start": 9.876,
+                    "end": 9.896,
+                    "score": 1.0
+                },
+                {
+                    "char": "t",
+                    "start": 9.896,
+                    "end": 9.936,
+                    "score": 0.44
+                },
+                {
+                    "char": "h",
+                    "start": 9.936,
+                    "end": 9.956,
+                    "score": 0.987
+                },
+                {
+                    "char": "e",
+                    "start": 9.956,
+                    "end": 9.976,
+                    "score": 0.989
+                },
+                {
+                    "char": " ",
+                    "start": 9.976,
+                    "end": 10.036,
+                    "score": 0.663
+                },
+                {
+                    "char": "w",
+                    "start": 10.036,
+                    "end": 10.116,
+                    "score": 0.996
+                },
+                {
+                    "char": "i",
+                    "start": 10.116,
+                    "end": 10.136,
+                    "score": 1.0
+                },
+                {
+                    "char": "n",
+                    "start": 10.136,
+                    "end": 10.236,
+                    "score": 0.801
+                },
+                {
+                    "char": "d",
+                    "start": 10.236,
+                    "end": 10.356,
+                    "score": 1.0
+                },
+                {
+                    "char": "o",
+                    "start": 10.356,
+                    "end": 10.376,
+                    "score": 1.0
+                },
+                {
+                    "char": "w",
+                    "start": 10.376,
+                    "end": 10.456,
+                    "score": 0.929
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 10.456,
+                    "end": 10.476,
+                    "score": 0.999
+                },
+                {
+                    "char": "a",
+                    "start": 10.476,
+                    "end": 10.796,
+                    "score": 0.746
+                },
+                {
+                    "char": "n",
+                    "start": 10.796,
+                    "end": 10.856,
+                    "score": 0.786
+                },
+                {
+                    "char": "d",
+                    "start": 10.856,
+                    "end": 10.916,
+                    "score": 0.949
+                },
+                {
+                    "char": " ",
+                    "start": 10.916,
+                    "end": 11.457,
+                    "score": 0.963
+                },
+                {
+                    "char": "w",
+                    "start": 11.457,
+                    "end": 11.477,
+                    "score": 0.984
+                },
+                {
+                    "char": "h",
+                    "start": 11.477,
+                    "end": 11.497,
+                    "score": 0.023
+                },
+                {
+                    "char": "a",
+                    "start": 11.497,
+                    "end": 11.557,
+                    "score": 0.661
+                },
+                {
+                    "char": "t",
+                    "start": 11.557,
+                    "end": 11.597,
+                    "score": 0.494
+                },
+                {
+                    "char": " ",
+                    "start": 11.597,
+                    "end": 11.617,
+                    "score": 0.009
+                },
+                {
+                    "char": "e",
+                    "start": 11.617,
+                    "end": 11.657,
+                    "score": 0.915
+                },
+                {
+                    "char": "l",
+                    "start": 11.657,
+                    "end": 11.757,
+                    "score": 0.95
+                },
+                {
+                    "char": "s",
+                    "start": 11.757,
+                    "end": 11.797,
+                    "score": 0.721
+                },
+                {
+                    "char": "e",
+                    "start": 11.797,
+                    "end": 11.817,
+                    "score": 0.326
+                },
+                {
+                    "char": "?"
+                }
+            ]
+        },
+        {
+            "start": 12.017,
+            "end": 18.221,
+            "text": "The cookie jar, boy and a girl, and it's on the top shelf, and he's going to fall off that stool, and what else?",
+            "words": [
+                {
+                    "word": "The",
+                    "start": 12.017,
+                    "end": 12.097,
+                    "score": 0.167
+                },
+                {
+                    "word": "cookie",
+                    "start": 12.137,
+                    "end": 12.459,
+                    "score": 0.877
+                },
+                {
+                    "word": "jar,",
+                    "start": 12.479,
+                    "end": 12.9,
+                    "score": 0.803
+                },
+                {
+                    "word": "boy",
+                    "start": 13.121,
+                    "end": 13.302,
+                    "score": 0.984
+                },
+                {
+                    "word": "and",
+                    "start": 13.342,
+                    "end": 13.442,
+                    "score": 0.317
+                },
+                {
+                    "word": "a",
+                    "start": 13.463,
+                    "end": 13.483,
+                    "score": 0.894
+                },
+                {
+                    "word": "girl,",
+                    "start": 13.543,
+                    "end": 13.904,
+                    "score": 0.851
+                },
+                {
+                    "word": "and",
+                    "start": 14.085,
+                    "end": 14.406,
+                    "score": 0.7
+                },
+                {
+                    "word": "it's",
+                    "start": 14.647,
+                    "end": 14.768,
+                    "score": 0.884
+                },
+                {
+                    "word": "on",
+                    "start": 14.848,
+                    "end": 14.948,
+                    "score": 0.864
+                },
+                {
+                    "word": "the",
+                    "start": 14.968,
+                    "end": 15.049,
+                    "score": 0.804
+                },
+                {
+                    "word": "top",
+                    "start": 15.089,
+                    "end": 15.35,
+                    "score": 0.968
+                },
+                {
+                    "word": "shelf,",
+                    "start": 15.39,
+                    "end": 15.771,
+                    "score": 0.723
+                },
+                {
+                    "word": "and",
+                    "start": 15.972,
+                    "end": 16.053,
+                    "score": 0.59
+                },
+                {
+                    "word": "he's",
+                    "start": 16.093,
+                    "end": 16.213,
+                    "score": 0.744
+                },
+                {
+                    "word": "going",
+                    "start": 16.253,
+                    "end": 16.374,
+                    "score": 0.232
+                },
+                {
+                    "word": "to",
+                    "start": 16.394,
+                    "end": 16.434,
+                    "score": 0.015
+                },
+                {
+                    "word": "fall",
+                    "start": 16.474,
+                    "end": 16.695,
+                    "score": 0.648
+                },
+                {
+                    "word": "off",
+                    "start": 16.755,
+                    "end": 16.896,
+                    "score": 0.884
+                },
+                {
+                    "word": "that",
+                    "start": 16.956,
+                    "end": 17.157,
+                    "score": 0.935
+                },
+                {
+                    "word": "stool,",
+                    "start": 17.217,
+                    "end": 17.599,
+                    "score": 0.747
+                },
+                {
+                    "word": "and",
+                    "start": 17.699,
+                    "end": 17.799,
+                    "score": 0.772
+                },
+                {
+                    "word": "what",
+                    "start": 17.88,
+                    "end": 18.121,
+                    "score": 0.707
+                },
+                {
+                    "word": "else?",
+                    "start": 18.141,
+                    "end": 18.221,
+                    "score": 0.416
+                }
+            ],
+            "chars": [
+                {
+                    "char": "T",
+                    "start": 12.017,
+                    "end": 12.037,
+                    "score": 0.0
+                },
+                {
+                    "char": "h",
+                    "start": 12.037,
+                    "end": 12.077,
+                    "score": 0.5
+                },
+                {
+                    "char": "e",
+                    "start": 12.077,
+                    "end": 12.097,
+                    "score": 0.001
+                },
+                {
+                    "char": " ",
+                    "start": 12.097,
+                    "end": 12.137,
+                    "score": 0.518
+                },
+                {
+                    "char": "c",
+                    "start": 12.137,
+                    "end": 12.178,
+                    "score": 0.977
+                },
+                {
+                    "char": "o",
+                    "start": 12.178,
+                    "end": 12.238,
+                    "score": 0.901
+                },
+                {
+                    "char": "o",
+                    "start": 12.238,
+                    "end": 12.298,
+                    "score": 0.971
+                },
+                {
+                    "char": "k",
+                    "start": 12.298,
+                    "end": 12.398,
+                    "score": 0.969
+                },
+                {
+                    "char": "i",
+                    "start": 12.398,
+                    "end": 12.419,
+                    "score": 0.844
+                },
+                {
+                    "char": "e",
+                    "start": 12.419,
+                    "end": 12.459,
+                    "score": 0.6
+                },
+                {
+                    "char": " ",
+                    "start": 12.459,
+                    "end": 12.479,
+                    "score": 0.883
+                },
+                {
+                    "char": "j",
+                    "start": 12.479,
+                    "end": 12.68,
+                    "score": 0.999
+                },
+                {
+                    "char": "a",
+                    "start": 12.68,
+                    "end": 12.74,
+                    "score": 0.828
+                },
+                {
+                    "char": "r",
+                    "start": 12.74,
+                    "end": 12.9,
+                    "score": 0.582
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 12.9,
+                    "end": 13.121,
+                    "score": 0.816
+                },
+                {
+                    "char": "b",
+                    "start": 13.121,
+                    "end": 13.202,
+                    "score": 0.993
+                },
+                {
+                    "char": "o",
+                    "start": 13.202,
+                    "end": 13.262,
+                    "score": 0.986
+                },
+                {
+                    "char": "y",
+                    "start": 13.262,
+                    "end": 13.302,
+                    "score": 0.973
+                },
+                {
+                    "char": " ",
+                    "start": 13.302,
+                    "end": 13.342,
+                    "score": 0.746
+                },
+                {
+                    "char": "a",
+                    "start": 13.342,
+                    "end": 13.362,
+                    "score": 0.134
+                },
+                {
+                    "char": "n",
+                    "start": 13.362,
+                    "end": 13.422,
+                    "score": 0.816
+                },
+                {
+                    "char": "d",
+                    "start": 13.422,
+                    "end": 13.442,
+                    "score": 0.001
+                },
+                {
+                    "char": " ",
+                    "start": 13.442,
+                    "end": 13.463,
+                    "score": 0.921
+                },
+                {
+                    "char": "a",
+                    "start": 13.463,
+                    "end": 13.483,
+                    "score": 0.894
+                },
+                {
+                    "char": " ",
+                    "start": 13.483,
+                    "end": 13.543,
+                    "score": 0.656
+                },
+                {
+                    "char": "g",
+                    "start": 13.543,
+                    "end": 13.663,
+                    "score": 1.0
+                },
+                {
+                    "char": "i",
+                    "start": 13.663,
+                    "end": 13.683,
+                    "score": 0.97
+                },
+                {
+                    "char": "r",
+                    "start": 13.683,
+                    "end": 13.804,
+                    "score": 0.88
+                },
+                {
+                    "char": "l",
+                    "start": 13.804,
+                    "end": 13.904,
+                    "score": 0.553
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 13.904,
+                    "end": 14.085,
+                    "score": 0.769
+                },
+                {
+                    "char": "a",
+                    "start": 14.085,
+                    "end": 14.105,
+                    "score": 0.916
+                },
+                {
+                    "char": "n",
+                    "start": 14.105,
+                    "end": 14.145,
+                    "score": 0.722
+                },
+                {
+                    "char": "d",
+                    "start": 14.145,
+                    "end": 14.406,
+                    "score": 0.463
+                },
+                {
+                    "char": " ",
+                    "start": 14.406,
+                    "end": 14.647,
+                    "score": 0.998
+                },
+                {
+                    "char": "i",
+                    "start": 14.647,
+                    "end": 14.667,
+                    "score": 0.976
+                },
+                {
+                    "char": "t",
+                    "start": 14.667,
+                    "end": 14.707,
+                    "score": 0.713
+                },
+                {
+                    "char": "'",
+                    "start": 14.707,
+                    "end": 14.727,
+                    "score": 0.863
+                },
+                {
+                    "char": "s",
+                    "start": 14.727,
+                    "end": 14.768,
+                    "score": 0.985
+                },
+                {
+                    "char": " ",
+                    "start": 14.768,
+                    "end": 14.848,
+                    "score": 0.852
+                },
+                {
+                    "char": "o",
+                    "start": 14.848,
+                    "end": 14.868,
+                    "score": 0.999
+                },
+                {
+                    "char": "n",
+                    "start": 14.868,
+                    "end": 14.948,
+                    "score": 0.73
+                },
+                {
+                    "char": " ",
+                    "start": 14.948,
+                    "end": 14.968,
+                    "score": 1.0
+                },
+                {
+                    "char": "t",
+                    "start": 14.968,
+                    "end": 14.988,
+                    "score": 0.971
+                },
+                {
+                    "char": "h",
+                    "start": 14.988,
+                    "end": 15.009,
+                    "score": 0.965
+                },
+                {
+                    "char": "e",
+                    "start": 15.009,
+                    "end": 15.049,
+                    "score": 0.476
+                },
+                {
+                    "char": " ",
+                    "start": 15.049,
+                    "end": 15.089,
+                    "score": 0.84
+                },
+                {
+                    "char": "t",
+                    "start": 15.089,
+                    "end": 15.209,
+                    "score": 1.0
+                },
+                {
+                    "char": "o",
+                    "start": 15.209,
+                    "end": 15.27,
+                    "score": 0.998
+                },
+                {
+                    "char": "p",
+                    "start": 15.27,
+                    "end": 15.35,
+                    "score": 0.905
+                },
+                {
+                    "char": " ",
+                    "start": 15.35,
+                    "end": 15.39,
+                    "score": 0.987
+                },
+                {
+                    "char": "s",
+                    "start": 15.39,
+                    "end": 15.43,
+                    "score": 0.526
+                },
+                {
+                    "char": "h",
+                    "start": 15.43,
+                    "end": 15.551,
+                    "score": 1.0
+                },
+                {
+                    "char": "e",
+                    "start": 15.551,
+                    "end": 15.611,
+                    "score": 0.367
+                },
+                {
+                    "char": "l",
+                    "start": 15.611,
+                    "end": 15.691,
+                    "score": 0.981
+                },
+                {
+                    "char": "f",
+                    "start": 15.691,
+                    "end": 15.771,
+                    "score": 0.741
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 15.771,
+                    "end": 15.972,
+                    "score": 0.991
+                },
+                {
+                    "char": "a",
+                    "start": 15.972,
+                    "end": 15.992,
+                    "score": 0.751
+                },
+                {
+                    "char": "n",
+                    "start": 15.992,
+                    "end": 16.032,
+                    "score": 0.633
+                },
+                {
+                    "char": "d",
+                    "start": 16.032,
+                    "end": 16.053,
+                    "score": 0.387
+                },
+                {
+                    "char": " ",
+                    "start": 16.053,
+                    "end": 16.093,
+                    "score": 0.57
+                },
+                {
+                    "char": "h",
+                    "start": 16.093,
+                    "end": 16.113,
+                    "score": 0.915
+                },
+                {
+                    "char": "e",
+                    "start": 16.113,
+                    "end": 16.133,
+                    "score": 0.827
+                },
+                {
+                    "char": "'",
+                    "start": 16.133,
+                    "end": 16.173,
+                    "score": 0.504
+                },
+                {
+                    "char": "s",
+                    "start": 16.173,
+                    "end": 16.213,
+                    "score": 0.732
+                },
+                {
+                    "char": " ",
+                    "start": 16.213,
+                    "end": 16.253,
+                    "score": 0.972
+                },
+                {
+                    "char": "g",
+                    "start": 16.253,
+                    "end": 16.293,
+                    "score": 0.953
+                },
+                {
+                    "char": "o",
+                    "start": 16.293,
+                    "end": 16.314,
+                    "score": 0.183
+                },
+                {
+                    "char": "i",
+                    "start": 16.314,
+                    "end": 16.334,
+                    "score": 0.001
+                },
+                {
+                    "char": "n",
+                    "start": 16.334,
+                    "end": 16.354,
+                    "score": 0.021
+                },
+                {
+                    "char": "g",
+                    "start": 16.354,
+                    "end": 16.374,
+                    "score": 0.0
+                },
+                {
+                    "char": " ",
+                    "start": 16.374,
+                    "end": 16.394,
+                    "score": 0.76
+                },
+                {
+                    "char": "t",
+                    "start": 16.394,
+                    "end": 16.414,
+                    "score": 0.005
+                },
+                {
+                    "char": "o",
+                    "start": 16.414,
+                    "end": 16.434,
+                    "score": 0.025
+                },
+                {
+                    "char": " ",
+                    "start": 16.434,
+                    "end": 16.474,
+                    "score": 0.567
+                },
+                {
+                    "char": "f",
+                    "start": 16.474,
+                    "end": 16.575,
+                    "score": 0.941
+                },
+                {
+                    "char": "a",
+                    "start": 16.575,
+                    "end": 16.595,
+                    "score": 0.412
+                },
+                {
+                    "char": "l",
+                    "start": 16.595,
+                    "end": 16.675,
+                    "score": 0.757
+                },
+                {
+                    "char": "l",
+                    "start": 16.675,
+                    "end": 16.695,
+                    "score": 0.481
+                },
+                {
+                    "char": " ",
+                    "start": 16.695,
+                    "end": 16.755,
+                    "score": 0.899
+                },
+                {
+                    "char": "o",
+                    "start": 16.755,
+                    "end": 16.775,
+                    "score": 0.978
+                },
+                {
+                    "char": "f",
+                    "start": 16.775,
+                    "end": 16.856,
+                    "score": 0.791
+                },
+                {
+                    "char": "f",
+                    "start": 16.856,
+                    "end": 16.896,
+                    "score": 0.882
+                },
+                {
+                    "char": " ",
+                    "start": 16.896,
+                    "end": 16.956,
+                    "score": 0.406
+                },
+                {
+                    "char": "t",
+                    "start": 16.956,
+                    "end": 16.976,
+                    "score": 0.918
+                },
+                {
+                    "char": "h",
+                    "start": 16.976,
+                    "end": 17.036,
+                    "score": 0.998
+                },
+                {
+                    "char": "a",
+                    "start": 17.036,
+                    "end": 17.056,
+                    "score": 0.984
+                },
+                {
+                    "char": "t",
+                    "start": 17.056,
+                    "end": 17.157,
+                    "score": 0.839
+                },
+                {
+                    "char": " ",
+                    "start": 17.157,
+                    "end": 17.217,
+                    "score": 0.688
+                },
+                {
+                    "char": "s",
+                    "start": 17.217,
+                    "end": 17.257,
+                    "score": 0.525
+                },
+                {
+                    "char": "t",
+                    "start": 17.257,
+                    "end": 17.317,
+                    "score": 0.74
+                },
+                {
+                    "char": "o",
+                    "start": 17.317,
+                    "end": 17.398,
+                    "score": 0.8
+                },
+                {
+                    "char": "o",
+                    "start": 17.398,
+                    "end": 17.518,
+                    "score": 0.807
+                },
+                {
+                    "char": "l",
+                    "start": 17.518,
+                    "end": 17.599,
+                    "score": 0.865
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 17.599,
+                    "end": 17.699,
+                    "score": 0.801
+                },
+                {
+                    "char": "a",
+                    "start": 17.699,
+                    "end": 17.719,
+                    "score": 0.928
+                },
+                {
+                    "char": "n",
+                    "start": 17.719,
+                    "end": 17.739,
+                    "score": 0.995
+                },
+                {
+                    "char": "d",
+                    "start": 17.739,
+                    "end": 17.799,
+                    "score": 0.394
+                },
+                {
+                    "char": " ",
+                    "start": 17.799,
+                    "end": 17.88,
+                    "score": 0.664
+                },
+                {
+                    "char": "w",
+                    "start": 17.88,
+                    "end": 17.9,
+                    "score": 0.999
+                },
+                {
+                    "char": "h",
+                    "start": 17.9,
+                    "end": 18.02,
+                    "score": 0.837
+                },
+                {
+                    "char": "a",
+                    "start": 18.02,
+                    "end": 18.1,
+                    "score": 0.992
+                },
+                {
+                    "char": "t",
+                    "start": 18.1,
+                    "end": 18.121,
+                    "score": 0.0
+                },
+                {
+                    "char": " ",
+                    "start": 18.121,
+                    "end": 18.141,
+                    "score": 0.0
+                },
+                {
+                    "char": "e",
+                    "start": 18.141,
+                    "end": 18.161,
+                    "score": 0.889
+                },
+                {
+                    "char": "l",
+                    "start": 18.161,
+                    "end": 18.181,
+                    "score": 0.0
+                },
+                {
+                    "char": "s",
+                    "start": 18.181,
+                    "end": 18.201,
+                    "score": 0.777
+                },
+                {
+                    "char": "e",
+                    "start": 18.201,
+                    "end": 18.221,
+                    "score": 0.0
+                },
+                {
+                    "char": "?"
+                }
+            ]
+        },
+        {
+            "start": 18.502,
+            "end": 21.002,
+            "text": "And mom's going to slip on the water if she doesn't be careful.",
+            "words": [
+                {
+                    "word": "And",
+                    "start": 18.502,
+                    "end": 18.563,
+                    "score": 0.021
+                },
+                {
+                    "word": "mom's",
+                    "start": 18.583,
+                    "end": 18.704,
+                    "score": 0.216
+                },
+                {
+                    "word": "going",
+                    "start": 18.724,
+                    "end": 18.865,
+                    "score": 0.312
+                },
+                {
+                    "word": "to",
+                    "start": 18.885,
+                    "end": 18.986,
+                    "score": 0.539
+                },
+                {
+                    "word": "slip",
+                    "start": 19.006,
+                    "end": 19.248,
+                    "score": 0.88
+                },
+                {
+                    "word": "on",
+                    "start": 19.309,
+                    "end": 19.409,
+                    "score": 0.893
+                },
+                {
+                    "word": "the",
+                    "start": 19.429,
+                    "end": 19.51,
+                    "score": 0.848
+                },
+                {
+                    "word": "water",
+                    "start": 19.571,
+                    "end": 19.913,
+                    "score": 0.958
+                },
+                {
+                    "word": "if",
+                    "start": 19.933,
+                    "end": 19.974,
+                    "score": 0.018
+                },
+                {
+                    "word": "she",
+                    "start": 20.034,
+                    "end": 20.155,
+                    "score": 0.799
+                },
+                {
+                    "word": "doesn't",
+                    "start": 20.175,
+                    "end": 20.437,
+                    "score": 0.951
+                },
+                {
+                    "word": "be",
+                    "start": 20.498,
+                    "end": 20.598,
+                    "score": 0.792
+                },
+                {
+                    "word": "careful.",
+                    "start": 20.639,
+                    "end": 21.002,
+                    "score": 0.904
+                }
+            ],
+            "chars": [
+                {
+                    "char": "A",
+                    "start": 18.502,
+                    "end": 18.523,
+                    "score": 0.061
+                },
+                {
+                    "char": "n",
+                    "start": 18.523,
+                    "end": 18.543,
+                    "score": 0.001
+                },
+                {
+                    "char": "d",
+                    "start": 18.543,
+                    "end": 18.563,
+                    "score": 0.0
+                },
+                {
+                    "char": " ",
+                    "start": 18.563,
+                    "end": 18.583,
+                    "score": 0.001
+                },
+                {
+                    "char": "m",
+                    "start": 18.583,
+                    "end": 18.603,
+                    "score": 0.485
+                },
+                {
+                    "char": "o",
+                    "start": 18.603,
+                    "end": 18.623,
+                    "score": 0.001
+                },
+                {
+                    "char": "m",
+                    "start": 18.623,
+                    "end": 18.643,
+                    "score": 0.0
+                },
+                {
+                    "char": "'",
+                    "start": 18.643,
+                    "end": 18.664,
+                    "score": 0.036
+                },
+                {
+                    "char": "s",
+                    "start": 18.664,
+                    "end": 18.704,
+                    "score": 0.559
+                },
+                {
+                    "char": " ",
+                    "start": 18.704,
+                    "end": 18.724,
+                    "score": 0.821
+                },
+                {
+                    "char": "g",
+                    "start": 18.724,
+                    "end": 18.764,
+                    "score": 0.762
+                },
+                {
+                    "char": "o",
+                    "start": 18.764,
+                    "end": 18.805,
+                    "score": 0.583
+                },
+                {
+                    "char": "i",
+                    "start": 18.805,
+                    "end": 18.825,
+                    "score": 0.052
+                },
+                {
+                    "char": "n",
+                    "start": 18.825,
+                    "end": 18.845,
+                    "score": 0.157
+                },
+                {
+                    "char": "g",
+                    "start": 18.845,
+                    "end": 18.865,
+                    "score": 0.006
+                },
+                {
+                    "char": " ",
+                    "start": 18.865,
+                    "end": 18.885,
+                    "score": 0.458
+                },
+                {
+                    "char": "t",
+                    "start": 18.885,
+                    "end": 18.926,
+                    "score": 0.513
+                },
+                {
+                    "char": "o",
+                    "start": 18.926,
+                    "end": 18.986,
+                    "score": 0.565
+                },
+                {
+                    "char": " ",
+                    "start": 18.986,
+                    "end": 19.006,
+                    "score": 0.956
+                },
+                {
+                    "char": "s",
+                    "start": 19.006,
+                    "end": 19.067,
+                    "score": 0.638
+                },
+                {
+                    "char": "l",
+                    "start": 19.067,
+                    "end": 19.127,
+                    "score": 0.998
+                },
+                {
+                    "char": "i",
+                    "start": 19.127,
+                    "end": 19.188,
+                    "score": 0.996
+                },
+                {
+                    "char": "p",
+                    "start": 19.188,
+                    "end": 19.248,
+                    "score": 0.886
+                },
+                {
+                    "char": " ",
+                    "start": 19.248,
+                    "end": 19.309,
+                    "score": 0.759
+                },
+                {
+                    "char": "o",
+                    "start": 19.309,
+                    "end": 19.329,
+                    "score": 0.995
+                },
+                {
+                    "char": "n",
+                    "start": 19.329,
+                    "end": 19.409,
+                    "score": 0.79
+                },
+                {
+                    "char": " ",
+                    "start": 19.409,
+                    "end": 19.429,
+                    "score": 0.974
+                },
+                {
+                    "char": "t",
+                    "start": 19.429,
+                    "end": 19.45,
+                    "score": 0.904
+                },
+                {
+                    "char": "h",
+                    "start": 19.45,
+                    "end": 19.49,
+                    "score": 0.662
+                },
+                {
+                    "char": "e",
+                    "start": 19.49,
+                    "end": 19.51,
+                    "score": 0.979
+                },
+                {
+                    "char": " ",
+                    "start": 19.51,
+                    "end": 19.571,
+                    "score": 0.673
+                },
+                {
+                    "char": "w",
+                    "start": 19.571,
+                    "end": 19.712,
+                    "score": 0.998
+                },
+                {
+                    "char": "a",
+                    "start": 19.712,
+                    "end": 19.792,
+                    "score": 0.98
+                },
+                {
+                    "char": "t",
+                    "start": 19.792,
+                    "end": 19.853,
+                    "score": 0.995
+                },
+                {
+                    "char": "e",
+                    "start": 19.853,
+                    "end": 19.873,
+                    "score": 0.998
+                },
+                {
+                    "char": "r",
+                    "start": 19.873,
+                    "end": 19.913,
+                    "score": 0.818
+                },
+                {
+                    "char": " ",
+                    "start": 19.913,
+                    "end": 19.933,
+                    "score": 0.988
+                },
+                {
+                    "char": "i",
+                    "start": 19.933,
+                    "end": 19.954,
+                    "score": 0.026
+                },
+                {
+                    "char": "f",
+                    "start": 19.954,
+                    "end": 19.974,
+                    "score": 0.011
+                },
+                {
+                    "char": " ",
+                    "start": 19.974,
+                    "end": 20.034,
+                    "score": 0.914
+                },
+                {
+                    "char": "s",
+                    "start": 20.034,
+                    "end": 20.054,
+                    "score": 0.997
+                },
+                {
+                    "char": "h",
+                    "start": 20.054,
+                    "end": 20.115,
+                    "score": 0.838
+                },
+                {
+                    "char": "e",
+                    "start": 20.115,
+                    "end": 20.155,
+                    "score": 0.562
+                },
+                {
+                    "char": " ",
+                    "start": 20.155,
+                    "end": 20.175,
+                    "score": 0.973
+                },
+                {
+                    "char": "d",
+                    "start": 20.175,
+                    "end": 20.236,
+                    "score": 0.972
+                },
+                {
+                    "char": "o",
+                    "start": 20.236,
+                    "end": 20.256,
+                    "score": 0.994
+                },
+                {
+                    "char": "e",
+                    "start": 20.256,
+                    "end": 20.296,
+                    "score": 0.984
+                },
+                {
+                    "char": "s",
+                    "start": 20.296,
+                    "end": 20.357,
+                    "score": 0.913
+                },
+                {
+                    "char": "n",
+                    "start": 20.357,
+                    "end": 20.397,
+                    "score": 0.954
+                },
+                {
+                    "char": "'",
+                    "start": 20.397,
+                    "end": 20.417,
+                    "score": 0.871
+                },
+                {
+                    "char": "t",
+                    "start": 20.417,
+                    "end": 20.437,
+                    "score": 0.966
+                },
+                {
+                    "char": " ",
+                    "start": 20.437,
+                    "end": 20.498,
+                    "score": 0.689
+                },
+                {
+                    "char": "b",
+                    "start": 20.498,
+                    "end": 20.538,
+                    "score": 0.999
+                },
+                {
+                    "char": "e",
+                    "start": 20.538,
+                    "end": 20.598,
+                    "score": 0.585
+                },
+                {
+                    "char": " ",
+                    "start": 20.598,
+                    "end": 20.639,
+                    "score": 0.991
+                },
+                {
+                    "char": "c",
+                    "start": 20.639,
+                    "end": 20.74,
+                    "score": 0.997
+                },
+                {
+                    "char": "a",
+                    "start": 20.74,
+                    "end": 20.8,
+                    "score": 0.674
+                },
+                {
+                    "char": "r",
+                    "start": 20.8,
+                    "end": 20.84,
+                    "score": 0.732
+                },
+                {
+                    "char": "e",
+                    "start": 20.84,
+                    "end": 20.921,
+                    "score": 0.958
+                },
+                {
+                    "char": "f",
+                    "start": 20.921,
+                    "end": 20.961,
+                    "score": 0.979
+                },
+                {
+                    "char": "u",
+                    "start": 20.961,
+                    "end": 20.981,
+                    "score": 0.991
+                },
+                {
+                    "char": "l",
+                    "start": 20.981,
+                    "end": 21.002,
+                    "score": 0.995
+                },
+                {
+                    "char": "."
+                }
+            ]
+        },
+        {
+            "start": 21.343,
+            "end": 22.763,
+            "text": "And what else do you want me to tell you?",
+            "words": [
+                {
+                    "word": "And",
+                    "start": 21.343,
+                    "end": 21.464,
+                    "score": 0.334
+                },
+                {
+                    "word": "what",
+                    "start": 21.606,
+                    "end": 21.687,
+                    "score": 0.249
+                },
+                {
+                    "word": "else",
+                    "start": 21.728,
+                    "end": 21.829,
+                    "score": 0.125
+                },
+                {
+                    "word": "do",
+                    "start": 21.85,
+                    "end": 22.012,
+                    "score": 0.751
+                },
+                {
+                    "word": "you",
+                    "start": 22.032,
+                    "end": 22.154,
+                    "score": 0.358
+                },
+                {
+                    "word": "want",
+                    "start": 22.174,
+                    "end": 22.276,
+                    "score": 0.156
+                },
+                {
+                    "word": "me",
+                    "start": 22.296,
+                    "end": 22.377,
+                    "score": 0.798
+                },
+                {
+                    "word": "to",
+                    "start": 22.418,
+                    "end": 22.458,
+                    "score": 0.006
+                },
+                {
+                    "word": "tell",
+                    "start": 22.479,
+                    "end": 22.682,
+                    "score": 0.863
+                },
+                {
+                    "word": "you?",
+                    "start": 22.702,
+                    "end": 22.763,
+                    "score": 0.031
+                }
+            ],
+            "chars": [
+                {
+                    "char": "A",
+                    "start": 21.343,
+                    "end": 21.363,
+                    "score": 0.0
+                },
+                {
+                    "char": "n",
+                    "start": 21.363,
+                    "end": 21.383,
+                    "score": 0.237
+                },
+                {
+                    "char": "d",
+                    "start": 21.383,
+                    "end": 21.464,
+                    "score": 0.764
+                },
+                {
+                    "char": " ",
+                    "start": 21.464,
+                    "end": 21.606,
+                    "score": 0.993
+                },
+                {
+                    "char": "w",
+                    "start": 21.606,
+                    "end": 21.627,
+                    "score": 0.0
+                },
+                {
+                    "char": "h",
+                    "start": 21.627,
+                    "end": 21.647,
+                    "score": 0.993
+                },
+                {
+                    "char": "a",
+                    "start": 21.647,
+                    "end": 21.667,
+                    "score": 0.002
+                },
+                {
+                    "char": "t",
+                    "start": 21.667,
+                    "end": 21.687,
+                    "score": 0.001
+                },
+                {
+                    "char": " ",
+                    "start": 21.687,
+                    "end": 21.728,
+                    "score": 0.994
+                },
+                {
+                    "char": "e",
+                    "start": 21.728,
+                    "end": 21.769,
+                    "score": 0.499
+                },
+                {
+                    "char": "l",
+                    "start": 21.769,
+                    "end": 21.789,
+                    "score": 0.0
+                },
+                {
+                    "char": "s",
+                    "start": 21.789,
+                    "end": 21.809,
+                    "score": 0.0
+                },
+                {
+                    "char": "e",
+                    "start": 21.809,
+                    "end": 21.829,
+                    "score": 0.0
+                },
+                {
+                    "char": " ",
+                    "start": 21.829,
+                    "end": 21.85,
+                    "score": 0.002
+                },
+                {
+                    "char": "d",
+                    "start": 21.85,
+                    "end": 21.89,
+                    "score": 0.852
+                },
+                {
+                    "char": "o",
+                    "start": 21.89,
+                    "end": 22.012,
+                    "score": 0.65
+                },
+                {
+                    "char": " ",
+                    "start": 22.012,
+                    "end": 22.032,
+                    "score": 0.833
+                },
+                {
+                    "char": "y",
+                    "start": 22.032,
+                    "end": 22.114,
+                    "score": 0.714
+                },
+                {
+                    "char": "o",
+                    "start": 22.114,
+                    "end": 22.134,
+                    "score": 0.33
+                },
+                {
+                    "char": "u",
+                    "start": 22.134,
+                    "end": 22.154,
+                    "score": 0.03
+                },
+                {
+                    "char": " ",
+                    "start": 22.154,
+                    "end": 22.174,
+                    "score": 0.043
+                },
+                {
+                    "char": "w",
+                    "start": 22.174,
+                    "end": 22.195,
+                    "score": 0.002
+                },
+                {
+                    "char": "a",
+                    "start": 22.195,
+                    "end": 22.215,
+                    "score": 0.135
+                },
+                {
+                    "char": "n",
+                    "start": 22.215,
+                    "end": 22.256,
+                    "score": 0.486
+                },
+                {
+                    "char": "t",
+                    "start": 22.256,
+                    "end": 22.276,
+                    "score": 0.003
+                },
+                {
+                    "char": " ",
+                    "start": 22.276,
+                    "end": 22.296,
+                    "score": 0.95
+                },
+                {
+                    "char": "m",
+                    "start": 22.296,
+                    "end": 22.357,
+                    "score": 0.967
+                },
+                {
+                    "char": "e",
+                    "start": 22.357,
+                    "end": 22.377,
+                    "score": 0.63
+                },
+                {
+                    "char": " ",
+                    "start": 22.377,
+                    "end": 22.418,
+                    "score": 0.462
+                },
+                {
+                    "char": "t",
+                    "start": 22.418,
+                    "end": 22.438,
+                    "score": 0.01
+                },
+                {
+                    "char": "o",
+                    "start": 22.438,
+                    "end": 22.458,
+                    "score": 0.001
+                },
+                {
+                    "char": " ",
+                    "start": 22.458,
+                    "end": 22.479,
+                    "score": 0.827
+                },
+                {
+                    "char": "t",
+                    "start": 22.479,
+                    "end": 22.56,
+                    "score": 0.904
+                },
+                {
+                    "char": "e",
+                    "start": 22.56,
+                    "end": 22.58,
+                    "score": 0.77
+                },
+                {
+                    "char": "l",
+                    "start": 22.58,
+                    "end": 22.661,
+                    "score": 0.908
+                },
+                {
+                    "char": "l",
+                    "start": 22.661,
+                    "end": 22.682,
+                    "score": 0.871
+                },
+                {
+                    "char": " ",
+                    "start": 22.682,
+                    "end": 22.702,
+                    "score": 0.076
+                },
+                {
+                    "char": "y",
+                    "start": 22.702,
+                    "end": 22.722,
+                    "score": 0.094
+                },
+                {
+                    "char": "o",
+                    "start": 22.722,
+                    "end": 22.742,
+                    "score": 0.0
+                },
+                {
+                    "char": "u",
+                    "start": 22.742,
+                    "end": 22.763,
+                    "score": 0.0
+                },
+                {
+                    "char": "?"
+                }
+            ]
+        },
+        {
+            "start": 22.803,
+            "end": 25.224,
+            "text": "Do you want me to describe everything on that that I see?",
+            "words": [
+                {
+                    "word": "Do",
+                    "start": 22.803,
+                    "end": 22.843,
+                    "score": 0.0
+                },
+                {
+                    "word": "you",
+                    "start": 22.864,
+                    "end": 22.924,
+                    "score": 0.001
+                },
+                {
+                    "word": "want",
+                    "start": 22.944,
+                    "end": 23.085,
+                    "score": 0.856
+                },
+                {
+                    "word": "me",
+                    "start": 23.106,
+                    "end": 23.186,
+                    "score": 0.978
+                },
+                {
+                    "word": "to",
+                    "start": 23.227,
+                    "end": 23.307,
+                    "score": 0.974
+                },
+                {
+                    "word": "describe",
+                    "start": 23.328,
+                    "end": 23.691,
+                    "score": 0.486
+                },
+                {
+                    "word": "everything",
+                    "start": 23.751,
+                    "end": 24.135,
+                    "score": 0.902
+                },
+                {
+                    "word": "on",
+                    "start": 24.215,
+                    "end": 24.316,
+                    "score": 0.962
+                },
+                {
+                    "word": "that",
+                    "start": 24.357,
+                    "end": 24.518,
+                    "score": 0.626
+                },
+                {
+                    "word": "that",
+                    "start": 24.801,
+                    "end": 24.922,
+                    "score": 0.226
+                },
+                {
+                    "word": "I",
+                    "start": 24.942,
+                    "end": 25.043,
+                    "score": 0.912
+                },
+                {
+                    "word": "see?",
+                    "start": 25.083,
+                    "end": 25.224,
+                    "score": 0.478
+                }
+            ],
+            "chars": [
+                {
+                    "char": "D",
+                    "start": 22.803,
+                    "end": 22.823,
+                    "score": 0.001
+                },
+                {
+                    "char": "o",
+                    "start": 22.823,
+                    "end": 22.843,
+                    "score": 0.0
+                },
+                {
+                    "char": " ",
+                    "start": 22.843,
+                    "end": 22.864,
+                    "score": 0.0
+                },
+                {
+                    "char": "y",
+                    "start": 22.864,
+                    "end": 22.884,
+                    "score": 0.0
+                },
+                {
+                    "char": "o",
+                    "start": 22.884,
+                    "end": 22.904,
+                    "score": 0.0
+                },
+                {
+                    "char": "u",
+                    "start": 22.904,
+                    "end": 22.924,
+                    "score": 0.002
+                },
+                {
+                    "char": " ",
+                    "start": 22.924,
+                    "end": 22.944,
+                    "score": 0.672
+                },
+                {
+                    "char": "w",
+                    "start": 22.944,
+                    "end": 22.985,
+                    "score": 0.943
+                },
+                {
+                    "char": "a",
+                    "start": 22.985,
+                    "end": 23.005,
+                    "score": 0.916
+                },
+                {
+                    "char": "n",
+                    "start": 23.005,
+                    "end": 23.045,
+                    "score": 0.954
+                },
+                {
+                    "char": "t",
+                    "start": 23.045,
+                    "end": 23.085,
+                    "score": 0.613
+                },
+                {
+                    "char": " ",
+                    "start": 23.085,
+                    "end": 23.106,
+                    "score": 0.837
+                },
+                {
+                    "char": "m",
+                    "start": 23.106,
+                    "end": 23.126,
+                    "score": 0.983
+                },
+                {
+                    "char": "e",
+                    "start": 23.126,
+                    "end": 23.186,
+                    "score": 0.972
+                },
+                {
+                    "char": " ",
+                    "start": 23.186,
+                    "end": 23.227,
+                    "score": 0.536
+                },
+                {
+                    "char": "t",
+                    "start": 23.227,
+                    "end": 23.287,
+                    "score": 0.987
+                },
+                {
+                    "char": "o",
+                    "start": 23.287,
+                    "end": 23.307,
+                    "score": 0.962
+                },
+                {
+                    "char": " ",
+                    "start": 23.307,
+                    "end": 23.328,
+                    "score": 0.21
+                },
+                {
+                    "char": "d",
+                    "start": 23.328,
+                    "end": 23.348,
+                    "score": 0.0
+                },
+                {
+                    "char": "e",
+                    "start": 23.348,
+                    "end": 23.368,
+                    "score": 0.0
+                },
+                {
+                    "char": "s",
+                    "start": 23.368,
+                    "end": 23.428,
+                    "score": 0.982
+                },
+                {
+                    "char": "c",
+                    "start": 23.428,
+                    "end": 23.449,
+                    "score": 0.013
+                },
+                {
+                    "char": "r",
+                    "start": 23.449,
+                    "end": 23.509,
+                    "score": 0.679
+                },
+                {
+                    "char": "i",
+                    "start": 23.509,
+                    "end": 23.59,
+                    "score": 0.823
+                },
+                {
+                    "char": "b",
+                    "start": 23.59,
+                    "end": 23.63,
+                    "score": 0.878
+                },
+                {
+                    "char": "e",
+                    "start": 23.63,
+                    "end": 23.691,
+                    "score": 0.515
+                },
+                {
+                    "char": " ",
+                    "start": 23.691,
+                    "end": 23.751,
+                    "score": 0.982
+                },
+                {
+                    "char": "e",
+                    "start": 23.751,
+                    "end": 23.792,
+                    "score": 0.998
+                },
+                {
+                    "char": "v",
+                    "start": 23.792,
+                    "end": 23.832,
+                    "score": 0.564
+                },
+                {
+                    "char": "e",
+                    "start": 23.832,
+                    "end": 23.852,
+                    "score": 0.997
+                },
+                {
+                    "char": "r",
+                    "start": 23.852,
+                    "end": 23.893,
+                    "score": 0.999
+                },
+                {
+                    "char": "y",
+                    "start": 23.893,
+                    "end": 23.953,
+                    "score": 0.926
+                },
+                {
+                    "char": "t",
+                    "start": 23.953,
+                    "end": 23.993,
+                    "score": 0.622
+                },
+                {
+                    "char": "h",
+                    "start": 23.993,
+                    "end": 24.034,
+                    "score": 0.989
+                },
+                {
+                    "char": "i",
+                    "start": 24.034,
+                    "end": 24.054,
+                    "score": 0.999
+                },
+                {
+                    "char": "n",
+                    "start": 24.054,
+                    "end": 24.094,
+                    "score": 0.993
+                },
+                {
+                    "char": "g",
+                    "start": 24.094,
+                    "end": 24.135,
+                    "score": 0.934
+                },
+                {
+                    "char": " ",
+                    "start": 24.135,
+                    "end": 24.215,
+                    "score": 0.904
+                },
+                {
+                    "char": "o",
+                    "start": 24.215,
+                    "end": 24.236,
+                    "score": 0.995
+                },
+                {
+                    "char": "n",
+                    "start": 24.236,
+                    "end": 24.316,
+                    "score": 0.929
+                },
+                {
+                    "char": " ",
+                    "start": 24.316,
+                    "end": 24.357,
+                    "score": 0.973
+                },
+                {
+                    "char": "t",
+                    "start": 24.357,
+                    "end": 24.377,
+                    "score": 0.983
+                },
+                {
+                    "char": "h",
+                    "start": 24.377,
+                    "end": 24.458,
+                    "score": 0.995
+                },
+                {
+                    "char": "a",
+                    "start": 24.458,
+                    "end": 24.498,
+                    "score": 0.523
+                },
+                {
+                    "char": "t",
+                    "start": 24.498,
+                    "end": 24.518,
+                    "score": 0.002
+                },
+                {
+                    "char": " ",
+                    "start": 24.518,
+                    "end": 24.801,
+                    "score": 0.941
+                },
+                {
+                    "char": "t",
+                    "start": 24.801,
+                    "end": 24.821,
+                    "score": 0.1
+                },
+                {
+                    "char": "h",
+                    "start": 24.821,
+                    "end": 24.841,
+                    "score": 0.157
+                },
+                {
+                    "char": "a",
+                    "start": 24.841,
+                    "end": 24.901,
+                    "score": 0.648
+                },
+                {
+                    "char": "t",
+                    "start": 24.901,
+                    "end": 24.922,
+                    "score": 0.001
+                },
+                {
+                    "char": " ",
+                    "start": 24.922,
+                    "end": 24.942,
+                    "score": 0.033
+                },
+                {
+                    "char": "I",
+                    "start": 24.942,
+                    "end": 25.043,
+                    "score": 0.912
+                },
+                {
+                    "char": " ",
+                    "start": 25.043,
+                    "end": 25.083,
+                    "score": 0.674
+                },
+                {
+                    "char": "s",
+                    "start": 25.083,
+                    "end": 25.103,
+                    "score": 0.51
+                },
+                {
+                    "char": "e",
+                    "start": 25.103,
+                    "end": 25.204,
+                    "score": 0.784
+                },
+                {
+                    "char": "e",
+                    "start": 25.204,
+                    "end": 25.224,
+                    "score": 0.141
+                },
+                {
+                    "char": "?"
+                }
+            ]
+        },
+        {
+            "start": 25.505,
+            "end": 26.423,
+            "text": "Oh, that's it, I think.",
+            "words": [
+                {
+                    "word": "Oh,",
+                    "start": 25.505,
+                    "end": 25.607,
+                    "score": 0.272
+                },
+                {
+                    "word": "that's",
+                    "start": 25.627,
+                    "end": 25.832,
+                    "score": 0.84
+                },
+                {
+                    "word": "it,",
+                    "start": 25.934,
+                    "end": 26.036,
+                    "score": 0.755
+                },
+                {
+                    "word": "I",
+                    "start": 26.097,
+                    "end": 26.178,
+                    "score": 0.994
+                },
+                {
+                    "word": "think.",
+                    "start": 26.219,
+                    "end": 26.423,
+                    "score": 0.901
+                }
+            ],
+            "chars": [
+                {
+                    "char": "O",
+                    "start": 25.505,
+                    "end": 25.525,
+                    "score": 0.063
+                },
+                {
+                    "char": "h",
+                    "start": 25.525,
+                    "end": 25.607,
+                    "score": 0.481
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 25.607,
+                    "end": 25.627,
+                    "score": 0.941
+                },
+                {
+                    "char": "t",
+                    "start": 25.627,
+                    "end": 25.648,
+                    "score": 0.875
+                },
+                {
+                    "char": "h",
+                    "start": 25.648,
+                    "end": 25.689,
+                    "score": 0.64
+                },
+                {
+                    "char": "a",
+                    "start": 25.689,
+                    "end": 25.729,
+                    "score": 0.921
+                },
+                {
+                    "char": "t",
+                    "start": 25.729,
+                    "end": 25.77,
+                    "score": 0.936
+                },
+                {
+                    "char": "'",
+                    "start": 25.77,
+                    "end": 25.811,
+                    "score": 0.686
+                },
+                {
+                    "char": "s",
+                    "start": 25.811,
+                    "end": 25.832,
+                    "score": 0.979
+                },
+                {
+                    "char": " ",
+                    "start": 25.832,
+                    "end": 25.934,
+                    "score": 0.836
+                },
+                {
+                    "char": "i",
+                    "start": 25.934,
+                    "end": 25.974,
+                    "score": 0.733
+                },
+                {
+                    "char": "t",
+                    "start": 25.974,
+                    "end": 26.036,
+                    "score": 0.777
+                },
+                {
+                    "char": ","
+                },
+                {
+                    "char": " ",
+                    "start": 26.036,
+                    "end": 26.097,
+                    "score": 0.812
+                },
+                {
+                    "char": "I",
+                    "start": 26.097,
+                    "end": 26.178,
+                    "score": 0.994
+                },
+                {
+                    "char": " ",
+                    "start": 26.178,
+                    "end": 26.219,
+                    "score": 0.571
+                },
+                {
+                    "char": "t",
+                    "start": 26.219,
+                    "end": 26.26,
+                    "score": 0.977
+                },
+                {
+                    "char": "h",
+                    "start": 26.26,
+                    "end": 26.342,
+                    "score": 0.988
+                },
+                {
+                    "char": "i",
+                    "start": 26.342,
+                    "end": 26.362,
+                    "score": 0.986
+                },
+                {
+                    "char": "n",
+                    "start": 26.362,
+                    "end": 26.403,
+                    "score": 0.994
+                },
+                {
+                    "char": "k",
+                    "start": 26.403,
+                    "end": 26.423,
+                    "score": 0.56
+                },
+                {
+                    "char": "."
+                }
+            ]
+        },
+        {
+            "start": 26.845,
+            "end": 26.995,
+            "text": "She's",
+            "words": [
+                {
+                    "word": "She's",
+                    "start": 26.845,
+                    "end": 26.995,
+                    "score": 0.128
+                }
+            ],
+            "chars": [
+                {
+                    "char": "S",
+                    "start": 26.845,
+                    "end": 26.866,
+                    "score": 0.059
+                },
+                {
+                    "char": "h",
+                    "start": 26.866,
+                    "end": 26.931,
+                    "score": 0.541
+                },
+                {
+                    "char": "e",
+                    "start": 26.931,
+                    "end": 26.952,
+                    "score": 0.003
+                },
+                {
+                    "char": "'",
+                    "start": 26.952,
+                    "end": 26.974,
+                    "score": 0.001
+                },
+                {
+                    "char": "s",
+                    "start": 26.974,
+                    "end": 26.995,
+                    "score": 0.034
+                }
+            ]
+        }
+    ],
+    "word_segments": [
+        {
+            "word": "from",
+            "start": 0.051,
+            "end": 0.191,
+            "score": 0.992
+        },
+        {
+            "word": "the",
+            "start": 0.231,
+            "end": 0.311,
+            "score": 0.829
+        },
+        {
+            "word": "cookie",
+            "start": 0.371,
+            "end": 0.671,
+            "score": 0.834
+        },
+        {
+            "word": "jar,",
+            "start": 0.711,
+            "end": 0.911,
+            "score": 0.88
+        },
+        {
+            "word": "and",
+            "start": 0.931,
+            "end": 1.011,
+            "score": 0.484
+        },
+        {
+            "word": "he's",
+            "start": 1.031,
+            "end": 1.172,
+            "score": 0.392
+        },
+        {
+            "word": "going",
+            "start": 1.192,
+            "end": 1.332,
+            "score": 0.392
+        },
+        {
+            "word": "to",
+            "start": 1.352,
+            "end": 1.432,
+            "score": 0.238
+        },
+        {
+            "word": "fall",
+            "start": 1.472,
+            "end": 1.732,
+            "score": 0.849
+        },
+        {
+            "word": "off",
+            "start": 1.792,
+            "end": 1.912,
+            "score": 0.964
+        },
+        {
+            "word": "the",
+            "start": 1.952,
+            "end": 2.112,
+            "score": 0.78
+        },
+        {
+            "word": "stool,",
+            "start": 2.132,
+            "end": 2.532,
+            "score": 0.846
+        },
+        {
+            "word": "and",
+            "start": 2.792,
+            "end": 2.912,
+            "score": 0.9
+        },
+        {
+            "word": "the",
+            "start": 2.952,
+            "end": 3.093,
+            "score": 0.892
+        },
+        {
+            "word": "sink",
+            "start": 3.193,
+            "end": 3.493,
+            "score": 0.919
+        },
+        {
+            "word": "in",
+            "start": 3.573,
+            "end": 3.653,
+            "score": 0.841
+        },
+        {
+            "word": "the",
+            "start": 3.673,
+            "end": 3.753,
+            "score": 0.809
+        },
+        {
+            "word": "bath",
+            "start": 3.813,
+            "end": 4.073,
+            "score": 0.96
+        },
+        {
+            "word": "and",
+            "start": 4.233,
+            "end": 4.333,
+            "score": 0.755
+        },
+        {
+            "word": "the",
+            "start": 4.353,
+            "end": 4.433,
+            "score": 0.831
+        },
+        {
+            "word": "kitchen",
+            "start": 4.493,
+            "end": 4.833,
+            "score": 0.854
+        },
+        {
+            "word": "is",
+            "start": 4.893,
+            "end": 4.993,
+            "score": 0.51
+        },
+        {
+            "word": "overflowing,",
+            "start": 5.094,
+            "end": 5.734,
+            "score": 0.787
+        },
+        {
+            "word": "and",
+            "start": 5.894,
+            "end": 5.994,
+            "score": 0.851
+        },
+        {
+            "word": "the",
+            "start": 6.014,
+            "end": 6.094,
+            "score": 0.827
+        },
+        {
+            "word": "mother",
+            "start": 6.134,
+            "end": 6.414,
+            "score": 0.888
+        },
+        {
+            "word": "is",
+            "start": 6.534,
+            "end": 6.614,
+            "score": 0.709
+        },
+        {
+            "word": "drying",
+            "start": 6.754,
+            "end": 7.115,
+            "score": 0.789
+        },
+        {
+            "word": "the",
+            "start": 7.155,
+            "end": 7.235,
+            "score": 0.821
+        },
+        {
+            "word": "dishes,",
+            "start": 7.295,
+            "end": 7.735,
+            "score": 0.808
+        },
+        {
+            "word": "and",
+            "start": 8.115,
+            "end": 8.235,
+            "score": 0.84
+        },
+        {
+            "word": "I",
+            "start": 8.315,
+            "end": 8.395,
+            "score": 0.764
+        },
+        {
+            "word": "see",
+            "start": 8.475,
+            "end": 8.715,
+            "score": 0.823
+        },
+        {
+            "word": "the",
+            "start": 8.735,
+            "end": 8.895,
+            "score": 0.725
+        },
+        {
+            "word": "backyard",
+            "start": 9.056,
+            "end": 9.616,
+            "score": 0.865
+        },
+        {
+            "word": "through",
+            "start": 9.656,
+            "end": 9.876,
+            "score": 0.863
+        },
+        {
+            "word": "the",
+            "start": 9.896,
+            "end": 9.976,
+            "score": 0.805
+        },
+        {
+            "word": "window,",
+            "start": 10.036,
+            "end": 10.456,
+            "score": 0.954
+        },
+        {
+            "word": "and",
+            "start": 10.476,
+            "end": 10.916,
+            "score": 0.827
+        },
+        {
+            "word": "what",
+            "start": 11.457,
+            "end": 11.597,
+            "score": 0.54
+        },
+        {
+            "word": "else?",
+            "start": 11.617,
+            "end": 11.817,
+            "score": 0.728
+        },
+        {
+            "word": "The",
+            "start": 12.017,
+            "end": 12.097,
+            "score": 0.167
+        },
+        {
+            "word": "cookie",
+            "start": 12.137,
+            "end": 12.459,
+            "score": 0.877
+        },
+        {
+            "word": "jar,",
+            "start": 12.479,
+            "end": 12.9,
+            "score": 0.803
+        },
+        {
+            "word": "boy",
+            "start": 13.121,
+            "end": 13.302,
+            "score": 0.984
+        },
+        {
+            "word": "and",
+            "start": 13.342,
+            "end": 13.442,
+            "score": 0.317
+        },
+        {
+            "word": "a",
+            "start": 13.463,
+            "end": 13.483,
+            "score": 0.894
+        },
+        {
+            "word": "girl,",
+            "start": 13.543,
+            "end": 13.904,
+            "score": 0.851
+        },
+        {
+            "word": "and",
+            "start": 14.085,
+            "end": 14.406,
+            "score": 0.7
+        },
+        {
+            "word": "it's",
+            "start": 14.647,
+            "end": 14.768,
+            "score": 0.884
+        },
+        {
+            "word": "on",
+            "start": 14.848,
+            "end": 14.948,
+            "score": 0.864
+        },
+        {
+            "word": "the",
+            "start": 14.968,
+            "end": 15.049,
+            "score": 0.804
+        },
+        {
+            "word": "top",
+            "start": 15.089,
+            "end": 15.35,
+            "score": 0.968
+        },
+        {
+            "word": "shelf,",
+            "start": 15.39,
+            "end": 15.771,
+            "score": 0.723
+        },
+        {
+            "word": "and",
+            "start": 15.972,
+            "end": 16.053,
+            "score": 0.59
+        },
+        {
+            "word": "he's",
+            "start": 16.093,
+            "end": 16.213,
+            "score": 0.744
+        },
+        {
+            "word": "going",
+            "start": 16.253,
+            "end": 16.374,
+            "score": 0.232
+        },
+        {
+            "word": "to",
+            "start": 16.394,
+            "end": 16.434,
+            "score": 0.015
+        },
+        {
+            "word": "fall",
+            "start": 16.474,
+            "end": 16.695,
+            "score": 0.648
+        },
+        {
+            "word": "off",
+            "start": 16.755,
+            "end": 16.896,
+            "score": 0.884
+        },
+        {
+            "word": "that",
+            "start": 16.956,
+            "end": 17.157,
+            "score": 0.935
+        },
+        {
+            "word": "stool,",
+            "start": 17.217,
+            "end": 17.599,
+            "score": 0.747
+        },
+        {
+            "word": "and",
+            "start": 17.699,
+            "end": 17.799,
+            "score": 0.772
+        },
+        {
+            "word": "what",
+            "start": 17.88,
+            "end": 18.121,
+            "score": 0.707
+        },
+        {
+            "word": "else?",
+            "start": 18.141,
+            "end": 18.221,
+            "score": 0.416
+        },
+        {
+            "word": "And",
+            "start": 18.502,
+            "end": 18.563,
+            "score": 0.021
+        },
+        {
+            "word": "mom's",
+            "start": 18.583,
+            "end": 18.704,
+            "score": 0.216
+        },
+        {
+            "word": "going",
+            "start": 18.724,
+            "end": 18.865,
+            "score": 0.312
+        },
+        {
+            "word": "to",
+            "start": 18.885,
+            "end": 18.986,
+            "score": 0.539
+        },
+        {
+            "word": "slip",
+            "start": 19.006,
+            "end": 19.248,
+            "score": 0.88
+        },
+        {
+            "word": "on",
+            "start": 19.309,
+            "end": 19.409,
+            "score": 0.893
+        },
+        {
+            "word": "the",
+            "start": 19.429,
+            "end": 19.51,
+            "score": 0.848
+        },
+        {
+            "word": "water",
+            "start": 19.571,
+            "end": 19.913,
+            "score": 0.958
+        },
+        {
+            "word": "if",
+            "start": 19.933,
+            "end": 19.974,
+            "score": 0.018
+        },
+        {
+            "word": "she",
+            "start": 20.034,
+            "end": 20.155,
+            "score": 0.799
+        },
+        {
+            "word": "doesn't",
+            "start": 20.175,
+            "end": 20.437,
+            "score": 0.951
+        },
+        {
+            "word": "be",
+            "start": 20.498,
+            "end": 20.598,
+            "score": 0.792
+        },
+        {
+            "word": "careful.",
+            "start": 20.639,
+            "end": 21.002,
+            "score": 0.904
+        },
+        {
+            "word": "And",
+            "start": 21.343,
+            "end": 21.464,
+            "score": 0.334
+        },
+        {
+            "word": "what",
+            "start": 21.606,
+            "end": 21.687,
+            "score": 0.249
+        },
+        {
+            "word": "else",
+            "start": 21.728,
+            "end": 21.829,
+            "score": 0.125
+        },
+        {
+            "word": "do",
+            "start": 21.85,
+            "end": 22.012,
+            "score": 0.751
+        },
+        {
+            "word": "you",
+            "start": 22.032,
+            "end": 22.154,
+            "score": 0.358
+        },
+        {
+            "word": "want",
+            "start": 22.174,
+            "end": 22.276,
+            "score": 0.156
+        },
+        {
+            "word": "me",
+            "start": 22.296,
+            "end": 22.377,
+            "score": 0.798
+        },
+        {
+            "word": "to",
+            "start": 22.418,
+            "end": 22.458,
+            "score": 0.006
+        },
+        {
+            "word": "tell",
+            "start": 22.479,
+            "end": 22.682,
+            "score": 0.863
+        },
+        {
+            "word": "you?",
+            "start": 22.702,
+            "end": 22.763,
+            "score": 0.031
+        },
+        {
+            "word": "Do",
+            "start": 22.803,
+            "end": 22.843,
+            "score": 0.0
+        },
+        {
+            "word": "you",
+            "start": 22.864,
+            "end": 22.924,
+            "score": 0.001
+        },
+        {
+            "word": "want",
+            "start": 22.944,
+            "end": 23.085,
+            "score": 0.856
+        },
+        {
+            "word": "me",
+            "start": 23.106,
+            "end": 23.186,
+            "score": 0.978
+        },
+        {
+            "word": "to",
+            "start": 23.227,
+            "end": 23.307,
+            "score": 0.974
+        },
+        {
+            "word": "describe",
+            "start": 23.328,
+            "end": 23.691,
+            "score": 0.486
+        },
+        {
+            "word": "everything",
+            "start": 23.751,
+            "end": 24.135,
+            "score": 0.902
+        },
+        {
+            "word": "on",
+            "start": 24.215,
+            "end": 24.316,
+            "score": 0.962
+        },
+        {
+            "word": "that",
+            "start": 24.357,
+            "end": 24.518,
+            "score": 0.626
+        },
+        {
+            "word": "that",
+            "start": 24.801,
+            "end": 24.922,
+            "score": 0.226
+        },
+        {
+            "word": "I",
+            "start": 24.942,
+            "end": 25.043,
+            "score": 0.912
+        },
+        {
+            "word": "see?",
+            "start": 25.083,
+            "end": 25.224,
+            "score": 0.478
+        },
+        {
+            "word": "Oh,",
+            "start": 25.505,
+            "end": 25.607,
+            "score": 0.272
+        },
+        {
+            "word": "that's",
+            "start": 25.627,
+            "end": 25.832,
+            "score": 0.84
+        },
+        {
+            "word": "it,",
+            "start": 25.934,
+            "end": 26.036,
+            "score": 0.755
+        },
+        {
+            "word": "I",
+            "start": 26.097,
+            "end": 26.178,
+            "score": 0.994
+        },
+        {
+            "word": "think.",
+            "start": 26.219,
+            "end": 26.423,
+            "score": 0.901
+        },
+        {
+            "word": "She's",
+            "start": 26.845,
+            "end": 26.995,
+            "score": 0.128
+        }
+    ]
+}

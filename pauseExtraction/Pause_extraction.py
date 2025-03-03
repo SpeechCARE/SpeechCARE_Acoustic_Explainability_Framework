@@ -10,9 +10,10 @@ import whisperx
 from itertools import groupby
 from typing import List, Tuple, Optional
 import stanza
+import spacy
 
-# Initialize Stanza pipeline for POS tagging
 nlp = stanza.Pipeline(lang="en", processors="tokenize,pos")
+nlp_spacy = spacy.load("en_core_web_sm")
 
 class PauseExtraction:
     def __init__(self, config, audio_file: str, word_segments: Optional[str] = None):
@@ -108,7 +109,7 @@ class PauseExtraction:
             elif next_word_POS in noun_tags:
                 mark = "Pause before noun"
             else:
-                doc = nlp(next_phrase.lower())
+                doc = nlp_spacy(next_phrase.lower())
                 noun_phrases = [chunk.text for chunk in doc.noun_chunks]
                 noun_phrases = [phrase for phrase in noun_phrases if phrase.startswith(next_word.lower())]
                 if noun_phrases:
