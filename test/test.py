@@ -2,15 +2,16 @@ import sys
 import argparse
 import torch
 import librosa
-
+import yaml
+from typing import Optional, Tuple, Dict, Any
 # Add custom paths to sys.path (if needed)
-sys.path.append("")
+sys.path.append("SpeechCARE_Acoustic_Explainability_Framework")
 
 # Import custom modules
-from SpeechCARE_Acoustic_Explainability_Framework.models.ModelWrapper import ModelWrapper
-from SpeechCARE_Acoustic_Explainability_Framework.Config import Config
-from SpeechCARE_Acoustic_Explainability_Framework.SHAP.Shap import AcousticShap
-from SpeechCARE_Acoustic_Explainability_Framework.pauseExtraction.Pause_extraction import PauseExtraction
+from models.ModelWrapper import ModelWrapper
+from utils.Config import Config
+from SHAP.Shap import AcousticShap
+from pauseExtraction.Pause_extraction import PauseExtraction
 
 
 def parse_arguments():
@@ -62,6 +63,19 @@ def initialize_pause_extractor(config_pause, audio_path, word_segments):
     pause_extractor = PauseExtraction(config_pause, audio_path, word_segments)
     return pause_extractor
 
+def load_config_from_yaml(config_path: str) -> Dict[str, Any]:
+    """
+    Load model configuration from a YAML file.
+
+    Args:
+        config_path (str): Path to the YAML configuration file.
+
+    Returns:
+        Dict[str, Any]: Configuration dictionary.
+    """
+    with open(config_path, 'r') as file:
+        config = yaml.safe_load(file)
+    return config
 
 def refine_pauses(pause_extractor, sr, energy_threshold, min_pause_duration, expansion_threshold):
     """
@@ -101,17 +115,15 @@ def initialize_model(config, model_checkpoint):
     model = wrapper.get_model(model_checkpoint)
     return model
 
-
+ 
 def main():
     # Parse command-line arguments
     args = parse_arguments()
 
-    # Initialize pause extraction configuration
-    config_pause = Config()
-    config_pause.device = "cpu"
-    config_pause.batch_size = 16
-    config_pause.compute_type = "int8"
-    config_pause.model_id = "large-v3"
+    
+    # Load pause configuration from YAML file
+    config_path = "SpeechCARE_Acoustic_Explainability_Framework/data/pause_config.yaml"  # Path to your YAML configuration file
+    config_pause = Config(load_config_from_yaml(config_path))
 
     # Initialize pause extractor
     pause_extractor = initialize_pause_extractor(config_pause, args.audio_path, args.word_segments)
@@ -123,24 +135,10 @@ def main():
         args.min_pause_duration, args.expansion_threshold
     )
 
-    # Initialize model configuration
-    SIMPLE_ATTENTION = 16
-    config = Config()
-    config.seed = 133
-    config.bs = 4
-    config.epochs = 14
-    config.lr = 1e-6
-    config.hidden_size = 128
-    config.wd = 1e-3
-    config.integration = SIMPLE_ATTENTION
-    config.num_labels = 3
-    config.txt_transformer_chp = config.MGTEBASE
-    config.speech_transformer_chp = config.mHuBERT
-    config.segment_size = 5
-    config.active_layers = 12
-    config.demography = 'age_bin'
-    config.demography_hidden_size = 128
-    config.max_num_segments = 7
+ 
+    # Load model configuration from YAML file
+    config_path = "SpeechCARE_Acoustic_Explainability_Framework/data/model_config.yaml"  # Path to your YAML configuration file
+    config = Config(load_config_from_yaml(config_path))
 
     # Initialize and load the model
     model = initialize_model(config, args.model_checkpoint)

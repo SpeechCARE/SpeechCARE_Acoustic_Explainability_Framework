@@ -1,0 +1,2 @@
+# ignore all .wav files
+data/*.wav

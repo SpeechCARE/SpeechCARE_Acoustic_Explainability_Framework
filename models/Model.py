@@ -10,7 +10,7 @@ from transformers import (AutoModel,
                           AutoModelForSpeechSeq2Seq, 
                           AutoProcessor, pipeline)
 
-from SpeechCARE_Acoustic_Explainability_Framework.dataset.utils import preprocess_audio
+from utils.dataset_utils import preprocess_audio
 
 class MultiHeadAttentionAddNorm(nn.Module):
     def __init__(self, embedding_dim, num_heads, dropout):
