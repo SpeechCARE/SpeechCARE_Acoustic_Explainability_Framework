@@ -8,19 +8,21 @@ class Config:
         """
         self._load_config(config_dict)
 
-    def _load_config(self, config_dict: dict) -> None:
+    def _load_config(self, config_dict: dict, prefix: str = "") -> None:
         """
         Recursively load configuration keys and values into the class attributes.
 
         Args:
             config_dict (dict): Dictionary containing configuration data.
+            prefix (str): Prefix to add to flattened keys.
         """
         for key, value in config_dict.items():
+            
             if isinstance(value, dict):
-                # If the value is a dictionary, create a nested Config object
-                setattr(self, key, Config(value))
+                # Recursively flatten nested dictionaries
+                self._load_config(value, key)
             else:
-                # Otherwise, set the attribute directly
+                # Set the attribute directly
                 setattr(self, key, value)
 
     def get_subnet_insize(self) -> int:

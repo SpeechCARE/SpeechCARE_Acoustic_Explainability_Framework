@@ -120,10 +120,10 @@ def main():
     # Parse command-line arguments
     args = parse_arguments()
 
-    
     # Load pause configuration from YAML file
     config_path = "SpeechCARE_Acoustic_Explainability_Framework/data/pause_config.yaml"  # Path to your YAML configuration file
     config_pause = Config(load_config_from_yaml(config_path))
+  
 
     # Initialize pause extractor
     pause_extractor = initialize_pause_extractor(config_pause, args.audio_path, args.word_segments)
