@@ -14,7 +14,7 @@ pip install -r requirements.txt
 
 ## ⚙️ Configuring `*.yml`
 
-Before starting the training process, update the **`data/model_config.yml`** and **`data/pause_config.yml`** fileste with the appropriate paths and settings.
+Before starting the training process, update the **`data/model_config.yml`** and **`data/pause_config.yml`** files with the appropriate paths and settings.
 
 ### ✅ Set Pretrained Checkpoints
 
