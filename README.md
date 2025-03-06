@@ -76,8 +76,8 @@ Use the following command to run the `test.py` file:
   A JSON file containing the words in the audio file along with their respective start and end times. This file is used to detect pauses in the audio, which are important indicators for classification. The JSON file should have the following format:
   ```json
   [
-    { "word": "example", "start_time": 0.0, "end_time": 0.5 },
-    { "word": "audio", "start_time": 0.6, "end_time": 1.0 }
+    { "word": "example", "start": 0.0, "end": 0.5 },
+    { "word": "audio", "start": 0.6, "end": 1.0 }
   ]
   ```
 
