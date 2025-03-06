@@ -58,6 +58,29 @@ Use the following command to run the `test.py` file:
                                                                  --min_pause_duration 0.15
 ```
 
+### Arguments
+
+- **`--model_checkpoint`**:  
+  Path to the pretrained TBNET model weights. This file contains the trained model parameters required for inference.
+
+- **`--audio_path`**:  
+  Path to the audio sample for which you want to generate explanations. The audio file should be in a supported format (e.g., WAV).
+
+- **`--demography_info`**:  
+  A scalar value (e.g., age) associated with the audio sample. This information can be used as additional input for the model, if required.
+
+- **`--fig_save_path`**:  
+  Path to save the generated spectrogram image with SHAP values visualized. This image highlights the parts of the audio signal that the model attended to most.
+
+- **`--word_segments` (optional)**:  
+  A JSON file containing the words in the audio file along with their respective start and end times. This file is used to detect pauses in the audio, which are important indicators for classification. The JSON file should have the following format:
+  ```json
+  [
+    { "word": "example", "start_time": 0.0, "end_time": 0.5 },
+    { "word": "audio", "start_time": 0.6, "end_time": 1.0 }
+  ]
+  ```
+
 ## 📁 Repository Structure
 
 ```
