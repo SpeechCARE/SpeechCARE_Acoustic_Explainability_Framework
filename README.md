@@ -61,7 +61,7 @@ Use the following command to run the `test.py` file:
 ### Arguments
 
 - **`--model_checkpoint`**:  
-  Path to the pretrained TBNET model weights. This file contains the trained model parameters required for inference.
+  Path to the pretrained TBNet model weights. This file contains the trained model parameters required for inference.
 
 - **`--audio_path`**:  
   Path to the audio sample for which you want to generate explanations. The audio file should be in a supported format (e.g., WAV).
