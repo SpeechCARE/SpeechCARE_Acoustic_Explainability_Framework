@@ -79,6 +79,15 @@ class PauseExtraction:
                 ))
         return pauses
 
+    def get_pps(self, doc):
+        "Function to get PPs from a parsed document."
+        pps = []
+        for token in doc:
+            if token.pos_ == 'ADP':
+                pp = ' '.join([tok.orth_ for tok in token.subtree])
+                pps.append(pp)
+        return pps
+
     def mark_pauses(self, pauses: List[Tuple]) -> List[Tuple]:
         """
         Mark pauses based on linguistic rules.
@@ -107,10 +116,17 @@ class PauseExtraction:
                 mark = "Pause before noun"
             else:
                 doc = nlp_spacy(next_phrase.lower())
+
+                prep_phrases = self.get_pps(doc)
+                prep_phrases = [phrase for phrase in prep_phrases if phrase.startswith(next_word.lower())]
                 noun_phrases = [chunk.text for chunk in doc.noun_chunks]
                 noun_phrases = [phrase for phrase in noun_phrases if phrase.startswith(next_word.lower())]
+                
                 if noun_phrases:
                     mark = "Pause before noun phrase"
+                elif prep_phrases:
+                    mark = "Pause before prepositional phrase"
+
 
             marked_pauses.append((start_pause, end_pause, prev_word, prev_word_POS, next_word, next_word_POS, mark))
 
