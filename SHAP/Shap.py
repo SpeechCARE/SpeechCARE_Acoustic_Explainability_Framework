@@ -381,18 +381,28 @@ class AcousticShap():
         # Determine max_mel from the y_coords of the spectrogram
         max_mel = img.axes.yaxis.get_data_interval()[-1]  # Get the maximum y-axis value (mel frequency)
 
+        # Plot pauses and create legend entries
         if pauses:
+            # # Create proxy artists for the legend
+            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="-", linewidth=2, label="Important Pause")
+            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="--", linewidth=2, label="Regular Pause")
+       
             for start, end, _, _, _, _, mark in pauses:
-                color = "red" if mark else "yellow"
-                ax.plot([start, start, end, end, start], [0, max_mel, max_mel, 0, 0], color=color, linewidth=2)
+                # Use solid yellow for pauses with a mark, dashed yellow otherwise
+                linestyle = "-" if mark else "--"
+                ax.plot([start, start, end, end, start], [0, max_mel, max_mel, 0, 0], color="yellow", linestyle=linestyle, linewidth=2)
 
-        ax.set_xlabel("")
+        ax.set_xlabel("Time (ms)", fontsize=16)  # Add x-axis label
         ax.set_ylabel("Frequency (Hz)", fontsize=16)
         ax.set_xlim(0, audio_duration)
-        # ax.set_xticks(np.arange(0, audio_duration + 1, 1))
-        ax.set_xticks([])
 
-        formant_colors = {"F0": 'red', "F1": 'cyan', "F2": 'white', "F3": 'orange'}
+        # Define x-axis ticks in milliseconds
+        time_ticks_ms = np.arange(0, audio_duration * 1000, 500)  # Every 500 ms
+        time_ticks_seconds = time_ticks_ms / 1000  # Convert ms to seconds for plotting
+        ax.set_xticks(time_ticks_seconds)
+        ax.set_xticklabels([f"{int(t)}" for t in time_ticks_ms], rotation=45)  # Display ticks in ms
+
+        formant_colors = {"F0": 'red', "F1": 'cyan', "F2": 'white', "F3": '#FF8C00'}
         if formants_to_plot:
             for formant in formants_to_plot:
                 if formant in formant_values:
