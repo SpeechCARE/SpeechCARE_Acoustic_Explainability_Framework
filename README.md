@@ -1,14 +1,16 @@
-# Model Explainability for Acoustic Inputs
+# Acoustic Explainability Framework
 
-This repository implements an **acoustic transformer-based classification pipeline** for distinguishing between individuals with **Alzheimer’s Disease and Related Dementias (ADRD)**, **Mild Cognitive Impairment (MCI)**, and **healthy controls** based on audio recordings. To enhance interpretability, we provide tools to explain the model's decision-making process by calculating **SHAP (SHapley Additive exPlanations)** values for acoustic inputs. This allows us to identify and visualize the specific parts of the audio signal that the model attends to most when making predictions.
+This repository introduces a model-agnostic explainability framework designed for acoustic deep learning pipelines. The framework integrates advanced visualization techniques, such as spectrogram analysis and SHAP (SHapley Additive exPlanations), to identify and visualize acoustic cues associated with desired model outcomes (e.g., cognitive impairment). It comprises three complementary explanation layers:
 
-## 🚀 Installation
+- **Audio Spectrogram:** Visualizes the energy of frequency components over time.
+- **SHAP-based Spectrogram:** Highlights time spans that are most informative for the predicted outcome.
+- **Explainable Acoustic/Temporal Features:** Provides deeper insights into how key acoustic and temporal features relate to the desired outcome (e.g., cognitive status).
 
-First, install the required dependencies using the `requirements.txt` file:
+The output of this framework is a spectrogram visualization that emphasizes informative acoustic and temporal features, accompanied by human-interpretable explanations. Additionally, this framework includes linguistic transformer explainability. For more details, refer to the [Linguistic Explainability Framework repository](https://github.com/SpeechCARE/SpeechCARE_Linguistic_Explainability_Framework.git).
 
-```bash
-pip install -r requirements.txt
-```
+Below is a sample output of our explainability framework applied to a classification task from the [SpeechCARE challenge](https://github.com/SpeechCARE), where the subject's class was Mild Cognitive Impairment (MCI).
+
+![Example Output](figs/qnvo_spectrogram.png)
 
 ---
 
@@ -21,18 +23,7 @@ Before starting the training process, update the **`data/model_config.yml`** and
 Choose a pretrained acoustic transformer model by specifying its checkpoint in the configuration file. The pipeline supports various self-supervised speech models:
 
 ```yaml
-# mHuBERT: Multilingual HuBERT model for robust speech representation learning
-speech_transformer_chp: "utter-project/mHuBERT-147"
-```
-
-```yaml
-# wav2vec 2.0: Self-supervised model trained on 960 hours of English speech
-speech_transformer_chp: "facebook/wav2vec2-base-960h"
-```
-
-```yaml
-# HuBERT: Hidden-unit BERT model trained on the LibriSpeech 960h dataset
-speech_transformer_chp: "facebook/hubert-base-ls960"
+speech_transformer_chp: "PATH/TO/PRETRAINED/MODEL/CHECKPOINTS"
 ```
 
 ### ✅ Set Training Hyperparameters
@@ -72,6 +63,9 @@ Use the following command to run the `test.py` file:
 - **`--fig_save_path`**:  
   Path to save the generated spectrogram image with SHAP values visualized. This image highlights the parts of the audio signal that the model attended to most.
 
+- **`--min_pause_duration `**:  
+  A scalar value that defines the minimum duration required for a pause to be considered as valid.
+
 - **`--word_segments` (optional)**:  
   A JSON file containing the words in the audio file along with their respective start and end times. This file is used to detect pauses in the audio, which are important indicators for classification. The JSON file should have the following format:
   ```json
@@ -80,6 +74,18 @@ Use the following command to run the `test.py` file:
     { "word": "audio", "start": 0.6, "end": 1.0 }
   ]
   ```
+
+---
+
+## 🚀 Installation
+
+You can install the required dependencies using the `requirements.txt` file:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
 
 ## 📁 Repository Structure
 

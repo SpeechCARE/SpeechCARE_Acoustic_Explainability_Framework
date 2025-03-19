@@ -14,7 +14,6 @@ config:
   wd: 1e-3
   integration: 16
   num_labels: 3
-  txt_transformer_chp: "Alibaba-NLP/gte-multilingual-base"
   speech_transformer_chp: "utter-project/mHuBERT-147"
   segment_size: 5
   active_layers: 12
