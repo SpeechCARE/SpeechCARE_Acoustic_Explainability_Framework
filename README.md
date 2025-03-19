@@ -10,7 +10,7 @@ The output of this framework is a spectrogram visualization that emphasizes info
 
 The framework also includes linguistic explainability. For more details, refer to the [Linguistic Explainability Framework repository](https://github.com/SpeechCARE/SpeechCARE_Linguistic_Explainability_Framework.git).
 
-Below is a sample output of our explainability framework applied to a classification task from the [SpeechCARE challenge](https://github.com/SpeechCARE), where the subject's class was Mild Cognitive Impairment (MCI).
+Below is a sample output of our acoustic explainability framework applied to a classification task from the [SpeechCARE challenge](https://github.com/SpeechCARE), where the subject's class was Mild Cognitive Impairment (MCI).
 
 ![Example Output](figs/qnvo_spectrogram.png)
 
