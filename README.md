@@ -88,14 +88,37 @@ python test/test.py \
 
 #### 📋 Arguments Overview
 
-| Argument               | Required | Description                                                                                           |
-| ---------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| `--model_checkpoint`   | ✅       | Path to trained TBNet model weights (`.pt` file)                                                      |
-| `--audio_path`         | ✅       | Input audio file path (WAV format recommended)                                                        |
-| `--demography_info`    | ✅       | Speaker demographic value (e.g., age as integer)                                                      |
-| `--fig_save_path`      | ✅       | Directory to save explanation visualizations                                                          |
-| `--min_pause_duration` | ✅       | Minimum pause length (seconds) for detection                                                          |
-| `--word_segments`      | ❌       | Optional JSON file with word timestamps:<br> `[{"word": "example", "start": 0.0, "end": 0.5 } , ...]` |
+| Argument               | Required | Description                                                 |
+| ---------------------- | -------- | ----------------------------------------------------------- |
+| `--model_checkpoint`   | ✅       | Path to trained TBNet model weights (`.pt` file)            |
+| `--audio_path`         | ✅       | Input audio file path (WAV format recommended)              |
+| `--demography_info`    | ✅       | Speaker demographic value (e.g., age as integer)            |
+| `--fig_save_path`      | ✅       | Directory to save explanation visualizations                |
+| `--min_pause_duration` | ✅       | Minimum pause length (seconds) for detection                |
+| `--word_segments`      | ❌       | Optional JSON file with word timestamps: (see format below) |
+
+**_Word Segments JSON Format_**
+The script accepts the following format for word timestamps:
+
+```json
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 1.0,
+      "text": "Hello world",
+      "words": [
+        { "word": "Hello", "start": 0.0, "end": 0.5 },
+        { "word": "world", "start": 0.6, "end": 1.0 }
+      ]
+    }
+  ],
+  "word_segments": [
+    { "word": "Hello", "start": 0.0, "end": 0.5 },
+    { "word": "world", "start": 0.6, "end": 1.0 }
+  ]
+}
+```
 
 **_Note:_** When omitting --word_segments, the script automatically transcribes audio using the Whisper model specified in pause_config.yaml.
 
