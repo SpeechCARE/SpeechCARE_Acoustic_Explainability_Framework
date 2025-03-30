@@ -1,22 +1,35 @@
+# PRETRAINED MODEL CHECKPOINTS (HuggingFace paths)
 model_checkpoints:
-  HUBERT: "facebook/hubert-base-ls960"
-  WAV2VEC2: "facebook/wav2vec2-base-960h"
-  mHuBERT: "utter-project/mHuBERT-147"
-  MGTEBASE: "Alibaba-NLP/gte-multilingual-base"
-  WHISPER: "openai/whisper-large-v3-turbo"
+  HUBERT: "facebook/hubert-base-ls960" # Standard HuBERT model (960h Librispeech)
+  WAV2VEC2: "facebook/wav2vec2-base-960h" # Base Wav2Vec 2.0 model
+  mHuBERT: "utter-project/mHuBERT-147" # Multilingual HuBERT variant
+  MGTEBASE: "Alibaba-NLP/gte-multilingual-base" # General Text Embedding model
+  WHISPER: "openai/whisper-large-v3-turbo" # Whisper ASR model (large v3 turbo)
 
+# TRAINING CONFIGURATION
 config:
-  seed: 133
-  bs: 4
-  epochs: 14
-  lr: 1e-6
-  hidden_size: 128
-  wd: 1e-3
-  integration: 16
-  num_labels: 3
-  speech_transformer_chp: "utter-project/mHuBERT-147"
-  segment_size: 5
-  active_layers: 12
-  demography: "age_bin"
-  demography_hidden_size: 128
-  max_num_segments: 7
+  # Experiment Control
+  seed: 133 # Random seed for reproducibility
+  bs: 4 # Batch size for training
+  epochs: 14 # Total training epochs
+
+  # Optimization Parameters
+  lr: 1e-6 # Learning rate
+  wd: 1e-3 # Weight decay (L2 regularization)
+
+  # Model Architecture
+  hidden_size: 128 # Hidden layer dimension
+  integration: 16 # Cross-modal integration dimension
+  num_labels: 3 # Number of output classes
+
+  # Speech Processing
+  speech_transformer_chp: "utter-project/mHuBERT-147" # Default speech model
+  segment_size: 5 # Audio segment length (seconds)
+  active_layers: 12 # Number of transformer layers to use
+
+  # Demographic Handling
+  demography: "age_bin" # Demographic feature to use
+  demography_hidden_size: 128 # Demographic embedding dimension
+
+  # Data Processing
+  max_num_segments: 7 # Maximum audio segments per sample

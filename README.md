@@ -16,66 +16,47 @@ Below is a sample output of our acoustic explainability framework applied to a c
 
 ---
 
-## ⚙️ Configuring `*.yml`
+## 📁 Repository Structure
 
-Before starting the training process, update the **`data/model_config.yml`** and **`data/pause_config.yml`** files with the appropriate paths and settings.
-
-### ✅ Set Pretrained Checkpoints
-
-Choose a pretrained acoustic transformer model by specifying its checkpoint in the configuration file. The pipeline supports various self-supervised speech models:
-
-```yaml
-speech_transformer_chp: "PATH/TO/PRETRAINED/MODEL/CHECKPOINTS"
 ```
-
-### ✅ Set Training Hyperparameters
-
-Change other training parameters or model configs like epoch, learning rate and etc.
+├── data/                       # Contains necessary data
+├── modelCheckpoints/           # Contains checkpoints of the pretrained model
+├── dataset/                    # Dataset architecture
+├── model/                      # Model architecture
+├── pauseExtraction/             # Contains code to extract pauses from audio input
+├── utils/                      # Utility scripts for preprocessing and evaluation
+├── test/                 # A sample script for using the explanation on acoustic data
+├── result.ipynb                      # A notebook sample to show the output of the explanation method used
+├── requirements.txt              # Dependencies for the project
+```
 
 ---
 
-## 🛠️ Usage
+## ⚙️ Configuration Files `*.yml`
 
-To use the provided explainability methods (SHAP) on an acoustic input, you can run the `test.py` file using the following bash script. This script generates explanations for a given audio sample and saves the results.
+Before running the project, you may need to adjust these configuration files:
 
-### Running the Script
+### ✅ data/model_config.yaml - Core Model Parameters
 
-Use the following command to run the `test.py` file:
+When to modify: Change these if you want to:
 
-```bash
-!python SpeechCARE_Acoustic_Explainability_Framework/test/test.py --model_checkpoint $CHECKPOINTS_FILE \
-                                                                 --audio_path $AUDIO_PATH \
-                                                                 --demography_info $DEMOGRAPHIC_INFO \
-                                                                 --fig_save_path $FIG_SAVE_PATH \
-                                                                 --word_segments $WORD_SEGMENTS_PATH \
-                                                                 --min_pause_duration 0.15
-```
+- Use different pretrained models
 
-### Arguments
+- Adjust training hyperparameters (batch size, learning rate, etc.)
 
-- **`--model_checkpoint`**:  
-  Path to the pretrained TBNet model weights. This file contains the trained model parameters required for inference.
+- Modify model architecture settings
 
-- **`--audio_path`**:  
-  Path to the audio sample for which you want to generate explanations. The audio file should be in a supported format (e.g., WAV).
+### ✅ data/pause_config.yaml - Audio Processing
 
-- **`--demography_info`**:  
-  A scalar value (e.g., age) associated with the audio sample. This information can be used as additional input for the model, if required.
+When to modify: Only adjust these if you:
 
-- **`--fig_save_path`**:  
-  Path to save the generated spectrogram image with SHAP values visualized. This image highlights the parts of the audio signal that the model attended to most.
+- Need to process audio transcriptions (skip if you have existing transcripts)
 
-- **`--min_pause_duration `**:  
-  A scalar value that defines the minimum duration required for a pause to be considered as valid.
+- Want to use GPU (device: "cuda")
 
-- **`--word_segments` (optional)**:  
-  A JSON file containing the words in the audio file along with their respective start and end times. This file is used to detect pauses in the audio, which are important indicators for classification. The JSON file should have the following format:
-  ```json
-  [
-    { "word": "example", "start": 0.0, "end": 0.5 },
-    { "word": "audio", "start": 0.6, "end": 1.0 }
-  ]
-  ```
+- Prefer a different Whisper model size
+
+**Default Note**: Both files come with working defaults - you can run the project immediately without changes for basic usage.
 
 ---
 
@@ -89,17 +70,38 @@ pip install -r requirements.txt
 
 ---
 
-## 📁 Repository Structure
+## 🛠️ Explainability Testing
+
+Run SHAP-based explainability analysis on acoustic inputs using the provided test script. This generates model explanations and saves visualizations.
+
+### Quick Start
+
+```bash
+python test/test.py \
+  --model_checkpoint path/to/model.pt \
+  --audio_path path/to/audio.wav \
+  --demography_info 65 \          # Age of speaker
+  --fig_save_path results/result.png \      # Path to save result image
+  --min_pause_duration 0.15       # Minimum pause threshold (seconds)
 
 ```
-├── data/                       # Contains necessary data
-├── dataset/                    # Dataset architecture
-├── model/                      # Model architecture
-├── pauseExtraction/             # Contains code to extract pauses from audio input
-├── utils/                      # Utility scripts for preprocessing and evaluation
-├── test/                 # A sample script for using the explanation on acoustic data
-├── result.ipynb                      # A notebook sample to show the output of the explanation method used
-├── requirements.txt              # Dependencies for the project
-```
+
+#### 📋 Arguments Overview
+
+| Argument               | Required | Description                                                                                           |
+| ---------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| `--model_checkpoint`   | ✅       | Path to trained TBNet model weights (`.pt` file)                                                      |
+| `--audio_path`         | ✅       | Input audio file path (WAV format recommended)                                                        |
+| `--demography_info`    | ✅       | Speaker demographic value (e.g., age as integer)                                                      |
+| `--fig_save_path`      | ✅       | Directory to save explanation visualizations                                                          |
+| `--min_pause_duration` | ✅       | Minimum pause length (seconds) for detection                                                          |
+| `--word_segments`      | ❌       | Optional JSON file with word timestamps:<br> `[{"word": "example", "start": 0.0, "end": 0.5 } , ...]` |
+
+**_Note:_** When omitting --word_segments, the script automatically transcribes audio using the Whisper model specified in pause_config.yaml.
 
 ---
+
+## 📖 Detailed Tutorial & Examples
+
+For a complete step-by-step guide with sample data demonstrations and output visualizations, see the Jupyter notebook:
+`result.ipynb`
