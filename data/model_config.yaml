@@ -24,6 +24,7 @@ config:
 
   # Speech Processing
   speech_transformer_chp: "utter-project/mHuBERT-147" # Default speech model
+  txt_transformer_chp: "Alibaba-NLP/gte-multilingual-base" # Default text model
   segment_size: 5 # Audio segment length (seconds)
   active_layers: 12 # Number of transformer layers to use
 
