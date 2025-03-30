@@ -20,7 +20,7 @@ Below is a sample output of our acoustic explainability framework applied to a c
 
 ```
 ├── data/                       # Contains necessary data
-├── modelCheckpoints/           # Contains checkpoints of the pretrained model
+├── checkpoints/           # Contains checkpoints of the pretrained model
 ├── dataset/                    # Dataset architecture
 ├── model/                      # Model architecture
 ├── pauseExtraction/             # Contains code to extract pauses from audio input
