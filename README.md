@@ -94,7 +94,7 @@ pip install -r requirements.txt
 ```
 ├── data/                       # Contains necessary data
 ├── dataset/                    # Dataset architecture
-├── models/                      # Model architecture
+├── model/                      # Model architecture
 ├── pauseExtraction/             # Contains code to extract pauses from audio input
 ├── utils/                      # Utility scripts for preprocessing and evaluation
 ├── test/                 # A sample script for using the explanation on acoustic data

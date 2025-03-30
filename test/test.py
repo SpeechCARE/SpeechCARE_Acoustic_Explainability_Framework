@@ -8,7 +8,7 @@ from typing import Optional, Tuple, Dict, Any
 sys.path.append("SpeechCARE_Acoustic_Explainability_Framework")
 
 # Import custom modules
-from models.ModelWrapper import ModelWrapper
+from model.ModelWrapper import ModelWrapper
 from utils.Config import Config
 from SHAP.Shap import AcousticShap
 from pauseExtraction.Pause_extraction import PauseExtraction
