@@ -48,7 +48,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def initialize_pause_extractor(config_pause, audio_path, word_segments):
+def initialize_pause_extractor(config_pause, audio_path, word_segments = None):
     """
     Initialize and configure the PauseExtraction module.
 
