@@ -370,8 +370,8 @@ class AcousticShap():
 
         # Step 3: Plot pauses (identical to SHAP version)
         if pauses:
-            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="-", linewidth=2, label="Important Pause")
-            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="--", linewidth=2, label="Regular Pause")
+            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="-", linewidth=2, label="Informative Pause")
+            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="--", linewidth=2, label="Natural Pause")
        
             for start, end, _, _, _, _, mark in pauses:
                 linestyle = "-" if mark else "--"
@@ -538,8 +538,8 @@ class AcousticShap():
         # Plot pauses and create legend entries
         if pauses:
             # # Create proxy artists for the legend
-            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="-", linewidth=2, label="Important Pause")
-            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="--", linewidth=2, label="Regular Pause")
+            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="-", linewidth=2, label="Informative Pause")
+            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="--", linewidth=2, label="Natural Pause")
        
             for start, end, _, _, _, _, mark in pauses:
                 # Use solid yellow for pauses with a mark, dashed yellow otherwise
