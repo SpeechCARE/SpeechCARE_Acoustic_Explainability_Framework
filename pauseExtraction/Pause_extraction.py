@@ -154,7 +154,7 @@ class PauseExtraction:
                     tagged_words[i + 1]['word'],
                     tagged_words[i + 1]['POS'],
                     pre_context,
-                    post_context,
+                    post_context
                 )
                 pauses.append(pause)
         
