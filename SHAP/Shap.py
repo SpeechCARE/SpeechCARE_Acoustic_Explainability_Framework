@@ -238,7 +238,7 @@ class AcousticShap():
 
     def frequency_shannon_entropy(self,
         audio_path, frame_length_ms=25, frame_step_ms=10, windowing_function="hamming",
-        smooth=True, smooth_window=5, ax=None
+        smooth=True, smooth_window=5, ax=None, plot=None
     ):
         """
         Calculates and plots the frequency Shannon entropy for an audio file, with optional smoothing.
@@ -251,6 +251,8 @@ class AcousticShap():
         - smooth (bool): Whether to smooth the entropy values.
         - smooth_window (int): Window size for smoothing.
         - ax (matplotlib.axes.Axes, optional): Axis to plot on for subplots. If None, creates a new plot.
+        - plot: Whether to display the plot
+
 
         Returns:
         - np.ndarray: (Original or smoothed) entropy values.
@@ -305,18 +307,19 @@ class AcousticShap():
         else:
             time_axis = np.arange(num_frames) * frame_step_ms / 1000
 
-        # Plot entropy over time
-        if ax is None:
-            fig, ax = plt.subplots(figsize=(10, 4))
+        if plot:
+            # Plot entropy over time
+            if ax is None:
+                fig, ax = plt.subplots(figsize=(10, 4))
 
-        ax.plot(time_axis, entropy_values, label="Frequency Shannon Entropy")
-        ax.set_xlim(0, audio_duration)
-        ax.set_xticks(np.arange(0, audio_duration + 1, 1))  # Set x-ticks based on actual duration
-        # ax.set_title(f"UID: {name}, Frequency Shannon Entropy Over Time")
-        ax.set_xlabel("Time (s)", fontsize=16)
-        ax.set_ylabel("Entropy", fontsize=16)
-        ax.grid(axis='x')
-        ax.legend(loc='upper right')
+            ax.plot(time_axis, entropy_values, label="Frequency Shannon Entropy")
+            ax.set_xlim(0, audio_duration)
+            ax.set_xticks(np.arange(0, audio_duration + 1, 1))  # Set x-ticks based on actual duration
+            # ax.set_title(f"UID: {name}, Frequency Shannon Entropy Over Time")
+            ax.set_xlabel("Time (s)", fontsize=16)
+            ax.set_ylabel("Entropy", fontsize=16)
+            ax.grid(axis='x')
+            ax.legend(loc='upper right')
 
         return entropy_values
     
