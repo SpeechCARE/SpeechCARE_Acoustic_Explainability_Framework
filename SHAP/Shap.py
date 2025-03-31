@@ -186,10 +186,13 @@ class AcousticShap():
             
         if formants_to_plot is None:
             formants_to_plot = []
-            
+
+        fig, ax = plt.subplots(figsize=(20, 4))
         # Get base spectrogram
         if spectrogram_type == "original":
+        
             spectrogram = self.visualize_original_spectrogram(
+                ax = ax,
                 audio_path=audio_path,
                 sr=sr,
                 formants_to_plot=formants_to_plot,
@@ -209,6 +212,7 @@ class AcousticShap():
             )["shap_values"]
             
             spectrogram = self.visualize_shap_spectrogram(
+                ax=ax,
                 audio_path=audio_path,
                 shap_values=shap_values,
                 label=audio_label,
@@ -226,7 +230,9 @@ class AcousticShap():
         if include_entropy:
             entropy = self.frequency_shannon_entropy(
                 audio_path,
-                smooth_window=50
+                smooth_window=50,
+                ax=ax
+                
             )
             return spectrogram, entropy
         
