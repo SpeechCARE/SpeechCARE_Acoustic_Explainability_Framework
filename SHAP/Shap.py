@@ -244,7 +244,7 @@ class AcousticShap():
 
     def frequency_shannon_entropy(self,
         audio_path, frame_length_ms=25, frame_step_ms=10, windowing_function="hamming",
-        smooth=True, smooth_window=5, ax=None, plot=None
+        smooth=True, smooth_window=5, ax=None, plot=True
     ):
         """
         Calculates and plots the frequency Shannon entropy for an audio file, with optional smoothing.
