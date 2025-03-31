@@ -331,7 +331,8 @@ class AcousticShap():
         plot=False
     ):
         """
-        Visualize and return the original spectrogram with optional formants and pauses
+        Visualize and return the original spectrogram with formants and pauses.
+        Matches the style of visualize_shap_spectrogram() exactly except for SHAP modifications.
         
         Args:
             audio_path (str): Path to audio file
@@ -345,68 +346,78 @@ class AcousticShap():
         Returns:
             np.ndarray: The original log-power mel spectrogram in dB
         """
-        # Load audio and compute spectrogram
+        name = os.path.splitext(os.path.basename(audio_path))[0]
+
+        # Step 1: Load audio and compute spectrogram
         audio, _ = librosa.load(audio_path, sr=sr)
         S = librosa.feature.melspectrogram(y=audio, sr=sr, n_fft=2048, hop_length=512, power=2.0)
         log_S = librosa.power_to_db(S, ref=np.max)
         audio_duration = len(audio) / sr
 
-        # Create figure
+        # Step 2: Create figure (same style as SHAP version)
         if ax is None:
             fig, ax = plt.subplots(figsize=(20, 4))
 
-        # Plot original spectrogram
-        img = librosa.display.specshow(log_S, sr=sr, x_axis="time", y_axis="mel", cmap="viridis", ax=ax)
-        ax.set_title("Original Spectrogram")
-        ax.set_xlabel("Time (ms)", fontsize=16)
-        ax.set_ylabel("Frequency (Hz)", fontsize=16)
+        # Plot original spectrogram (same colormap as SHAP version)
+        img = librosa.display.specshow(log_S, sr=sr, x_axis="time", y_axis="mel", 
+                                     cmap="viridis", ax=ax)
         
         # Get max mel frequency for pause plotting
         max_mel = img.axes.yaxis.get_data_interval()[-1]
 
-        # Plot pauses if provided
+        # Step 3: Plot pauses (identical to SHAP version)
         if pauses:
+            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="-", linewidth=2, label="Important Pause")
+            ax.plot([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], color="yellow", linestyle="--", linewidth=2, label="Regular Pause")
+       
             for start, end, _, _, _, _, mark in pauses:
                 linestyle = "-" if mark else "--"
                 ax.plot([start, start, end, end, start], 
-                       [0, max_mel, max_mel, 0, 0], 
-                       color="yellow", 
-                       linestyle=linestyle, 
-                       linewidth=2)
+                        [0, max_mel, max_mel, 0, 0], 
+                        color="yellow", 
+                        linestyle=linestyle, 
+                        linewidth=2)
 
-        # Plot formants if requested
+        # Step 4: Axis formatting (identical to SHAP version)
+        ax.set_xlabel("Time (ms)", fontsize=16)
+        ax.set_ylabel("Frequency (Hz)", fontsize=16)
+        ax.set_xlim(0, audio_duration)
+        
+        # X-axis ticks in milliseconds (same as SHAP version)
+        time_ticks_ms = np.arange(0, audio_duration * 1000, 500)  # Every 500 ms
+        time_ticks_seconds = time_ticks_ms / 1000
+        ax.set_xticks(time_ticks_seconds)
+        ax.set_xticklabels([f"{int(t)}" for t in time_ticks_ms], rotation=45)
+
+        # Step 5: Formant plotting (identical to SHAP version)
+        formant_values = {}
         if formants_to_plot:
             sound = parselmouth.Sound(audio_path)
+            pitch = sound.to_pitch()
+            time_stamps = pitch.ts()
+            f0_values = pitch.selected_array["frequency"]
+            f0_values[f0_values == 0] = np.nan
             formant = sound.to_formant_burg(time_step=0.1)
             times = np.arange(0, audio_duration, 0.01)
-            
-            formant_values = {}
+            formant_values = {"F0": f0_values, "F1": [], "F2": [], "F3": []}
             for t in times:
-                for i, f in enumerate(["F1", "F2", "F3"], 1):
-                    if f in formants_to_plot:
-                        formant_values.setdefault(f, []).append(formant.get_value_at_time(i, t))
-            
-            # Add F0 separately if needed
-            if "F0" in formants_to_plot:
-                pitch = sound.to_pitch()
-                time_stamps = pitch.ts()
-                f0_values = pitch.selected_array["frequency"]
-                f0_values[f0_values == 0] = np.nan
-                formant_values["F0"] = f0_values
-            
-            # Plot each requested formant
+                formant_values["F1"].append(formant.get_value_at_time(1, t))
+                formant_values["F2"].append(formant.get_value_at_time(2, t))
+                formant_values["F3"].append(formant.get_value_at_time(3, t))
+
             formant_colors = {"F0": 'red', "F1": 'cyan', "F2": 'white', "F3": '#FF8C00'}
             for formant in formants_to_plot:
                 if formant in formant_values:
-                    plot_times = time_stamps if formant == "F0" else times
-                    ax.plot(plot_times, 
-                           formant_values[formant], 
-                           label=formant,
-                           linewidth=3 if formant == "F0" else 2,
-                           color=formant_colors[formant])
+                    ax.plot(
+                        times if formant != "F0" else time_stamps,
+                        formant_values[formant],
+                        label=formant,
+                        linewidth=3 if formant == "F0" else 2,
+                        color=formant_colors[formant]
+                    )
             ax.legend(loc='upper right')
 
-        # Save or show if requested
+        # Step 6: Save/show (same as SHAP version)
         if fig_save_path:
             plt.savefig(fig_save_path, dpi=600, bbox_inches="tight")
         if plot:
