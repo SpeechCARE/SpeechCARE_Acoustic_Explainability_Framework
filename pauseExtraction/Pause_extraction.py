@@ -5,7 +5,7 @@ import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
 import whisperx
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional,Dict
 import stanza
 import spacy
 
@@ -45,40 +45,122 @@ class PauseExtraction:
             with open(self.word_segments, "r") as f:
                 result = json.load(f)
         return result
-
-    def extract_pauses(self, threshold: float = 0.3, window_size: int = 6) -> List[Tuple]:
+    
+    def extract_pauses(
+        self,
+        energy_threshold: float = 0.001,
+        min_pause_duration: float = 0.2,
+        expansion_threshold: float = 0.03,
+        sr: int = 16000,
+        pause_threshold: float = 0.3,
+        context_window_size: int = 6,
+        marked: bool = True,
+        refined: bool = True
+    ) -> List[Tuple[float, float, str, str, str, str, str, str, bool]]:
         """
-        Extract pauses from the word segments.
+        Extract and process pauses from word segments with contextual information.
 
         Args:
-            result (dict): Word segments from WhisperX.
-            threshold (float): Minimum gap duration to consider as a pause.
-            window_size (int): Number of words to consider before and after the pause.
+            energy_threshold: RMS energy threshold for silence detection (default: 0.001)
+            min_pause_duration: Minimum duration to consider as pause in seconds (default: 0.2)
+            expansion_threshold: Threshold for pause boundary expansion in seconds (default: 0.03)
+            sr: Sampling rate in Hz (default: 16000)
+            pause_threshold: Minimum gap between words to consider as pause in seconds (default: 0.3)
+            context_window_size: Number of words to include before/after pause for context (default: 6)
+            marked: Whether to mark important pauses (default: True)
+            refined: Whether to refine pause boundaries using energy (default: True)
 
         Returns:
-            List[Tuple]: List of pauses with start, end, and context information.
+            List of tuples containing:
+            - start_time: Pause start time in seconds
+            - end_time: Pause end time in seconds
+            - pre_word: Word before pause
+            - pre_pos: POS tag before pause
+            - post_word: Word after pause
+            - post_pos: POS tag after pause
+            - pre_context: Context before pause
+            - post_context: Context after pause
+            - is_important: Whether pause is marked important
+        """
+        # 1. Get word segments and POS tags
+        word_segments = self.extract_word_segments()
+        tagged_words = self.get_pos_tagged_words(word_segments)
+        
+        # 2. Extract raw pauses
+        raw_pauses = self._find_raw_pauses(
+            tagged_words,
+            pause_threshold=pause_threshold,
+            window_size=context_window_size
+        )
+        
+        # 3. Process pauses
+        if marked:
+            raw_pauses = self.mark_pauses(raw_pauses)
+        
+        if refined:
+            raw_pauses = self.refine_pauses(
+                raw_pauses,
+                sr=sr,
+                energy_threshold=energy_threshold,
+                min_pause_duration=min_pause_duration,
+                expansion_threshold=expansion_threshold
+            )
+        
+        return raw_pauses
+
+    def _find_raw_pauses(
+        self,
+        tagged_words: List[Dict],
+        pause_threshold: float,
+        window_size: int
+    ) -> List[Tuple]:
+        """
+        Identify pauses between words based on temporal gaps.
+        
+        Args:
+            tagged_words: List of words with POS tags and timings
+            pause_threshold: Minimum gap duration to consider as pause
+            window_size: Context window size in words
+            
+        Returns:
+            List of raw pause tuples
         """
         pauses = []
-        result = self.extract_word_segments()
-        words = self.get_pos_tagged_words(result)
-
-        for i in range(len(words) - 1):
-            gap = words[i + 1]['start'] - words[i]['end']
-            if gap > threshold:
-                start_window = max(0, i - window_size)
-                end_window = min(len(words), i + window_size + 1)
-
-                prev_phrase = " ".join([words[j]['word'].lower() for j in range(start_window, i)])
-                next_phrase = " ".join([words[j]['word'].lower() for j in range(i + 1, end_window)])
-
-                pauses.append((
-                    words[i]['end'], words[i + 1]['start'],
-                    words[i]['word'], words[i]['POS'],
-                    words[i + 1]['word'], words[i + 1]['POS'],
-                    prev_phrase, next_phrase
-                ))
+        
+        for i in range(len(tagged_words) - 1):
+            gap_duration = tagged_words[i + 1]['start'] - tagged_words[i]['end']
+            
+            if gap_duration > pause_threshold:
+                # Get context window
+                start_idx = max(0, i - window_size)
+                end_idx = min(len(tagged_words), i + window_size + 1)
+                
+                # Build context phrases
+                pre_context = " ".join(
+                    w['word'].lower() 
+                    for w in tagged_words[start_idx:i]
+                )
+                post_context = " ".join(
+                    w['word'].lower() 
+                    for w in tagged_words[i + 1:end_idx]
+                )
+                
+                # Create pause tuple
+                pause = (
+                    tagged_words[i]['end'], 
+                    tagged_words[i + 1]['start'],
+                    tagged_words[i]['word'],
+                    tagged_words[i]['POS'],
+                    tagged_words[i + 1]['word'],
+                    tagged_words[i + 1]['POS'],
+                    pre_context,
+                    post_context,
+                    False  # Default importance marker
+                )
+                pauses.append(pause)
+        
         return pauses
-
+    
     def get_pps(self, doc):
         "Function to get PPs from a parsed document."
         pps = []

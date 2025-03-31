@@ -47,59 +47,6 @@ def parse_arguments():
 
     return parser.parse_args()
 
-
-def initialize_pause_extractor(config_pause, audio_path, word_segments = None):
-    """
-    Initialize and configure the PauseExtraction module.
-
-    Args:
-        config_pause (Config): Configuration object for pause extraction.
-        audio_path (str): Path to the audio file.
-        word_segments (str): Path to the word segments JSON file.
-
-    Returns:
-        PauseExtraction: Initialized pause extractor.
-    """
-    pause_extractor = PauseExtraction(config_pause, audio_path, word_segments)
-    return pause_extractor
-
-def refine_pauses(pause_extractor, sr, energy_threshold, min_pause_duration, expansion_threshold):
-    """
-    Extract and refine pauses from the audio.
-
-    Args:
-        pause_extractor (PauseExtraction): Pause extraction module.
-        sr (int): Sampling rate of the audio.
-        energy_threshold (float): Energy threshold for pause refinement.
-        min_pause_duration (float): Minimum pause duration.
-        expansion_threshold (float): Expansion threshold for pause refinement.
-
-    Returns:
-        list: Refined pauses.
-    """
-    pauses = pause_extractor.extract_pauses()
-    marked_pauses = pause_extractor.mark_pauses(pauses)
-    refine_pause = pause_extractor.refine_pauses(
-        marked_pauses, sr=sr, energy_threshold=energy_threshold,
-        min_pause_duration=min_pause_duration, expansion_threshold=expansion_threshold
-    )
-    return refine_pause
-
-def initialize_model(config, model_checkpoint):
-    """
-    Initialize the model wrapper and load the pretrained model.
-
-    Args:
-        config (Config): Configuration object for the model.
-        model_checkpoint (str): Path to the model checkpoint.
-
-    Returns:
-        torch.nn.Module: Loaded model.
-    """
-    wrapper = ModelWrapper(config)
-    model = wrapper.get_model(model_checkpoint)
-    return model
-
  
 def main():
     # Parse command-line arguments
@@ -108,17 +55,12 @@ def main():
     # Load pause configuration from YAML file
     config_path = "SpeechCARE_Acoustic_Explainability_Framework/data/pause_config.yaml"  # Path to your YAML configuration file
     config_pause = Config(load_yaml_file(config_path))
-  
 
-    # Initialize pause extractor
-    pause_extractor = initialize_pause_extractor(config_pause, args.audio_path, args.word_segments)
-
-    # Load audio and refine pauses
-    y, sr = librosa.load(args.audio_path, sr=48000)
-    refine_pause = refine_pauses(
-        pause_extractor, sr, args.energy_threshold,
-        args.min_pause_duration, args.expansion_threshold
-    )
+    pause_extractor = PauseExtraction(config_pause, args.audio_path, args.word_segments)
+    pauses = pause_extractor.extract_pauses(sr = 48000, energy_threshold = args.energy_threshold,
+                                            min_pause_duration = args.min_pause_duration,
+                                            expansion_threshold = args.expansion_threshold,
+                                            marked = True, refined = True)
 
  
     # Load model configuration from YAML file
@@ -126,7 +68,8 @@ def main():
     config = Config(load_yaml_file(config_path))
 
     # Initialize and load the model
-    model = initialize_model(config, args.model_checkpoint)
+    wrapper = ModelWrapper(config)
+    model = wrapper.get_model( args.model_checkpoint)
 
     # Initialize SHAP explainer
     shap = AcousticShap(model)
@@ -137,7 +80,7 @@ def main():
     # Generate and visualize the SHAP spectrogram
     modified_spectrogram, freq_shann_ent = shap.get_speech_spectrogram(
         args.audio_path, demography_tensor, config,
-        pauses=refine_pause, fig_save_path=args.fig_save_path, plot=args.plot
+        pauses=pauses, fig_save_path=args.fig_save_path, plot=args.plot
     )
 
 
