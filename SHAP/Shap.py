@@ -13,6 +13,9 @@ import parselmouth
 
 from scipy.signal import welch
 
+from typing import Optional, Tuple, Union, Any,List
+
+
 
 
 class AcousticShap():
@@ -134,57 +137,100 @@ class AcousticShap():
             "segments_tensor": segments_tensor.cpu().numpy(),
             "predictions": predictions
         }
-
-    def get_speech_spectrogram(self,
-        audio_path,
-        demography_info,
-        config,
-        frame_duration=0.3,
-        formants_to_plot=["F0", "F3"],
-        segment_length=5,
-        overlap=0.2,
-        target_sr=16000,
-        baseline_type='zeros',
-        pauses = None,
-        fig_save_path = None,
-        plot=False
-    ):
+    
+    def get_speech_spectrogram(
+        self,
+        audio_path: str,
+        demography_info: Any,
+        config: dict,
+        *,
+        spectrogram_type: str = "original",  # "original" or "shap"
+        include_entropy: bool = False,
+        formants_to_plot: List[str] = None,
+        pauses: List[tuple] = None,
+        sr: int = 16000,
+        segment_length: float = 5,
+        overlap: float = 0.2,
+        frame_duration: float = 0.3,
+        baseline_type: str = 'zeros',
+        fig_save_path: str = None,
+        plot: bool = False
+    ) -> Union[np.ndarray, Tuple[np.ndarray, ...]]:
         """
-        Calculates SHAP values for the given audio file, then calculates the modified 
-        spectrogram and frequency shannon entropy and returns them.
+        Flexible spectrogram analysis with configurable outputs.
+        
+        Args:
+            audio_path: Path to audio file
+            demography_info: Demographic information for model
+            config: Model configuration
+            spectrogram_type: "original" or "shap"
+            include_entropy: Whether to calculate frequency Shannon entropy
+            formants_to_plot: List of formants to overlay (e.g., ["F0", "F1"])
+            pauses: List of pause intervals to mark
+            sr: Sample rate
+            segment_length: Segment length in seconds for SHAP
+            overlap: Overlap ratio between segments
+            frame_duration: Frame duration in seconds for SHAP merging
+            baseline_type: SHAP baseline type
+            fig_save_path: Path to save figure (None to skip saving)
+            plot: Whether to display the plot
+            
+        Returns:
+            Single spectrogram or tuple of requested outputs:
+            - If only spectrogram: returns np.ndarray
+            - If spectrogram + entropy: returns (spectrogram, entropy)
         """
-        audio_path = str(audio_path)
-        audio_label = self.model.inference(audio_path, demography_info, config)[0]
-
-        shap_results = self.calculate_speech_shap_values(
-            audio_path,
-            segment_length=segment_length,
-            overlap=overlap,
-            target_sr=target_sr,
-            baseline_type=baseline_type,
-        )
-        shap_values = shap_results["shap_values"]
-
-        modified_spectrogram = self.visualize_shap_spectrogram(
-            audio_path,
-            shap_values,
-            audio_label,
-            sr=target_sr,
-            segment_length=segment_length,
-            overlap=overlap,
-            merge_frame_duration=frame_duration,
-            formants_to_plot=formants_to_plot,
-            pauses=pauses,
-            fig_save_path=fig_save_path,
-            plot=plot
-        )
-
-        freq_shann_ent = self.frequency_shannon_entropy(
-            audio_path,
-            smooth_window=50
-        )
-
-        return modified_spectrogram, freq_shann_ent
+        # Validate input
+        if spectrogram_type not in ["original", "shap"]:
+            raise ValueError("spectrogram_type must be 'original' or 'shap'")
+            
+        if formants_to_plot is None:
+            formants_to_plot = []
+            
+        # Get base spectrogram
+        if spectrogram_type == "original":
+            spectrogram = self.visualize_original_spectrogram(
+                audio_path=audio_path,
+                sr=sr,
+                formants_to_plot=formants_to_plot,
+                pauses=pauses,
+                fig_save_path=fig_save_path,
+                plot=plot
+            )
+        else:
+            # Get SHAP-modified spectrogram
+            audio_label = self.model.inference(audio_path, demography_info, config)[0]
+            shap_values = self.calculate_speech_shap_values(
+                audio_path,
+                segment_length=segment_length,
+                overlap=overlap,
+                target_sr=sr,
+                baseline_type=baseline_type,
+            )["shap_values"]
+            
+            spectrogram = self.visualize_shap_spectrogram(
+                audio_path=audio_path,
+                shap_values=shap_values,
+                label=audio_label,
+                sr=sr,
+                segment_length=segment_length,
+                overlap=overlap,
+                merge_frame_duration=frame_duration,
+                formants_to_plot=formants_to_plot,
+                pauses=pauses,
+                fig_save_path=fig_save_path,
+                plot=plot
+            )
+        
+        # Calculate entropy if requested
+        if include_entropy:
+            entropy = self.frequency_shannon_entropy(
+                audio_path,
+                smooth_window=50
+            )
+            return spectrogram, entropy
+        
+        return spectrogram
     
     def moving_average(self, data, window_size=5):
         return np.convolve(data, np.ones(window_size) / window_size, mode='valid')
@@ -273,6 +319,100 @@ class AcousticShap():
         ax.legend(loc='upper right')
 
         return entropy_values
+    
+    def visualize_original_spectrogram(
+        self,
+        audio_path,
+        sr=16000,
+        formants_to_plot=None,
+        pauses=None,
+        fig_save_path=None,
+        ax=None,
+        plot=False
+    ):
+        """
+        Visualize and return the original spectrogram with optional formants and pauses
+        
+        Args:
+            audio_path (str): Path to audio file
+            sr (int): Sample rate
+            formants_to_plot (list): Formants to overlay (e.g., ["F0", "F1"])
+            pauses (list): List of pause intervals to mark
+            fig_save_path (str): Path to save figure
+            ax (matplotlib.axes): Existing axis to plot on
+            plot (bool): Whether to display the plot
+            
+        Returns:
+            np.ndarray: The original log-power mel spectrogram in dB
+        """
+        # Load audio and compute spectrogram
+        audio, _ = librosa.load(audio_path, sr=sr)
+        S = librosa.feature.melspectrogram(y=audio, sr=sr, n_fft=2048, hop_length=512, power=2.0)
+        log_S = librosa.power_to_db(S, ref=np.max)
+        audio_duration = len(audio) / sr
+
+        # Create figure
+        if ax is None:
+            fig, ax = plt.subplots(figsize=(20, 4))
+
+        # Plot original spectrogram
+        img = librosa.display.specshow(log_S, sr=sr, x_axis="time", y_axis="mel", cmap="viridis", ax=ax)
+        ax.set_title("Original Spectrogram")
+        ax.set_xlabel("Time (ms)", fontsize=16)
+        ax.set_ylabel("Frequency (Hz)", fontsize=16)
+        
+        # Get max mel frequency for pause plotting
+        max_mel = img.axes.yaxis.get_data_interval()[-1]
+
+        # Plot pauses if provided
+        if pauses:
+            for start, end, _, _, _, _, mark in pauses:
+                linestyle = "-" if mark else "--"
+                ax.plot([start, start, end, end, start], 
+                       [0, max_mel, max_mel, 0, 0], 
+                       color="yellow", 
+                       linestyle=linestyle, 
+                       linewidth=2)
+
+        # Plot formants if requested
+        if formants_to_plot:
+            sound = parselmouth.Sound(audio_path)
+            formant = sound.to_formant_burg(time_step=0.1)
+            times = np.arange(0, audio_duration, 0.01)
+            
+            formant_values = {}
+            for t in times:
+                for i, f in enumerate(["F1", "F2", "F3"], 1):
+                    if f in formants_to_plot:
+                        formant_values.setdefault(f, []).append(formant.get_value_at_time(i, t))
+            
+            # Add F0 separately if needed
+            if "F0" in formants_to_plot:
+                pitch = sound.to_pitch()
+                time_stamps = pitch.ts()
+                f0_values = pitch.selected_array["frequency"]
+                f0_values[f0_values == 0] = np.nan
+                formant_values["F0"] = f0_values
+            
+            # Plot each requested formant
+            formant_colors = {"F0": 'red', "F1": 'cyan', "F2": 'white', "F3": '#FF8C00'}
+            for formant in formants_to_plot:
+                if formant in formant_values:
+                    plot_times = time_stamps if formant == "F0" else times
+                    ax.plot(plot_times, 
+                           formant_values[formant], 
+                           label=formant,
+                           linewidth=3 if formant == "F0" else 2,
+                           color=formant_colors[formant])
+            ax.legend(loc='upper right')
+
+        # Save or show if requested
+        if fig_save_path:
+            plt.savefig(fig_save_path, dpi=600, bbox_inches="tight")
+        if plot:
+            plt.show()
+            
+        return log_S
     
     def visualize_shap_spectrogram(
         self,
