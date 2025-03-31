@@ -2,7 +2,6 @@ import sys
 import argparse
 import torch
 import librosa
-import yaml
 from typing import Optional, Tuple, Dict, Any
 # Add custom paths to sys.path (if needed)
 sys.path.append("SpeechCARE_Acoustic_Explainability_Framework")
@@ -10,6 +9,7 @@ sys.path.append("SpeechCARE_Acoustic_Explainability_Framework")
 # Import custom modules
 from model.ModelWrapper import ModelWrapper
 from utils.Config import Config
+from utils.Utils import load_yaml_file
 from SHAP.Shap import AcousticShap
 from pauseExtraction.Pause_extraction import PauseExtraction
 
@@ -63,20 +63,6 @@ def initialize_pause_extractor(config_pause, audio_path, word_segments = None):
     pause_extractor = PauseExtraction(config_pause, audio_path, word_segments)
     return pause_extractor
 
-def load_config_from_yaml(config_path: str) -> Dict[str, Any]:
-    """
-    Load model configuration from a YAML file.
-
-    Args:
-        config_path (str): Path to the YAML configuration file.
-
-    Returns:
-        Dict[str, Any]: Configuration dictionary.
-    """
-    with open(config_path, 'r') as file:
-        config = yaml.safe_load(file)
-    return config
-
 def refine_pauses(pause_extractor, sr, energy_threshold, min_pause_duration, expansion_threshold):
     """
     Extract and refine pauses from the audio.
@@ -98,7 +84,6 @@ def refine_pauses(pause_extractor, sr, energy_threshold, min_pause_duration, exp
         min_pause_duration=min_pause_duration, expansion_threshold=expansion_threshold
     )
     return refine_pause
-
 
 def initialize_model(config, model_checkpoint):
     """
@@ -122,7 +107,7 @@ def main():
 
     # Load pause configuration from YAML file
     config_path = "SpeechCARE_Acoustic_Explainability_Framework/data/pause_config.yaml"  # Path to your YAML configuration file
-    config_pause = Config(load_config_from_yaml(config_path))
+    config_pause = Config(load_yaml_file(config_path))
   
 
     # Initialize pause extractor
@@ -138,7 +123,7 @@ def main():
  
     # Load model configuration from YAML file
     config_path = "SpeechCARE_Acoustic_Explainability_Framework/data/model_config.yaml"  # Path to your YAML configuration file
-    config = Config(load_config_from_yaml(config_path))
+    config = Config(load_yaml_file(config_path))
 
     # Initialize and load the model
     model = initialize_model(config, args.model_checkpoint)
