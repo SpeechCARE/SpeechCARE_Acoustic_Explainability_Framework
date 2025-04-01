@@ -164,7 +164,7 @@ class AcousticShap():
             demography_info: Demographic information for model
             config: Model configuration
             spectrogram_type: "original" or "shap"
-            include_entropy: Whether to calculate frequency Shannon entropy
+            include_entropy: Whether to calculate and plot frequency Shannon entropy below spectrogram
             formants_to_plot: List of formants to overlay (e.g., ["F0", "F1"])
             pauses: List of pause intervals to mark
             sr: Sample rate
@@ -187,18 +187,28 @@ class AcousticShap():
         if formants_to_plot is None:
             formants_to_plot = []
 
-        fig, ax = plt.subplots(figsize=(20, 4))
+        # Create figure with subplots if entropy is included
+        if include_entropy:
+            fig, (ax1, ax2) = plt.subplots(
+                2, 1, 
+                figsize=(20, 8), 
+                gridspec_kw={'height_ratios': [3, 1]},
+                sharex=True
+            )
+            plt.subplots_adjust(hspace=0.1)
+        else:
+            fig, ax1 = plt.subplots(figsize=(20, 4))
+
         # Get base spectrogram
         if spectrogram_type == "original":
-        
             spectrogram = self.visualize_original_spectrogram(
-                ax = ax,
+                ax=ax1,
                 audio_path=audio_path,
                 sr=sr,
                 formants_to_plot=formants_to_plot,
                 pauses=pauses,
-                fig_save_path=fig_save_path,
-                plot=plot
+                fig_save_path=None,  # We'll handle saving later
+                plot=False
             )
         else:
             # Get SHAP-modified spectrogram
@@ -212,7 +222,7 @@ class AcousticShap():
             )["shap_values"]
             
             spectrogram = self.visualize_shap_spectrogram(
-                ax=ax,
+                ax=ax1,
                 audio_path=audio_path,
                 shap_values=shap_values,
                 label=audio_label,
@@ -222,108 +232,125 @@ class AcousticShap():
                 merge_frame_duration=frame_duration,
                 formants_to_plot=formants_to_plot,
                 pauses=pauses,
-                fig_save_path=fig_save_path,
-                plot=plot
+                fig_save_path=None,  # We'll handle saving later
+                plot=False
             )
-        
-        # Calculate entropy if requested
+
+        # Calculate and plot entropy if requested
+        entropy = None
         if include_entropy:
             entropy = self.frequency_shannon_entropy(
                 audio_path,
                 smooth_window=50,
-                ax=ax
-                
+                ax=ax2
             )
-            return spectrogram, entropy
-        
-        return spectrogram
+            # Align x-axis limits
+            ax1.set_xlim(ax2.get_xlim())
+
+        # Save or display the figure
+        if fig_save_path:
+            plt.savefig(fig_save_path, dpi=600, bbox_inches="tight")
+        if plot:
+            plt.show()
+        plt.close()
+
+        return (spectrogram, entropy) if include_entropy else spectrogram
     
     def moving_average(self, data, window_size=5):
         return np.convolve(data, np.ones(window_size) / window_size, mode='valid')
 
 
-    def frequency_shannon_entropy(self,
-        audio_path, frame_length_ms=25, frame_step_ms=10, windowing_function="hamming",
-        smooth=True, smooth_window=5, ax=None
+    def frequency_shannon_entropy(
+        self,
+        audio_path,
+        frame_length_ms=25,
+        frame_step_ms=10,
+        windowing_function="hamming",
+        smooth=True,
+        smooth_window=5,
+        ax=None
     ):
         """
-        Calculates and plots the frequency Shannon entropy for an audio file, with optional smoothing.
-
-        Parameters:
-        - audio_path (str): Path to the audio file.
-        - frame_length_ms (float): Frame length in milliseconds.
-        - frame_step_ms (float): Step size between frames in milliseconds.
-        - windowing_function (str): Windowing function to apply (default: "hamming").
-        - smooth (bool): Whether to smooth the entropy values.
-        - smooth_window (int): Window size for smoothing.
-        - ax (matplotlib.axes.Axes, optional): Axis to plot on for subplots. If None, creates a new plot.
-
-
+        Calculates and plots the frequency Shannon entropy for an audio file.
+        
+        Args:
+            audio_path: Path to audio file
+            frame_length_ms: Frame length in milliseconds
+            frame_step_ms: Step size between frames in milliseconds
+            windowing_function: Windowing function ("hamming", "hanning", etc.)
+            smooth: Whether to smooth the entropy values
+            smooth_window: Window size for smoothing
+            ax: Matplotlib axis to plot on (if None, creates new figure)
+            
         Returns:
-        - np.ndarray: (Original or smoothed) entropy values.
+            np.ndarray: Array of entropy values
         """
-        name = os.path.splitext(os.path.basename(audio_path))[0]
-        # Load the audio file
+        # Load audio and calculate duration
         signal, sr = librosa.load(audio_path, sr=None)
         audio_duration = len(signal) / sr
 
-        # Convert frame length and step size to samples
+        # Convert frame parameters to samples
         frame_length_samples = int(frame_length_ms * sr / 1000)
         frame_step_samples = int(frame_step_ms * sr / 1000)
 
         # Select windowing function
-        if windowing_function == "hamming":
-            window = np.hamming(frame_length_samples)
-        else:
-            raise ValueError("Unsupported windowing function")
+        window = {
+            "hamming": np.hamming,
+            "hanning": np.hanning,
+            "blackman": np.blackman
+        }.get(windowing_function, np.hamming)(frame_length_samples)
 
-        # Calculate the number of frames (no padding)
-        num_frames = max(1, 1 + (len(signal) - frame_length_samples) // frame_step_samples)
-
-        entropy_values = []
+        # Calculate number of frames
+        num_frames = 1 + (len(signal) - frame_length_samples) // frame_step_samples
 
         # Calculate entropy for each frame
+        entropy_values = []
         for i in range(num_frames):
-            start_idx = i * frame_step_samples
-            end_idx = start_idx + frame_length_samples
-            if end_idx > len(signal):  # Skip frames beyond the actual signal
-                break
-            frame = signal[start_idx:end_idx] * window
-
-            # Calculate the power spectral density using Welch's method
-            frequencies, power_spectrum = welch(frame, fs=sr, nperseg=frame_length_samples)
-
-            # Convert power spectrum to probability distribution
-            power_spectrum_prob_dist = power_spectrum / (np.sum(power_spectrum) + np.finfo(float).eps)
-
+            start = i * frame_step_samples
+            frame = signal[start:start+frame_length_samples] * window
+            
+            # Power spectrum using Welch's method
+            _, power_spectrum = welch(frame, fs=sr, nperseg=frame_length_samples)
+            power_spectrum += np.finfo(float).eps  # Avoid log(0)
+            
+            # Normalize to probability distribution
+            prob_dist = power_spectrum / power_spectrum.sum()
+            
             # Calculate Shannon entropy
-            entropy = -np.sum(power_spectrum_prob_dist * np.log2(power_spectrum_prob_dist + np.finfo(float).eps))
+            entropy = -np.sum(prob_dist * np.log2(prob_dist))
             entropy_values.append(entropy)
 
         entropy_values = np.array(entropy_values)
 
         # Apply smoothing if enabled
         if smooth:
-            entropy_values = self.moving_average(entropy_values, window_size=smooth_window)
+            entropy_values = np.convolve(
+                entropy_values,
+                np.ones(smooth_window)/smooth_window,
+                mode='valid'
+            )
 
-        # Generate time axis for entropy values
-        if smooth:
-            time_axis = np.linspace(0, audio_duration, len(entropy_values))
-        else:
-            time_axis = np.arange(num_frames) * frame_step_ms / 1000
+        # Create time axis
+        time_axis = np.linspace(
+            0,
+            audio_duration,
+            len(entropy_values)
+        )
 
-        # Plot entropy over time
+        # Create plot if no axis provided
         if ax is None:
-            fig, ax = plt.subplots(figsize=(10, 4))
+            fig, ax = plt.subplots(figsize=(20, 3))
 
-        ax.plot(time_axis, entropy_values, label="Frequency Shannon Entropy")
-        ax.set_xlim(0, audio_duration)
-        ax.set_xticks(np.arange(0, audio_duration + 1, 1))  # Set x-ticks based on actual duration
-        # ax.set_title(f"UID: {name}, Frequency Shannon Entropy Over Time")
-        ax.set_xlabel("Time (s)", fontsize=16)
-        ax.set_ylabel("Entropy", fontsize=16)
-        ax.grid(axis='x')
+        # Plot entropy
+        ax.plot(time_axis, entropy_values, color='purple', linewidth=1.5, label="Spectral Entropy")
+        ax.set_ylabel("Entropy (bits)", fontsize=12)
+        ax.grid(True, alpha=0.3)
         ax.legend(loc='upper right')
+
+        # Set consistent x-axis if part of subplots
+        if ax.name != 'rect':
+            ax.set_xlabel("Time (s)", fontsize=12)
+            ax.set_xlim(0, audio_duration)
 
         return entropy_values
     
