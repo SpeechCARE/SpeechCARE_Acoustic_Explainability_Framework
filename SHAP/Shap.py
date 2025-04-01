@@ -207,7 +207,7 @@ class AcousticShap():
                 sr=sr,
                 formants_to_plot=formants_to_plot,
                 pauses=pauses,
-                fig_save_path=None,  # We'll handle saving later
+                fig_save_path=None,
                 plot=False
             )
         else:
@@ -232,7 +232,7 @@ class AcousticShap():
                 merge_frame_duration=frame_duration,
                 formants_to_plot=formants_to_plot,
                 pauses=pauses,
-                fig_save_path=None,  # We'll handle saving later
+                fig_save_path=None,
                 plot=False
             )
 
@@ -244,8 +244,27 @@ class AcousticShap():
                 smooth_window=50,
                 ax=ax2
             )
-            # Align x-axis limits
-            ax1.set_xlim(ax2.get_xlim())
+            
+            # Convert x-axis to milliseconds for both plots
+            audio_duration = len(librosa.load(audio_path, sr=sr)[0]) / sr
+            max_ms = audio_duration * 1000
+            tick_interval = 500  # ms between ticks
+            
+            # Set ticks and labels for both plots
+            ticks = np.arange(0, max_ms + tick_interval, tick_interval)
+            tick_labels = [f"{int(t)}" for t in ticks]
+            
+            # Apply to both axes (shared x-axis)
+            ax1.set_xticks(ticks/1000)  # Convert ms to seconds for positioning
+            ax1.set_xticklabels([])  # Remove labels from top plot
+            ax2.set_xticks(ticks/1000)
+            ax2.set_xticklabels(tick_labels, rotation=45)
+            
+            # Add x-axis label only to bottom plot
+            ax2.set_xlabel("Time (ms)", fontsize=12)
+            
+            # Adjust layout to prevent label clipping
+            plt.tight_layout()
 
         # Save or display the figure
         if fig_save_path:
@@ -330,27 +349,19 @@ class AcousticShap():
                 mode='valid'
             )
 
-        # Create time axis
-        time_axis = np.linspace(
-            0,
-            audio_duration,
-            len(entropy_values)
-        )
+        # Create time axis in seconds (converted to ms in parent function)
+        time_axis = np.linspace(0, audio_duration, len(entropy_values))
 
         # Create plot if no axis provided
         if ax is None:
             fig, ax = plt.subplots(figsize=(20, 3))
 
         # Plot entropy
-        ax.plot(time_axis, entropy_values, color='purple', linewidth=1.5, label="Spectral Entropy")
+        ax.plot(time_axis, entropy_values, color='blue', linewidth=1.5, label="Spectral Entropy")
         ax.set_ylabel("Entropy (bits)", fontsize=12)
         ax.grid(True, alpha=0.3)
         ax.legend(loc='upper right')
-
-        # Set consistent x-axis if part of subplots
-        if ax.name != 'rect':
-            ax.set_xlabel("Time (s)", fontsize=12)
-            ax.set_xlim(0, audio_duration)
+        ax.set_xlim(0, audio_duration)
 
         return entropy_values
     
