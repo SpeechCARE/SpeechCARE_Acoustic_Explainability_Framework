@@ -410,6 +410,7 @@ class AcousticShap():
     def _smooth_signal(self, signal: np.ndarray, window_size: int) -> np.ndarray:
         """Smooth signal using moving average."""
         return np.convolve(signal, np.ones(window_size)/window_size, mode='valid')
+    
 
     def _plot_entropy(
         self,
