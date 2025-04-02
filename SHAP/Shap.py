@@ -199,18 +199,18 @@ class AcousticShap():
 
         # Generate appropriate spectrogram
         spectrogram = self._generate_spectrogram(
-            spectrogram_type,
-            audio_path,
-            demography_info,
-            config,
-            formants_to_plot,
-            pauses,
-            sr,
-            segment_length,
-            overlap,
-            frame_duration,
-            baseline_type,
-            plot
+            spec_type = spectrogram_type,
+            audio_path= audio_path,
+            demography_info= demography_info,
+            config = config,
+            formants= formants_to_plot,
+            pauses = pauses,
+            sr = sr,
+            segment_length =segment_length,
+            overlap = overlap,
+            frame_duration = frame_duration,
+            baseline_type =baseline_type,
+            plot =plot
         )
 
         # Calculate and plot entropy if requested
@@ -228,7 +228,6 @@ class AcousticShap():
     def _generate_spectrogram(
         self,
         spec_type: str,
-        ax: plt.Axes,
         audio_path: str,
         demography_info: Any,
         config: dict,
@@ -254,6 +253,7 @@ class AcousticShap():
                 plot=plot
             )
         else:
+        
             audio_label = self.model.inference(audio_path, demography_info, config)[0]
             shap_values = self.calculate_speech_shap_values(
                 audio_path,
@@ -496,8 +496,6 @@ class AcousticShap():
         Returns:
             np.ndarray: The original log-power mel spectrogram in dB
         """
-        name = os.path.splitext(os.path.basename(audio_path))[0]
-
         # Step 1: Load audio and compute spectrogram
         audio, _ = librosa.load(audio_path, sr=sr)
         S = librosa.feature.melspectrogram(y=audio, sr=sr, n_fft=2048, hop_length=512, power=2.0)
