@@ -18,7 +18,7 @@ from typing import Optional, Tuple, Union, Any,List,Dict
 import librosa.display
 from scipy.signal import butter, filtfilt, welch
 
-
+DEFAULT_CUTOFF_FREQ = 8000
 
 
 class AcousticShap():
@@ -26,7 +26,7 @@ class AcousticShap():
     def __init__(self,model):
         self.model = model
         self.default_sr = 16000
-        self.default_cutoff = 8000
+        self.default_cutoff = DEFAULT_CUTOFF_FREQ
         
     
     def get_speech_shap_results(
