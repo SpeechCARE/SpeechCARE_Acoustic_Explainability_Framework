@@ -368,26 +368,21 @@ class AcousticShap():
         entropy = self._shannon_entropy(stft)
         times = librosa.frames_to_time(np.arange(len(entropy)), sr=sr, hop_length=512)
         
-        # Smooth if requested
-        if smooth:
-            entropy = self._smooth_signal(entropy, smooth_window)
-            times = times[:len(entropy)]
+       
+        entropy = self._smooth_signal(entropy, smooth_window)
+        times = times[:len(entropy)]
         
         # Handle plotting
         if ax is not None:
-            self._plot_entropy(
+            flat_segments = self._plot_entropy(
                 ax,
                 times,
                 entropy,
-                plot_flat_segments,
-                flat_segment_kwargs or {}
+                flat_segment_kwargs or {},
+                plot_flat_segments
             )
         
-        if plot_flat_segments:
-            flat_segments = self.detect_flat_segments(entropy, times, **(flat_segment_kwargs or {}))
-            return entropy, flat_segments
-            
-        return entropy
+        return entropy, flat_segments if plot_flat_segments else entropy
 
     def _low_pass_filter(
         self,
@@ -419,21 +414,54 @@ class AcousticShap():
         ax: plt.Axes,
         times: np.ndarray,
         entropy: np.ndarray,
-        plot_flat_segments: bool,
-        flat_segment_kwargs: Dict
+        flat_segment_kwargs: Dict,
+        plot_flat_segments: bool = True,
     ) -> None:
-        """Plot entropy on provided axis."""
-        ax.plot(times, entropy, color='blue', linewidth=1.5, label="Spectral Entropy")
+        """
+        Plot entropy with flat segments matching plot_entropy_analysis style.
+        
+        Args:
+            ax: Matplotlib axis to plot on
+            times: Time points for entropy values
+            entropy: Computed entropy values
+            flat_segment_kwargs: Parameters for flat segment detection
+            plot_flat_segments: Whether to plot detected flat segments
+        """
+        # Plot main entropy line
+        ax.plot(times, entropy, color='blue', linewidth=1.5, 
+            label="Smoothed Shannon Entropy (frequency)")
+        
+        # Plot flat segments if requested
+        if plot_flat_segments:
+            flat_segments = self.detect_flat_segments(
+                entropy,
+                times,
+                **flat_segment_kwargs
+            )
+            
+            # Plot each segment with consistent styling
+            for i, (start, end) in enumerate(flat_segments):
+                ax.axvspan(
+                    start, end,
+                    color='red',
+                    alpha=0.3,
+                    label='Flat Segment' if i == 0 else ""
+                )
+        
+        # Configure axis with same style as plot_entropy_analysis
         ax.set_ylabel("Entropy (bits)", fontsize=12)
-        ax.grid(True, alpha=0.3)
+        ax.set_xlabel("Time (seconds)", fontsize=12)
+        ax.grid(axis='x', alpha=0.3)
         ax.legend(loc='upper right')
         ax.set_xlim(0, times[-1])
         
-        if plot_flat_segments:
-            flat_segments = self.detect_flat_segments(entropy, times, **flat_segment_kwargs)
-            for start, end in flat_segments:
-                ax.axvspan(start, end, color='red', alpha=0.3, 
-                           label='Flat Segment' if start == flat_segments[0][0] else "")
+        # Set ticks every second like original
+        max_seconds = np.ceil(times[-1])
+        ax.set_xticks(np.arange(0, max_seconds + 1, 1))
+        
+        # Match title style
+        ax.set_title('Smoothed Shannon Entropy over Time (Low-Pass First, Then Resample)')
+        return flat_segments if flat_segments else None
 
     def detect_flat_segments(
         self,
