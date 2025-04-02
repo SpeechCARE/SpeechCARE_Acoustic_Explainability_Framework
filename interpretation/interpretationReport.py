@@ -51,55 +51,112 @@ def generate_audio_report_html(audio_path: str,
             '(3) High': "abnormal energy distribution"
         }.get(cat, "atypical spectral characteristics")
     
-    # Create HTML content
     html_content = f"""
     <html>
     <head>
         <style>
+            :root {{
+                color-scheme: light dark;
+            }}
+            
             body {{
                 font-family: Arial, sans-serif;
                 line-height: 1.6;
-                color: #333;
                 max-width: 900px;
                 margin: 0 auto;
                 padding: 20px;
+                
+                /* Light mode defaults */
+                --bg-color: #ffffff;
+                --text-color: #333333;
+                --primary-color: #2980b9;
+                --secondary-color: #2c3e50;
+                --table-header-bg: #3498db;
+                --table-header-text: #ffffff;
+                --table-row-even: #f2f2f2;
+                --table-row-odd: #ffffff;
+                --table-border: #dddddd;
+                --interpretation-bg: #f9f9f9;
+                --interpretation-border: #3498db;
             }}
+            
+            @media (prefers-color-scheme: dark) {{
+                body {{
+                    --bg-color: #1e1e1e;
+                    --text-color: #e0e0e0;
+                    --primary-color: #5dade2;
+                    --secondary-color: #7f8c8d;
+                    --table-header-bg: #2874a6;
+                    --table-header-text: #ffffff;
+                    --table-row-even: #2d2d2d;
+                    --table-row-odd: #252525;
+                    --table-border: #444444;
+                    --interpretation-bg: #2a2a2a;
+                    --interpretation-border: #5dade2;
+                }}
+            }}
+            
+            body {{
+                background-color: var(--bg-color);
+                color: var(--text-color);
+            }}
+            
             h1 {{
-                color: #2c3e50;
-                border-bottom: 2px solid #3498db;
+                color: var(--primary-color);
+                border-bottom: 2px solid var(--primary-color);
                 padding-bottom: 10px;
             }}
+            
             h2 {{
-                color: #2980b9;
+                color: var(--primary-color);
                 margin-top: 25px;
             }}
+            
+            h3 {{
+                color: var(--secondary-color);
+            }}
+            
             table {{
                 border-collapse: collapse;
                 width: 100%;
                 margin: 20px 0;
-                box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+                box-shadow: 0 2px 3px rgba(0,0,0,0.2);
             }}
+            
             th, td {{
                 padding: 12px;
                 text-align: left;
-                border-bottom: 1px solid #ddd;
+                border-bottom: 1px solid var(--table-border);
             }}
+            
             th {{
-                background-color: #3498db;
-                color: white;
+                background-color: var(--table-header-bg);
+                color: var(--table-header-text);
             }}
+            
             tr:nth-child(even) {{
-                background-color: #f2f2f2;
+                background-color: var(--table-row-even);
             }}
+            
+            tr:nth-child(odd) {{
+                background-color: var(--table-row-odd);
+            }}
+            
             .interpretation {{
-                background-color: #f9f9f9;
+                background-color: var(--interpretation-bg);
                 padding: 15px;
-                border-left: 4px solid #3498db;
+                border-left: 4px solid var(--interpretation-border);
                 margin: 20px 0;
+                border-radius: 4px;
             }}
+            
             .emoji {{
                 font-size: 1.2em;
                 margin-right: 5px;
+            }}
+            
+            strong {{
+                color: var(--primary-color);
             }}
         </style>
     </head>
@@ -143,11 +200,11 @@ def generate_audio_report_html(audio_path: str,
                 <td>{quartile_ranges['shimmer'][0]}</td>
             </tr>
             <tr>
-                <td>Nearly Stable (Q2)</td>
+                <td>Almost Stable (Q2)</td>
                 <td>{quartile_ranges['shimmer'][1]}</td>
             </tr>
             <tr>
-                <td>Marginally Unstable (Q3)</td>
+                <td>Almost Unstable (Q3)</td>
                 <td>{quartile_ranges['shimmer'][2]}</td>
             </tr>
             <tr>
