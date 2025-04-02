@@ -26,6 +26,7 @@ class AcousticShap():
     def __init__(self,model):
         self.model = model
         self.default_sr = 16000
+        self.default_cutoff = 8000
         
     
     def get_speech_shap_results(
