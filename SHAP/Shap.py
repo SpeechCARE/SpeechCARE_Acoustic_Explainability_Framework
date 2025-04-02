@@ -151,6 +151,7 @@ class AcousticShap():
         *,
         spectrogram_type: str = "original",
         include_entropy: bool = False,
+        flat_segment_kwargs: Optional[Dict] = None,
         formants_to_plot: Optional[List[str]] = None,
         pauses: Optional[List[Tuple[float, float]]] = None,
         sr: int = None,
@@ -170,6 +171,7 @@ class AcousticShap():
             config: Model configuration dictionary
             spectrogram_type: Type of spectrogram ("original" or "shap")
             include_entropy: Whether to include spectral entropy analysis
+            flat_segment_kwargs: Parameters for flat segment detection
             formants_to_plot: List of formant names to plot
             pauses: List of pause intervals as (start, end) tuples
             sr: Target sampling rate (uses default if None)
@@ -229,7 +231,8 @@ class AcousticShap():
             entropy = self.frequency_shannon_entropy(
                 audio_path,
                 sr=sr,
-                ax=ax2
+                ax=ax2,
+                flat_segment_kwargs = flat_segment_kwargs
             )
             self._configure_entropy_axes(ax1, ax2, audio_path, sr)
 
