@@ -151,7 +151,7 @@ class AcousticShap():
         *,
         spectrogram_type: str = "original",
         include_entropy: bool = False,
-        flat_segment_kwargs: Optional[Dict] = None,
+        entropy_kwargs: Optional[Dict] = None,
         formants_to_plot: Optional[List[str]] = None,
         pauses: Optional[List[Tuple[float, float]]] = None,
         sr: int = None,
@@ -171,7 +171,7 @@ class AcousticShap():
             config: Model configuration dictionary
             spectrogram_type: Type of spectrogram ("original" or "shap")
             include_entropy: Whether to include spectral entropy analysis
-            flat_segment_kwargs: Parameters for flat segment detection
+            entropy_kwargs: Parameters for plotting entropy
             formants_to_plot: List of formant names to plot
             pauses: List of pause intervals as (start, end) tuples
             sr: Target sampling rate (uses default if None)
@@ -197,22 +197,9 @@ class AcousticShap():
         if formants_to_plot is None:
             formants_to_plot = []
 
-        # Setup figure based on entropy inclusion
-        if include_entropy:
-            fig, (ax1, ax2) = plt.subplots(
-                2, 1, 
-                figsize=(20, 8), 
-                gridspec_kw={'height_ratios': [3, 1]},
-                sharex=True
-            )
-            plt.subplots_adjust(hspace=0.1)
-        else:
-            fig, ax1 = plt.subplots(figsize=(20, 4))
-
         # Generate appropriate spectrogram
         spectrogram = self._generate_spectrogram(
             spectrogram_type,
-            ax1,
             audio_path,
             demography_info,
             config,
@@ -222,22 +209,19 @@ class AcousticShap():
             segment_length,
             overlap,
             frame_duration,
-            baseline_type
+            baseline_type,
+            plot
         )
 
         # Calculate and plot entropy if requested
         entropy = None
         if include_entropy:
-            entropy = self.frequency_shannon_entropy(
+            entropy = self.plot_entropy_analysis(
                 audio_path,
                 sr=sr,
-                ax=ax2,
-                flat_segment_kwargs = flat_segment_kwargs
+                **entropy_kwargs
             )
-            self._configure_entropy_axes(ax1, ax2, audio_path, sr)
 
-        # Handle figure output
-        self._handle_figure_output(fig, fig_save_path, plot)
 
         return (spectrogram, entropy) if include_entropy else spectrogram
     
@@ -254,9 +238,11 @@ class AcousticShap():
         segment_length: float,
         overlap: float,
         frame_duration: float,
-        baseline_type: str
+        baseline_type: str,
+        plot: bool= True
     ) -> np.ndarray:
         """Internal method to generate appropriate spectrogram."""
+        fig, ax = plt.subplots(figsize=(20, 4))
         if spec_type == "original":
             return self.visualize_original_spectrogram(
                 ax=ax,
@@ -265,7 +251,7 @@ class AcousticShap():
                 formants_to_plot=formants,
                 pauses=pauses,
                 fig_save_path=None,
-                plot=False
+                plot=plot
             )
         else:
             audio_label = self.model.inference(audio_path, demography_info, config)[0]
@@ -289,103 +275,9 @@ class AcousticShap():
                 formants_to_plot=formants,
                 pauses=pauses,
                 fig_save_path=None,
-                plot=False
+                plot=plot
             )
 
-    def _configure_entropy_axes(
-        self,
-        spec_ax: plt.Axes,
-        entropy_ax: plt.Axes,
-        audio_path: str,
-        sr: int
-    ) -> None:
-        """Configure axes for combined spectrogram-entropy display."""
-        audio_duration = len(librosa.load(audio_path, sr=sr)[0]) / sr
-        max_ms = audio_duration * 1000
-        tick_interval = 500  # ms between ticks
-        
-        ticks = np.arange(0, max_ms + tick_interval, tick_interval)
-        tick_labels = [f"{int(t)}" for t in ticks]
-        
-        spec_ax.set_xticks(ticks/1000)
-        spec_ax.set_xticklabels([])
-        entropy_ax.set_xticks(ticks/1000)
-        entropy_ax.set_xticklabels(tick_labels, rotation=45)
-        entropy_ax.set_xlabel("Time (ms)", fontsize=12)
-        plt.tight_layout()
-
-    def _handle_figure_output(
-        self,
-        fig: plt.Figure,
-        save_path: Optional[str],
-        plot: bool
-    ) -> None:
-        """Handle figure saving and display."""
-        if save_path:
-            plt.savefig(save_path, dpi=600, bbox_inches="tight")
-        if plot:
-            plt.show()
-        plt.close()
-
-
-    def frequency_shannon_entropy(
-        self,
-        audio_path: str,
-        sr: Optional[int] = None,
-        frame_length_ms: int = 25,
-        frame_step_ms: int = 10,
-        windowing_function: str = "hamming",
-        smooth: bool = True,
-        smooth_window: int = 5,
-        ax: Optional[plt.Axes] = None,
-        plot_flat_segments: bool = True,
-        flat_segment_kwargs: Optional[Dict] = None
-    ) -> Union[np.ndarray, Tuple[np.ndarray, List[Tuple[float, float]]]]:
-        """
-        Calculate and optionally plot frequency Shannon entropy.
-        
-        Args:
-            audio_path: Path to audio file
-            sr: Target sampling rate (uses default if None)
-            frame_length_ms: Frame length in milliseconds
-            frame_step_ms: Frame step in milliseconds
-            windowing_function: Type of window function
-            smooth: Whether to smooth entropy values
-            smooth_window: Smoothing window size
-            ax: Matplotlib axis to plot on
-            plot_flat_segments: Whether to detect and plot flat segments
-            flat_segment_kwargs: Parameters for flat segment detection
-            
-        Returns:
-            entropy values and optionally flat segments if plot_flat_segments=True
-        """
-        sr = sr or self.default_sr
-        signal, orig_sr = librosa.load(audio_path, sr=None)
-        
-        # Apply anti-aliasing filter and resample
-        filtered_signal = self._low_pass_filter(signal, orig_sr, self.default_cutoff)
-        resampled_signal = librosa.resample(filtered_signal, orig_sr=orig_sr, target_sr=sr)
-        
-        # Calculate STFT and entropy
-        stft = librosa.stft(resampled_signal, n_fft=1024, hop_length=512)
-        entropy = self._shannon_entropy(stft)
-        times = librosa.frames_to_time(np.arange(len(entropy)), sr=sr, hop_length=512)
-        
-       
-        entropy = self._smooth_signal(entropy, smooth_window)
-        times = times[:len(entropy)]
-        
-        # Handle plotting
-        if ax is not None:
-            flat_segments = self._plot_entropy(
-                ax,
-                times,
-                entropy,
-                flat_segment_kwargs or {},
-                plot_flat_segments
-            )
-        
-        return entropy, flat_segments if plot_flat_segments else entropy
 
     def _low_pass_filter(
         self,
@@ -411,61 +303,6 @@ class AcousticShap():
         """Smooth signal using moving average."""
         return np.convolve(signal, np.ones(window_size)/window_size, mode='valid')
     
-
-    def _plot_entropy(
-        self,
-        ax: plt.Axes,
-        times: np.ndarray,
-        entropy: np.ndarray,
-        flat_segment_kwargs: Dict,
-        plot_flat_segments: bool = True,
-    ) -> None:
-        """
-        Plot entropy with flat segments matching plot_entropy_analysis style.
-        
-        Args:
-            ax: Matplotlib axis to plot on
-            times: Time points for entropy values
-            entropy: Computed entropy values
-            flat_segment_kwargs: Parameters for flat segment detection
-            plot_flat_segments: Whether to plot detected flat segments
-        """
-        # Plot main entropy line
-        ax.plot(times, entropy, color='blue', linewidth=1.5, 
-            label="Smoothed Shannon Entropy (frequency)")
-        
-        # Plot flat segments if requested
-        if plot_flat_segments:
-            flat_segments = self.detect_flat_segments(
-                entropy,
-                times,
-                **flat_segment_kwargs
-            )
-            
-            # Plot each segment with consistent styling
-            for i, (start, end) in enumerate(flat_segments):
-                ax.axvspan(
-                    start, end,
-                    color='red',
-                    alpha=0.3,
-                    label='Flat Segment' if i == 0 else ""
-                )
-        
-        # Configure axis with same style as plot_entropy_analysis
-        ax.set_ylabel("Entropy (bits)", fontsize=12)
-        ax.set_xlabel("Time (seconds)", fontsize=12)
-        ax.grid(axis='x', alpha=0.3)
-        ax.legend(loc='upper right')
-        ax.set_xlim(0, times[-1])
-        
-        # Set ticks every second like original
-        max_seconds = np.ceil(times[-1])
-        ax.set_xticks(np.arange(0, max_seconds + 1, 1))
-        
-        # Match title style
-        ax.set_title('Smoothed Shannon Entropy over Time (Low-Pass First, Then Resample)')
-        return flat_segments if flat_segments else None
-
     def detect_flat_segments(
         self,
         entropy: np.ndarray,
@@ -558,6 +395,8 @@ class AcousticShap():
         cutoff: Optional[int] = None,
         window_size: int = 15,
         min_duration: float = 5,
+        segments_std_threshold: float = 0.4,
+        segments_merge_gap: float = 0.5,
         figsize: Tuple[int, int] = (20, 2),
         dpi: int = 200
     ) -> List[Tuple[float, float]]:
@@ -570,6 +409,11 @@ class AcousticShap():
             cutoff: Low-pass cutoff frequency
             window_size: Smoothing window size
             min_duration: Minimum flat segment duration
+            segments_std_threshold: Maximum standard deviation threshold for 
+                                   considering a segment as "flat" (lower values 
+                                   detect more stable segments)
+            segments_merge_gap: Maximum time gap in seconds between adjacent flat 
+                              segments to allow merging
             figsize: Figure dimensions
             dpi: Figure resolution
             
@@ -594,8 +438,8 @@ class AcousticShap():
         flat_segments = self.detect_flat_segments(
             smoothed_entropy,
             times[:len(smoothed_entropy)],
-            std_threshold=0.4,
-            merge_gap=0.5,
+            std_threshold=segments_std_threshold,
+            merge_gap=segments_merge_gap,
             final_min_duration=min_duration
         )
         
