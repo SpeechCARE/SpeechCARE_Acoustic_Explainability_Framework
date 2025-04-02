@@ -34,41 +34,27 @@ def generate_audio_report_html(audio_path: str,
             3: "high pause frequency suggestive of cognitive load or speech disorder"
         }
         return interpretations.get(min(count, 3), "abnormal pause pattern")
+
     def get_shimmer_interpretation(cat):
-        """
-        Maps shimmer categories to interpretation strings and standardized labels.
-        
-        Args:
-            cat: Input category from analysis ('(0) Very Low' to '(3) High')
-            
-        Returns:
-            Tuple: (standardized_label, interpretation)
-        """
-        category_mapping = {
-            '(0) Very Low': ("Stable", "normal vocal fold vibration"),
-            '(1) Low': ("Almost Stable", "mild vocal instability"),
-            '(2) Moderate': ("Almost Unstable", "moderate voice abnormality"),
-            '(3) High': ("Unstable", "severe vocal pathology likely")
-        }
-        return category_mapping.get(cat, ("Undefined", "undefined stability pattern"))
+        mapping = {'(0) Very Low': 'Stable','(1) Low':'Almost Stable', '(2) Moderate':'Almost Unstable', '(3) High':'Unstable' }
+        cat = mapping[cat]
+        return {
+            'Stable': "normal vocal fold vibration",
+            'Almost Stable': "mild vocal instability",
+            'Almost Unstable': "moderate voice abnormality",
+            'Unstable': "severe vocal pathology likely"
+        }.get(cat, "undefined stability pattern")
 
     def get_energy_interpretation(cat):
-        """
-        Maps energy categories to interpretation strings and standardized labels.
-        
-        Args:
-            cat: Input category from analysis ('(0) Very Low' to '(3) High')
-            
-        Returns:
-            Tuple: (standardized_label, interpretation)
-        """
-        category_mapping = {
-            '(0) Very Low': ("Balanced", "normal spectral distribution"),
-            '(1) Low': ("Modulated", "slight energy variations"),
-            '(2) Moderate': ("Irregular", "noticeable spectral irregularities"),
-            '(3) High': ("Erratic", "abnormal energy distribution")
-        }
-        return category_mapping.get(cat, ("Undefined", "atypical spectral characteristics"))
+        mapping = {'(0) Very Low': 'Balanced','(1) Low':'Modulated', '(2) Moderate':'Irregular', '(3) High':'Erratic' }
+        cat = mapping[cat]
+        return {
+            'Balanced': "normal spectral distribution",
+            'Modulated': "slight energy variations",
+            'Irregular': "noticeable spectral irregularities",
+            'Erratic': "abnormal energy distribution"
+        }.get(cat, "atypical spectral characteristics")
+    
     html_content = f"""
     <html>
     <head>
