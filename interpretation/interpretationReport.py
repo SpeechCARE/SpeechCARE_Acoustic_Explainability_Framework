@@ -18,7 +18,12 @@ def generate_audio_report_html(audio_path: str,
         quartile_ranges: Dictionary containing quartile ranges for both features
     
     """
-    
+    mapping_shimmer = {'(0) Very Low': 'Stable','(1) Low':'Almost Stable', '(2) Moderate':'Almost Unstable', '(3) High':'Unstable' }
+    mapping_energy = {'(0) Very Low': 'Balanced','(1) Low':'Modulated', '(2) Moderate':'Irregular', '(3) High':'Erratic' }    
+
+    shimmer_category = mapping_shimmer[shimmer_category]
+    freq_category = mapping_energy[freq_category]
+
     # Helper functions (unchanged from original)
     def get_pause_category(count):
         if count == 0: return "None"
@@ -36,8 +41,6 @@ def generate_audio_report_html(audio_path: str,
         return interpretations.get(min(count, 3), "abnormal pause pattern")
 
     def get_shimmer_interpretation(cat):
-        mapping = {'(0) Very Low': 'Stable','(1) Low':'Almost Stable', '(2) Moderate':'Almost Unstable', '(3) High':'Unstable' }
-        cat = mapping[cat]
         return {
             'Stable': "normal vocal fold vibration",
             'Almost Stable': "mild vocal instability",
@@ -46,8 +49,6 @@ def generate_audio_report_html(audio_path: str,
         }.get(cat, "undefined stability pattern")
 
     def get_energy_interpretation(cat):
-        mapping = {'(0) Very Low': 'Balanced','(1) Low':'Modulated', '(2) Moderate':'Irregular', '(3) High':'Erratic' }
-        cat = mapping[cat]
         return {
             'Balanced': "normal spectral distribution",
             'Modulated': "slight energy variations",
