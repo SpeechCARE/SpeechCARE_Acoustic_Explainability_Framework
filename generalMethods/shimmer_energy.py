@@ -142,11 +142,12 @@ def _ensure_features_exist(
     return data_df
 
 
-def _calculate_value_ranges(values: np.ndarray) -> Dict[str, Tuple[float, float]]:
-    """Calculate quartile ranges for given values.
+def _calculate_value_ranges(values: np.ndarray, feature: str = None) -> Dict[str, Tuple[float, float]]:
+    """Calculate quartile ranges with feature-specific category names.
     
     Args:
         values: Array of numerical values
+        feature: Name of the feature ('shimmer' or 'vocal_energy') for specialized categories
         
     Returns:
         Dictionary mapping category names to (start, end) ranges
@@ -155,12 +156,39 @@ def _calculate_value_ranges(values: np.ndarray) -> Dict[str, Tuple[float, float]
     max_value = values.max()
     category_width = (max_value - min_value) / 4
     
-    return {
-        "(0) Very Low": (min_value, min_value + category_width),
-        "(1) Low": (min_value + category_width, min_value + 2 * category_width),
-        "(2) Moderate": (min_value + 2 * category_width, min_value + 3 * category_width),
-        "(3) High": (min_value + 3 * category_width, max_value)
+    # Define category naming schemes
+    category_schemes = {
+        'shimmer': {
+            'Q1': 'Stable',
+            'Q2': 'Almost Stable',
+            'Q3': 'Almost Unstable',
+            'Q4': 'Unstable'
+        },
+        'vocal_energy': {
+            'Q1': 'Low Energy',
+            'Q2': 'Mild Energy',
+            'Q3': 'Moderate Energy',
+            'Q4': 'Energetic'
+        }
     }
+    
+    # Get the appropriate naming scheme
+    if feature in category_schemes:
+        categories = category_schemes[feature]
+        return {
+            f"Q1: {categories['Q1']}": (min_value, min_value + category_width),
+            f"Q2: {categories['Q2']}": (min_value + category_width, min_value + 2 * category_width),
+            f"Q3: {categories['Q3']}": (min_value + 2 * category_width, min_value + 3 * category_width),
+            f"Q4: {categories['Q4']}": (min_value + 3 * category_width, max_value)
+        }
+    else:
+        # Default naming scheme
+        return {
+            "(0) Very Low": (min_value, min_value + category_width),
+            "(1) Low": (min_value + category_width, min_value + 2 * category_width),
+            "(2) Moderate": (min_value + 2 * category_width, min_value + 3 * category_width),
+            "(3) High": (min_value + 3 * category_width, max_value)
+        }
 
 
 def analyze_column_single(
@@ -172,17 +200,26 @@ def analyze_column_single(
     """Analyze a test audio file relative to training data distribution.
     
     Args:
-        data_df: DataFrame containing training audio features/paths
+        data_df: Reference DataFrame containing training data
         test_path: Path to test audio file
         column_name: Feature column to analyze
         feature_columns: List of feature columns
         
     Returns:
-        Dictionary containing:
+        Dictionary containing analysis results:
         - 'value': The test value
         - 'category': Quartile category
         - 'ranges': Dictionary of all category ranges
     """
+    # Print comprehensive reference data summary
+    print("Reference Data Information:")
+    print(f"- Total samples used for quartile calculation: {len(data_df):,}")
+    print(f"- Languages represented ({data_df['language'].nunique()}): {', '.join(sorted(data_df['language'].unique().astype(str)))}")
+    print(f"- Tasks represented ({data_df['task'].nunique()}): {', '.join(sorted(data_df['task'].unique().astype(str)))}")
+    print(f"\nThe quartile ranges for '{column_name}' were calculated based on this reference distribution.")
+    
+    sample_name = test_path.split("/")[-1].split(".")[0]
+    
     # Input validation
     if column_name not in feature_columns:
         raise ValueError(f"Column {column_name} not in available features: {feature_columns}")
@@ -200,19 +237,18 @@ def analyze_column_single(
     ranges = _calculate_value_ranges(train_values)
     
     # Determine category
-    category = "Unknown"
-    for cat_name, (start, end) in ranges.items():
-        if start <= test_value < end:
-            category = cat_name
-            break
+    category = next(
+        (cat for cat, (start, end) in ranges.items() if start <= test_value < end),
+        "Unknown"
+    )
     
     # Print results
-    print("\nValue ranges for each category:")
-    for cat_name, (start, end) in ranges.items():
-        print(f"{cat_name}: {start:.2f} - {end:.2f}")
-    
-    print(f"\nThe value of {column_name} for:")
-    print(f"{test_value:.2f} => Quartile: '{category}'")
+    print(f"\nAnalysis Results for {sample_name}:")
+    print(f"- {column_name} value: {test_value:.4f}")
+    print(f"- Quartile category: {category}")
+    print("\nFull Quartile Ranges:")
+    for cat_name, (start, end) in sorted(ranges.items()):
+        print(f"  {cat_name:<20}: {start:.4f} to {end:.4f}")
     
     return {
         'value': test_value,

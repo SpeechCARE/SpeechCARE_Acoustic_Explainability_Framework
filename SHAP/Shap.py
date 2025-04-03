@@ -161,9 +161,9 @@ class AcousticShap():
         baseline_type: str = 'zeros',
         fig_save_path: Optional[str] = None,
         plot: bool = False
-    ) -> Union[np.ndarray, Tuple[np.ndarray, np.ndarray]]:
+    ) -> Union[np.ndarray, Tuple[np.ndarray, ...]]:
         """
-        Enhanced spectrogram analysis with spectral entropy support.
+        Enhanced spectrogram analysis with spectral entropy and formant tracking support.
         
         Args:
             audio_path: Path to audio file
@@ -172,7 +172,7 @@ class AcousticShap():
             spectrogram_type: Type of spectrogram ("original" or "shap")
             include_entropy: Whether to include spectral entropy analysis
             entropy_kwargs: Parameters for plotting entropy
-            formants_to_plot: List of formant names to plot
+            formants_to_plot: List of formant names to plot (e.g., ['F1', 'F2'])
             pauses: List of pause intervals as (start, end) tuples
             sr: Target sampling rate (uses default if None)
             segment_length: SHAP segment length in seconds
@@ -183,7 +183,11 @@ class AcousticShap():
             plot: Whether to display the plot
             
         Returns:
-            Spectrogram array or tuple of (spectrogram, entropy) if include_entropy=True
+            Returns vary based on requested analyses:
+            - Spectrogram only (default)
+            - (spectrogram, entropy, flat_segments) if include_entropy=True
+            - (spectrogram, formant_values) if formants_to_plot is not empty
+            - (spectrogram, entropy, flat_segments, formant_values) if both are requested
             
         Raises:
             ValueError: For invalid spectrogram_type
@@ -197,33 +201,40 @@ class AcousticShap():
         if formants_to_plot is None:
             formants_to_plot = []
 
-        # Generate appropriate spectrogram
-        spectrogram = self._generate_spectrogram(
-            spec_type = spectrogram_type,
-            audio_path= audio_path,
-            demography_info= demography_info,
-            config = config,
-            formants= formants_to_plot,
-            pauses = pauses,
-            sr = sr,
-            segment_length =segment_length,
-            overlap = overlap,
-            frame_duration = frame_duration,
-            baseline_type =baseline_type,
-            plot =plot
+        # Generate appropriate spectrogram and formants
+        formant_values, spectrogram = self._generate_spectrogram(
+            spec_type=spectrogram_type,
+            audio_path=audio_path,
+            demography_info=demography_info,
+            config=config,
+            formants=formants_to_plot,
+            pauses=pauses,
+            sr=sr,
+            segment_length=segment_length,
+            overlap=overlap,
+            frame_duration=frame_duration,
+            baseline_type=baseline_type,
+            plot=plot
         )
 
+        # Initialize return values
+        return_values = [spectrogram]
+        
         # Calculate and plot entropy if requested
-        entropy = None
         if include_entropy:
-            entropy = self.plot_entropy_analysis(
+            entropy, flat_segments = self.plot_entropy_analysis(
                 audio_path,
                 sr=sr,
-                **entropy_kwargs
+                **entropy_kwargs if entropy_kwargs else {}
             )
-
-
-        return (spectrogram, entropy) if include_entropy else spectrogram
+            return_values.extend([entropy, flat_segments])
+        
+        # Add formant values if requested
+        if formants_to_plot:
+            return_values.append(formant_values)
+        
+        # Return appropriate tuple based on what was calculated
+        return tuple(return_values) if len(return_values) > 1 else return_values[0]
     
     def _generate_spectrogram(
         self,
@@ -418,6 +429,7 @@ class AcousticShap():
             dpi: Figure resolution
             
         Returns:
+            Value of the calculated entropy
             List of detected flat segments as (start, end) tuples
         """
         sr = sr or self.default_sr
@@ -464,7 +476,7 @@ class AcousticShap():
         for seg in flat_segments:
             print(f"{seg[0]:.2f} - {seg[1]:.2f}")
         
-        return flat_segments
+        return entropy, flat_segments
 
     
     def moving_average(self, data, window_size=5):
@@ -571,7 +583,7 @@ class AcousticShap():
         if plot:
             plt.show()
             
-        return log_S
+        return formant_values , log_S
     
     def visualize_shap_spectrogram(
         self,
@@ -723,4 +735,4 @@ class AcousticShap():
         if plot: 
             plt.show()
             
-        return modified_log_S
+        return formant_values, modified_log_S
