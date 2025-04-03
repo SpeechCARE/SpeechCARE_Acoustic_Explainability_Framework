@@ -1,10 +1,12 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from io import BytesIO
 import base64
 import os
+from matplotlib import patheffects
 from matplotlib.patheffects import withStroke
 
-def generate_darkmode_report(model, audio_path, demography_info, config):
+def generate_prediction_report(model, audio_path, demography_info, config):
     # Run inference and get the gating weights
     predicted_label, probabilities = model.inference(audio_path, demography_info, config)
     
@@ -18,6 +20,7 @@ def generate_darkmode_report(model, audio_path, demography_info, config):
     class_names = ['Control', 'MCI', 'ADRD']
     prob_values = [prob * 100 for prob in probabilities]
     modalities = ['Acoustic', 'Linguistic', 'Demographic']
+    predicted_class = class_names[predicted_label]
     
     # Create beautiful plots with custom styling
     plt.style.use('dark_background')
@@ -26,7 +29,8 @@ def generate_darkmode_report(model, audio_path, demography_info, config):
     
     # Prediction bar chart (left)
     bar_colors = ['#4CAF50', '#FFA726', '#F44336']  # Green, Orange, Red
-    bars = ax1.bar(class_names, prob_values, color=bar_colors, edgecolor='white', linewidth=0.5, alpha=0.9)
+    bars = ax1.bar(class_names, prob_values, color=bar_colors, 
+                  edgecolor='white', linewidth=0.5, alpha=0.9)
     ax1.set_title('Prediction Confidence', fontsize=14, pad=20, color='white', fontweight='bold')
     ax1.set_ylabel('Probability (%)', fontsize=12, color='#b0b0b0')
     ax1.set_ylim(0, 100)
@@ -41,7 +45,7 @@ def generate_darkmode_report(model, audio_path, demography_info, config):
                 f'{height:.1f}%',
                 ha='center', va='bottom',
                 color='white', fontsize=11, fontweight='bold',
-                path_effects=[withStroke(linewidth=3, foreground='#333333')])
+                path_effects=[patheffects.withStroke(linewidth=3, foreground='#333333')])
     
     # Modality pie chart (right) - Orange accent theme
     pie_colors = ['#1E88E5', '#FFA726', '#26A69A']  # Blue, Orange, Teal
@@ -59,11 +63,7 @@ def generate_darkmode_report(model, audio_path, demography_info, config):
     
     # Make percentages bold and larger
     plt.setp(autotexts, size=12, weight="bold", color='white',
-            path_effects=[withStroke(linewidth=2, foreground='#333333')])
-    
-    # Add glow effect to pie wedges
-    for w in wedges:
-        w.set_path_effects([path_effects.withSimplePatchShadow(offset=(2, 2))])
+            path_effects=[patheffects.withStroke(linewidth=2, foreground='#333333')])
     
     # Adjust layout
     plt.tight_layout()
