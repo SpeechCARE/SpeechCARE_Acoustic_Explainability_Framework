@@ -147,11 +147,12 @@ def _calculate_value_ranges(values: np.ndarray, feature: str = None) -> Dict[str
     
     Args:
         values: Array of numerical values
-        feature: Name of the feature ('shimmer' or 'vocal_energy') for specialized categories
+        feature: Name of the feature 
         
     Returns:
         Dictionary mapping category names to (start, end) ranges
     """
+    feature = 'shimmer' if 'shimmer' in feature else 'vocal_energy'
     min_value = values.min()
     max_value = values.max()
     category_width = (max_value - min_value) / 4
@@ -234,7 +235,7 @@ def analyze_column_single(
     
     # Calculate value ranges
     train_values = data_df[column_name]
-    ranges = _calculate_value_ranges(train_values)
+    ranges = _calculate_value_ranges(train_values,column_name)
     
     # Determine category
     category = next(
