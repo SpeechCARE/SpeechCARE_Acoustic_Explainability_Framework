@@ -2,13 +2,10 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 
-def generate_prediction_report_with_modalities(model, audio_path, demography_info, config):
+def generate_prediction_report(model, audio_path, demography_info, config):
     # Run inference and get the gating weights
     predicted_label, probabilities = model.inference(audio_path, demography_info, config)
     
-    # Get the gating weights (assuming they're stored in the model or can be accessed)
-    # You may need to modify your forward() or inference() methods to return these
-    # For this example, I'll assume they're available as model.last_gate_weights
     if hasattr(model, 'last_gate_weights'):
         gate_weights = model.last_gate_weights[0].tolist()  # Get weights for first sample
     else:
