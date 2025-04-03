@@ -156,6 +156,7 @@ class TBNet(nn.Module):
 
         # Step 12: Compute gating weights for modality fusion
         gate_weights = self.weight_gate(torch.cat([speech_x, txt_x, demography_x], dim=1))
+        self.last_gate_weights = gate_weights.detach().cpu().numpy()
         weight_speech, weight_txt, weight_demography = gate_weights[:, 0], gate_weights[:, 1], gate_weights[:, 2]
 
         # Step 13: Apply classifiers to each modality
