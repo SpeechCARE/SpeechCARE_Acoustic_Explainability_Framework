@@ -1,133 +1,251 @@
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
+import os
+from matplotlib.patheffects import withStroke
 
-def generate_prediction_report(model, audio_path, demography_info, config):
+def generate_darkmode_report(model, audio_path, demography_info, config):
     # Run inference and get the gating weights
     predicted_label, probabilities = model.inference(audio_path, demography_info, config)
     
+    # Get modality weights (ensure your model stores these)
     if hasattr(model, 'last_gate_weights'):
-        gate_weights = model.last_gate_weights[0].tolist()  # Get weights for first sample
+        gate_weights = model.last_gate_weights[0].tolist()
     else:
-        # Fallback - you'll need to modify your model to store/return these
-        gate_weights = [0.4, 0.4, 0.2]  # Example weights
+        gate_weights = [0.4, 0.4, 0.2]  # fallback
     
-    # Get class names and probabilities
+    # Prepare data
     class_names = ['Control', 'MCI', 'ADRD']
-    prob_values = [prob * 100 for prob in probabilities]  # Convert to percentages
+    prob_values = [prob * 100 for prob in probabilities]
+    modalities = ['Acoustic', 'Linguistic', 'Demographic']
     
-    # Create figures
-    plt.figure(figsize=(12, 5))
+    # Create beautiful plots with custom styling
+    plt.style.use('dark_background')
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6), gridspec_kw={'width_ratios': [1, 1]})
+    fig.patch.set_facecolor('#0d1117')  # Dark background
     
-    # Bar chart for predictions
-    plt.subplot(1, 2, 1)
-    bars = plt.bar(class_names, prob_values, color=['#4CAF50', '#FFC107', '#F44336'])
-    plt.title('Prediction Probabilities', fontsize=12)
-    plt.ylabel('Probability (%)')
-    plt.ylim(0, 100)
+    # Prediction bar chart (left)
+    bar_colors = ['#4CAF50', '#FFA726', '#F44336']  # Green, Orange, Red
+    bars = ax1.bar(class_names, prob_values, color=bar_colors, edgecolor='white', linewidth=0.5, alpha=0.9)
+    ax1.set_title('Prediction Confidence', fontsize=14, pad=20, color='white', fontweight='bold')
+    ax1.set_ylabel('Probability (%)', fontsize=12, color='#b0b0b0')
+    ax1.set_ylim(0, 100)
+    ax1.tick_params(axis='both', colors='#b0b0b0')
+    ax1.spines['bottom'].set_color('#404040')
+    ax1.spines['left'].set_color('#404040')
+    
+    # Add value labels with glow effect
     for bar in bars:
         height = bar.get_height()
-        plt.text(bar.get_x() + bar.get_width()/2., height,
-                 f'{height:.1f}%',
-                 ha='center', va='bottom')
+        ax1.text(bar.get_x() + bar.get_width()/2., height,
+                f'{height:.1f}%',
+                ha='center', va='bottom',
+                color='white', fontsize=11, fontweight='bold',
+                path_effects=[withStroke(linewidth=3, foreground='#333333')])
     
-    # Pie chart for modality contributions
-    plt.subplot(1, 2, 2)
-    modalities = ['Acoustic', 'Linguistic', 'Demographic']
-    colors = ['#2196F3', '#9C27B0', '#009688']
-    wedges, texts, autotexts = plt.pie(
+    # Modality pie chart (right) - Orange accent theme
+    pie_colors = ['#1E88E5', '#FFA726', '#26A69A']  # Blue, Orange, Teal
+    wedges, texts, autotexts = ax2.pie(
         gate_weights,
         labels=modalities,
-        colors=colors,
+        colors=pie_colors,
         autopct='%1.1f%%',
         startangle=90,
-        textprops={'fontsize': 10}
+        textprops={'fontsize': 12, 'color': 'white'},
+        wedgeprops={'edgecolor': '#0d1117', 'linewidth': 1.5},
+        explode=(0.05, 0.05, 0.05)  # Slight separation
     )
-    plt.title('Modality Contributions', fontsize=12)
-    plt.setp(autotexts, size=10, weight="bold")
+    ax2.set_title('Modality Contributions', fontsize=14, pad=20, color='white', fontweight='bold')
+    
+    # Make percentages bold and larger
+    plt.setp(autotexts, size=12, weight="bold", color='white',
+            path_effects=[withStroke(linewidth=2, foreground='#333333')])
+    
+    # Add glow effect to pie wedges
+    for w in wedges:
+        w.set_path_effects([path_effects.withSimplePatchShadow(offset=(2, 2))])
     
     # Adjust layout
     plt.tight_layout()
+    plt.subplots_adjust(wspace=0.3)
     
-    # Save combined plot to bytes
+    # Save plot
     buffer = BytesIO()
-    plt.savefig(buffer, format='png', bbox_inches='tight', dpi=100)
+    plt.savefig(buffer, format='png', facecolor=fig.get_facecolor(), bbox_inches='tight', dpi=120)
     buffer.seek(0)
     plot_data = base64.b64encode(buffer.read()).decode('utf-8')
     plt.close()
     
-    # Determine predicted class with max probability
-    predicted_class = class_names[predicted_label]
-    
-    # Generate HTML
+    # Generate HTML with dark/light mode toggle
     html = f"""
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Model Prediction Analysis</title>
+        <title>Model Decision Analysis</title>
         <style>
-            body {{
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                margin: 20px;
-                color: #333;
+            :root {{
+                --bg-color: #0d1117;
+                --text-color: #e6edf3;
+                --card-bg: #161b22;
+                --border-color: #30363d;
+                --highlight: #FFA726;
+                --accent-blue: #1E88E5;
+                --accent-green: #4CAF50;
+                --accent-teal: #26A69A;
+                --accent-red: #F44336;
             }}
+            
+            [data-theme="light"] {{
+                --bg-color: #f8f9fa;
+                --text-color: #212529;
+                --card-bg: #ffffff;
+                --border-color: #dee2e6;
+                --highlight: #FF7043;
+            }}
+            
+            body {{
+                font-family: 'Segoe UI', system-ui, sans-serif;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                margin: 0;
+                padding: 0;
+                transition: all 0.3s ease;
+                line-height: 1.6;
+            }}
+            
             .container {{
-                max-width: 900px;
+                max-width: 1000px;
                 margin: 0 auto;
                 padding: 20px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-                border-radius: 5px;
             }}
+            
             .header {{
                 text-align: center;
                 margin-bottom: 30px;
-                border-bottom: 1px solid #eee;
-                padding-bottom: 10px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid var(--border-color);
+                position: relative;
             }}
-            .result {{
-                background-color: #f8f9fa;
-                padding: 15px;
-                border-radius: 5px;
-                margin-bottom: 20px;
-                text-align: center;
-                font-size: 18px;
-            }}
-            .chart-container {{
-                text-align: center;
-                margin: 20px 0;
-            }}
-            .details {{
-                margin-top: 30px;
-                padding: 15px;
-                background-color: #f5f5f5;
-                border-radius: 5px;
-            }}
-            .highlight {{
-                font-weight: bold;
-                color: #2c3e50;
-            }}
-            .two-columns {{
-                display: flex;
-                justify-content: space-between;
-                margin: 20px 0;
-            }}
-            .column {{
-                width: 48%;
-            }}
-            .modality-details {{
-                margin-top: 15px;
-            }}
-            .modality {{
+            
+            .theme-toggle {{
+                position: absolute;
+                right: 0;
+                top: 0;
+                background: var(--card-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 20px;
+                padding: 5px 10px;
+                cursor: pointer;
+                font-size: 14px;
                 display: flex;
                 align-items: center;
-                margin: 8px 0;
+                gap: 8px;
             }}
-            .color-box {{
-                width: 20px;
-                height: 20px;
-                margin-right: 10px;
-                display: inline-block;
+            
+            .result-card {{
+                background-color: var(--card-bg);
+                border-radius: 12px;
+                padding: 25px;
+                margin-bottom: 30px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border: 1px solid var(--border-color);
+                text-align: center;
+            }}
+            
+            .prediction {{
+                font-size: 24px;
+                font-weight: 600;
+                margin-bottom: 10px;
+                color: var(--highlight);
+            }}
+            
+            .confidence {{
+                font-size: 18px;
+                color: var(--text-color);
+                opacity: 0.9;
+            }}
+            
+            .chart-container {{
+                background-color: var(--card-bg);
+                border-radius: 12px;
+                padding: 20px;
+                margin-bottom: 30px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border: 1px solid var(--border-color);
+            }}
+            
+            .details-grid {{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+                margin-bottom: 30px;
+            }}
+            
+            .detail-card {{
+                background-color: var(--card-bg);
+                border-radius: 12px;
+                padding: 20px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border: 1px solid var(--border-color);
+            }}
+            
+            .detail-title {{
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 15px;
+                color: var(--highlight);
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 8px;
+            }}
+            
+            .modality-item {{
+                display: flex;
+                align-items: center;
+                margin: 12px 0;
+                padding: 10px;
+                border-radius: 8px;
+                background-color: rgba(255,255,255,0.05);
+            }}
+            
+            .modality-color {{
+                width: 24px;
+                height: 24px;
+                border-radius: 6px;
+                margin-right: 12px;
+                flex-shrink: 0;
+            }}
+            
+            .modality-value {{
+                font-weight: 600;
+                margin-left: auto;
+            }}
+            
+            .audio-info {{
+                background-color: var(--card-bg);
+                border-radius: 12px;
+                padding: 20px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border: 1px solid var(--border-color);
+            }}
+            
+            .info-title {{
+                font-weight: 600;
+                margin-bottom: 8px;
+                color: var(--accent-blue);
+            }}
+            
+            .transcription {{
+                background-color: rgba(255,255,255,0.05);
+                padding: 15px;
+                border-radius: 8px;
+                font-style: italic;
+                line-height: 1.5;
+            }}
+            
+            @media (max-width: 768px) {{
+                .details-grid {{
+                    grid-template-columns: 1fr;
+                }}
             }}
         </style>
     </head>
@@ -135,53 +253,103 @@ def generate_prediction_report(model, audio_path, demography_info, config):
         <div class="container">
             <div class="header">
                 <h1>Model Decision Analysis</h1>
-                <p>Audio analysis results for: {audio_path}</p>
+                <p>Comprehensive breakdown for: {os.path.basename(audio_path)}</p>
+                <div class="theme-toggle" onclick="toggleTheme()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <span>Dark Mode</span>
+                </div>
             </div>
             
-            <div class="result">
-                <h2>Predicted Class: <span class="highlight">{predicted_class}</span></h2>
-                <p>with {prob_values[predicted_label]:.1f}% confidence</p>
+            <div class="result-card">
+                <div class="prediction">Predicted: <span style="color: {bar_colors[predicted_label]}">{predicted_class}</span></div>
+                <div class="confidence">Confidence: {prob_values[predicted_label]:.1f}%</div>
             </div>
             
             <div class="chart-container">
-                <img src="data:image/png;base64,{plot_data}" alt="Analysis Results" style="max-width: 100%;">
+                <img src="data:image/png;base64,{plot_data}" alt="Analysis Results" style="width: 100%; border-radius: 8px;">
             </div>
             
-            <div class="two-columns">
-                <div class="column">
-                    <h3>Class Probabilities:</h3>
-                    <ul>
-                        <li>Control: {prob_values[0]:.1f}%</li>
-                        <li>Mild Cognitive Impairment (MCI): {prob_values[1]:.1f}%</li>
-                        <li>Alzheimer's Disease (ADRD): {prob_values[2]:.1f}%</li>
-                    </ul>
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-title">Class Probabilities</div>
+                    <div class="modality-item" style="border-left: 4px solid var(--accent-green);">
+                        <div>Control</div>
+                        <div class="modality-value">{prob_values[0]:.1f}%</div>
+                    </div>
+                    <div class="modality-item" style="border-left: 4px solid var(--highlight);">
+                        <div>Mild Cognitive Impairment</div>
+                        <div class="modality-value">{prob_values[1]:.1f}%</div>
+                    </div>
+                    <div class="modality-item" style="border-left: 4px solid var(--accent-red);">
+                        <div>Alzheimer's Disease</div>
+                        <div class="modality-value">{prob_values[2]:.1f}%</div>
+                    </div>
                 </div>
                 
-                <div class="column">
-                    <h3>Modality Contributions:</h3>
-                    <div class="modality-details">
-                        <div class="modality">
-                            <span class="color-box" style="background-color: #2196F3;"></span>
-                            Acoustic: {gate_weights[0]*100:.1f}%
-                        </div>
-                        <div class="modality">
-                            <span class="color-box" style="background-color: #9C27B0;"></span>
-                            Linguistic: {gate_weights[1]*100:.1f}%
-                        </div>
-                        <div class="modality">
-                            <span class="color-box" style="background-color: #009688;"></span>
-                            Demographic: {gate_weights[2]*100:.1f}%
-                        </div>
+                <div class="detail-card">
+                    <div class="detail-title">Modality Contributions</div>
+                    <div class="modality-item">
+                        <div class="modality-color" style="background-color: var(--accent-blue);"></div>
+                        <div>Acoustic Analysis</div>
+                        <div class="modality-value">{gate_weights[0]*100:.1f}%</div>
+                    </div>
+                    <div class="modality-item">
+                        <div class="modality-color" style="background-color: var(--highlight);"></div>
+                        <div>Linguistic Features</div>
+                        <div class="modality-value">{gate_weights[1]*100:.1f}%</div>
+                    </div>
+                    <div class="modality-item">
+                        <div class="modality-color" style="background-color: var(--accent-teal);"></div>
+                        <div>Demographic Factors</div>
+                        <div class="modality-value">{gate_weights[2]*100:.1f}%</div>
                     </div>
                 </div>
             </div>
             
-            <div class="details">
-                <h3>Additional Information:</h3>
+            <div class="audio-info">
+                <div class="detail-title">Audio Information</div>
                 <p><strong>Demographic Factor:</strong> {demography_info}</p>
-                <p><strong>Transcription:</strong> {model.transcription}</p>
+                
+                <div class="detail-title" style="margin-top: 20px;">Transcript Analysis</div>
+                <div class="transcription">{model.transcription or "No transcription available"}</div>
             </div>
         </div>
+        
+        <script>
+            function toggleTheme() {{
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-theme');
+                const toggleBtn = document.querySelector('.theme-toggle');
+                
+                if (currentTheme === 'light') {{
+                    html.removeAttribute('data-theme');
+                    toggleBtn.innerHTML = `
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                        <span>Dark Mode</span>
+                    `;
+                }} else {{
+                    html.setAttribute('data-theme', 'light');
+                    toggleBtn.innerHTML = `
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <span>Light Mode</span>
+                    `;
+                }}
+            }}
+        </script>
     </body>
     </html>
     """
