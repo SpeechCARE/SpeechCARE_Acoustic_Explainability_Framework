@@ -305,16 +305,17 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                         <div class="modality-value">{prob_values[2]:.1f}%</div>
                     </div>
                 </div>
+
                 
                 <div class="detail-card">
                     <div class="detail-title">Modality Contributions</div>
                     <div class="modality-item">
-                        <div class="modality-color" style="background-color: var(--accent-blue);"></div>
+                        <div class="modality-color" style="background-color: var(--highlight);"></div>
                         <div>Acoustic Analysis</div>
                         <div class="modality-value">{gate_weights[0]*100:.1f}%</div>
                     </div>
                     <div class="modality-item">
-                        <div class="modality-color" style="background-color: var(--highlight);"></div>
+                        <div class="modality-color" style="background-color: var( --accent-blue);"></div>
                         <div>Linguistic Features</div>
                         <div class="modality-value">{gate_weights[1]*100:.1f}%</div>
                     </div>
