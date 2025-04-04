@@ -44,7 +44,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             fig.patch.set_facecolor('#0d1117')  # Dark background
             
             # Prediction bar chart (left)
-            bar_colors = ['#4CAF50', '#FFA726', '#F44336']  # Green, Orange, Red
+            bar_colors = ['#FFA726','#1E88E5', '#26A69A']  # Orange , Blue , Teal
             bars = ax1.bar(class_names, prob_values, color=bar_colors, 
                           edgecolor='white', linewidth=0.5, alpha=0.9)
             ax1.set_title('Prediction Confidence', fontsize=14, pad=20, color='white', fontweight='bold')
@@ -64,7 +64,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                         path_effects=[patheffects.withStroke(linewidth=3, foreground='#333333')])
             
             # Modality pie chart (right) - Orange accent theme
-            pie_colors = ['#1E88E5', '#FFA726', '#26A69A']  # Blue, Orange, Teal
+            pie_colors = ['#FFA726','#1E88E5', '#26A69A']  # Orange , Blue , Teal
             wedges, texts, autotexts = ax2.pie(
                 gate_weights,
                 labels=modalities,
@@ -287,13 +287,11 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                 <div class="confidence">Confidence: {prob_values[predicted_label]:.1f}%</div>
             </div>
             
-            <div class="chart-container">
-                <img src="data:image/png;base64,{plot_data}" alt="Analysis Results" style="width: 100%; border-radius: 8px;">
-            </div>
+          
             
             <div class="details-grid">
                 <div class="detail-card">
-                    <div class="detail-title">Class Probabilities</div>
+                    <div class="detail-title">Prediction Confidence</div>
                     <div class="modality-item" style="border-left: 4px solid var(--accent-green);">
                         <div>Control</div>
                         <div class="modality-value">{prob_values[0]:.1f}%</div>
@@ -327,10 +325,14 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                     </div>
                 </div>
             </div>
+
+            <div class="chart-container">
+                <img src="data:image/png;base64,{plot_data}" alt="Analysis Results" style="width: 100%; border-radius: 8px;">
+            </div>
             
             <div class="audio-info">
                 <div class="detail-title">Audio Information</div>
-                <p><strong>Demographic Factor:</strong> {demography_info}</p>
+                <p><strong>Age:</strong> {demography_info}</p>
                 
                 <div class="detail-title" style="margin-top: 20px;">Transcript Analysis</div>
                 <div class="transcription">{model.transcription or "No transcription available"}</div>

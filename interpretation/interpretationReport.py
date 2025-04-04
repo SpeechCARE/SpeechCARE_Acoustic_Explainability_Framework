@@ -165,12 +165,7 @@ def generate_vocal_analysis_report(
                     display: flex;
                     justify-content: space-between;
                 }}
-                
-                .clinical-insight {{
-                    font-style: italic;
-                    color: var(--accent-teal);
-                    margin-top: 10px;
-                }}
+
                 
                 .reference-table {{
                     width: 100%;
@@ -213,33 +208,6 @@ def generate_vocal_analysis_report(
                     <p>Analysis for sample: <strong>{sample_name}</strong></p>
                 </div>
                 
-                {f'<div class="chart-container"><img src="data:image/png;base64,{spectrogram_plot}" style="width:100%; border-radius:8px;"></div>' if spectrogram_plot else ''}
-                
-                <div class="plot-vertical">
-                    <div class="chart-container">
-                        <img src="data:image/png;base64,{f0_plot}" style="width:100%; border-radius:8px;">
-                    </div>
-                    <div class="chart-container">
-                        <img src="data:image/png;base64,{f3_plot}" style="width:100%; border-radius:8px;">
-                    </div>
-                </div>
-                
-                <div class="feature-section">
-                    <div class="feature-title">Fundamental Frequency (F0) Analysis</div>
-                    <div class="clinical-insight">
-                        Measures vocal fold vibration rate. Increased variability suggests impaired motor control.
-                        Normal range: 85-255Hz (adults).
-                    </div>
-                </div>
-                
-                <div class="feature-section">
-                    <div class="feature-title">Formant Frequency (F3) Analysis</div>
-                    <div class="clinical-insight">
-                        Reflects tongue positioning and vocal tract shape. Reduced variability may indicate articulatory imprecision.
-                        Typical range: 2500-3500Hz.
-                    </div>
-                </div>
-                
                 <div class="feature-section">
                     <div class="feature-title">Noun Pause Analysis</div>
                     <div class="feature-grid">
@@ -252,35 +220,26 @@ def generate_vocal_analysis_report(
                             <span><strong>{pause_category}</strong></span>
                         </div>
                     </div>
-                    <div class="clinical-insight">
-                        Cognitive impairment often leads to difficulty in lexical retrieval, particularly nouns.
-                        Healthy speech typically shows 0-1 noun pauses per minute.
-                    </div>
                     <table class="reference-table">
                         <tr>
-                            <th>Category</th>
                             <th>Pause Count</th>
-                            <th>Clinical Interpretation</th>
+                            <th>Category</th>
                         </tr>
                         <tr>
-                            <td>None (0)</td>
                             <td>0 pauses</td>
-                            <td>Normal fluency</td>
+                            <td>None (0)</td>
                         </tr>
                         <tr>
-                            <td>Single (1)</td>
                             <td>1 pause</td>
-                            <td>Mild impairment</td>
+                            <td>Single (1)</td>
                         </tr>
                         <tr>
-                            <td>Few (2)</td>
                             <td>2-3 pauses</td>
-                            <td>Moderate impairment</td>
+                            <td>Few (2)</td>
                         </tr>
                         <tr>
-                            <td>Several (3)</td>
                             <td>>3 pauses</td>
-                            <td>Severe impairment</td>
+                            <td>Several (3)</td>
                         </tr>
                     </table>
                 </div>
@@ -305,34 +264,26 @@ def generate_vocal_analysis_report(
                             <span><strong>{rhythm_category}</strong></span>
                         </div>
                     </div>
-                    <div class="clinical-insight">
-                        Monotonous speech shows reduced pitch variation. Healthy speech typically has <5% flat segments.
-                    </div>
                     <table class="reference-table">
                         <tr>
-                            <th>Category</th>
                             <th>Criteria</th>
-                            <th>Clinical Correlation</th>
+                            <th>Category</th>
                         </tr>
                         <tr>
-                            <td>Rhythmic</td>
                             <td>No flat segments</td>
-                            <td>Normal prosody</td>
+                            <td>Rhythmic</td>
                         </tr>
                         <tr>
-                            <td>Relatively Rhythmic</td>
                             <td>1 segment (5-6s)</td>
-                            <td>Mild impairment</td>
+                            <td>Relatively Rhythmic</td>
                         </tr>
                         <tr>
-                            <td>Less Rhythmic</td>
                             <td>2 segments or 1 >6s</td>
-                            <td>Moderate impairment</td>
+                            <td>Less Rhythmic</td>
                         </tr>
                         <tr>
-                            <td>Non-Rhythmic</td>
                             <td>>2 segments or >10s</td>
-                            <td>Severe impairment</td>
+                            <td>Non-Rhythmic</td>
                         </tr>
                     </table>
                 </div>
@@ -349,40 +300,32 @@ def generate_vocal_analysis_report(
                             <span><strong>{shimmer_category}</strong></span>
                         </div>
                     </div>
-                    <div class="clinical-insight">
-                        Measures cycle-to-cycle amplitude variation. Normal range: <3.5%. Values >5% suggest vocal instability.
-                    </div>
                     <table class="reference-table">
                         <tr>
-                            <th>Quartile</th>
-                            <th>Category</th>
                             <th>Shimmer Range</th>
+                            <th>Category</th>
                         </tr>
                         <tr>
-                            <td>Q1</td>
+                            <td>0-2.5% (Q1)</td>
                             <td>Stable</td>
-                            <td>0-2.5%</td>
                         </tr>
                         <tr>
-                            <td>Q2</td>
+                            <td>2.5-3.5% (Q2)</td>
                             <td>Almost Stable</td>
-                            <td>2.5-3.5%</td>
                         </tr>
                         <tr>
-                            <td>Q3</td>
+                            <td>3.5-5% (Q3)</td>
                             <td>Almost Unstable</td>
-                            <td>3.5-5%</td>
                         </tr>
                         <tr>
-                            <td>Q4</td>
+                            <td>>5% (Q4)</td>
                             <td>Unstable</td>
-                            <td>>5%</td>
                         </tr>
                     </table>
                 </div>
                 
                 <div class="feature-section">
-                    <div class="feature-title">Vocal Energy (SPL)</div>
+                    <div class="feature-title">Energy (Frequency Domain)</div>
                     <div class="feature-grid">
                         <div class="feature-value">
                             <span>Measured Value:</span>
@@ -393,34 +336,26 @@ def generate_vocal_analysis_report(
                             <span><strong>{energy_category}</strong></span>
                         </div>
                     </div>
-                    <div class="clinical-insight">
-                        Normal conversation: 50-70dB. Cognitive impairment often shows reduced dynamic range (<10dB variation).
-                    </div>
                     <table class="reference-table">
                         <tr>
-                            <th>Quartile</th>
-                            <th>Category</th>
                             <th>Energy Range</th>
+                            <th>Category</th>
                         </tr>
                         <tr>
-                            <td>Q1</td>
+                            <td><55dB (Q1)</td>
                             <td>Low Energy</td>
-                            <td><55dB</td>
                         </tr>
                         <tr>
-                            <td>Q2</td>
+                            <td>55-65dB (Q2)</td>
                             <td>Mild Energy</td>
-                            <td>55-65dB</td>
                         </tr>
                         <tr>
-                            <td>Q3</td>
+                            <td>65-75dB (Q3)</td>
                             <td>Moderate Energy</td>
-                            <td>65-75dB</td>
                         </tr>
                         <tr>
-                            <td>Q4</td>
+                            <td>>75dB (Q4)</td>
                             <td>Energetic</td>
-                            <td>>75dB</td>
                         </tr>
                     </table>
                 </div>
