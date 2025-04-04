@@ -314,6 +314,16 @@ class TBNet(nn.Module):
             "segments_tensor": segments_tensor.cpu().numpy()
         }
         
-    
 
-   
+    def text_only_classification(self, input_ids, attention_mask):
+        print('text only classifier in...')
+        txt_embeddings = self.txt_transformer(input_ids=input_ids, attention_mask=attention_mask)
+        print('transformer - done')
+        txt_cls = txt_embeddings.last_hidden_state[:, 0, :]
+        print('cls - done')
+        txt_x = self.txt_head(txt_cls)  
+        print('head - done')
+        txt_out = self.txt_classifier(txt_x)
+        print('classifier - done')
+        print('text only classifier out...')
+        return txt_out
