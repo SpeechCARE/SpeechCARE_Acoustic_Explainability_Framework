@@ -215,8 +215,9 @@ def analyze_column_single(
     # Print comprehensive reference data summary
     print("Reference Data Information:")
     print(f"- Total samples used for quartile calculation: {len(data_df):,}")
-    print(f"- Languages represented ({data_df['language'].nunique()}): {', '.join(sorted(data_df['language'].unique().astype(str)))}")
-    print(f"- Tasks represented ({data_df['task'].nunique()}): {', '.join(sorted(data_df['task'].unique().astype(str)))}")
+
+    if 'language' in data_df.columns: print(f"- Languages represented ({data_df['language'].nunique()}): {', '.join(sorted(data_df['language'].unique().astype(str)))}")
+    if 'task' in data_df.columns: print(f"- Tasks represented ({data_df['task'].nunique()}): {', '.join(sorted(data_df['task'].unique().astype(str)))}")
     print(f"\nThe quartile ranges for '{column_name}' were calculated based on this reference distribution.")
     
     sample_name = test_path.split("/")[-1].split(".")[0]
