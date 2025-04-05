@@ -98,7 +98,7 @@ def lpfilter_audio_files(audio_path, output_dir):
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, audio_path.split("/")[-1].split(".")[0] + ".wav")
     try:
-        noisy, sr = torchaudio.load(audio_path,format="wav")
+        noisy, sr = torchaudio.load(audio_path)
         filtered_waveform = torch.tensor(lowpass(noisy, sr, 8000, 5))
         torchaudio.save(output_path, filtered_waveform, sr)
         return output_path
@@ -135,7 +135,7 @@ def get_whisper_transcription_and_lang(audio_path, pipe):
     assert os.path.exists(audio_path), f"File not found: {audio_path}"
 
     # Load and resample audio
-    audio, sr = torchaudio.load(audio_path,format="wav")
+    audio, sr = torchaudio.load(audio_path)
     
     resampler = transforms.Resample(orig_freq=sr, new_freq=16000)
     audio = resampler(audio)
