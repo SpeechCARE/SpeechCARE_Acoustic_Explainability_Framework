@@ -213,4 +213,4 @@ def preprocess_data(audio_path: str,
     transcription = get_whisper_transcription_and_lang(processed_audio_path, pipe)
 
     
-    return pd.DataFrame(data={'processed_audio_path':[processed_audio_path],'age_bin':[age_category],'transcription':[transcription]})
+    return processed_audio_path, age_category,transcription
