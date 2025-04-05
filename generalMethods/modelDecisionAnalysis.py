@@ -33,7 +33,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             gate_weights = [0.4, 0.4, 0.2]  # fallback
         
         # Prepare data
-        class_names = ['Control', 'MCI', 'ADRD']
+        class_names = ['Control', 'MCI', 'AD']
         prob_values = [prob * 100 for prob in probabilities]
         modalities = ['Acoustic', 'Linguistic', 'Demographic']
         predicted_class = class_names[predicted_label]
@@ -44,7 +44,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             fig.patch.set_facecolor('#0d1117')  # Dark background
             
             # Prediction bar chart (left)
-            bar_colors = ['#FFA726','#1E88E5', '#26A69A']  # Orange , Blue , Teal
+            bar_colors = ['#4CAF50','#FFA726', '#F44336']    # accent green , orange , accent red
             bars = ax1.bar(class_names, prob_values, color=bar_colors, 
                           edgecolor='white', linewidth=0.5, alpha=0.9)
             ax1.set_title('Prediction Confidence', fontsize=14, pad=20, color='white', fontweight='bold')
@@ -62,6 +62,8 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                         ha='center', va='bottom',
                         color='white', fontsize=11, fontweight='bold',
                         path_effects=[patheffects.withStroke(linewidth=3, foreground='#333333')])
+            # Remove vertical grid lines
+            ax1.grid(axis='x', visible=False)
             
             # Modality pie chart (right) - Orange accent theme
             pie_colors = ['#FFA726','#1E88E5', '#26A69A']  # Orange , Blue , Teal
@@ -273,7 +275,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
         <div class="container">
             <div class="header">
                 <h1>Model Decision Analysis</h1>
-                <p>Comprehensive breakdown for: {os.path.basename(audio_path)}</p>
+                <p style="text-align: center;">Comprehensive breakdown for: {os.path.basename(audio_path)}</p>
                 <div class="theme-toggle" onclick="toggleTheme()">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
