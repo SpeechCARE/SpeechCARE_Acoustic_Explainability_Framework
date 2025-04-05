@@ -169,16 +169,19 @@ def get_age_category(age: int) -> str:
     Returns:
         str: Age category string
     """
+    # Create categories of age by mapping the age rages to "0","1","2"
+    demography_mapping = {"40-65": 0, "66-80": 1, "+80": 2}
     if age < 40:
-        return "Under 40"
+        print("Invalid age input")
+        return None
     elif 40 <= age < 66:
-        return "40-65"
+        return demography_mapping["40-65"]
     elif 66 <= age < 81:
-        return "66-80"
+        return demography_mapping["66-80"] 
     else:
-        return "+80"
+        return demography_mapping["+80"] 
 
-def prepare_df(audio_path: str,
+def preprocess_data(audio_path: str,
                age: int,
                output_dir: str = "./processed_audio") -> pd.DataFrame:
     """
