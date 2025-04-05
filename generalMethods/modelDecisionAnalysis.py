@@ -44,7 +44,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             fig.patch.set_facecolor('#0d1117')  # Dark background
             
             # Prediction bar chart (left)
-            bar_colors = ['#4CAF50','#FFA726', '#F44336']    # accent green , orange , accent red
+            bar_colors = ['#4CAF50','#ede28c', '#9c4940']    # accent green , orange , accent red
             bars = ax1.bar(class_names, prob_values, color=bar_colors, 
                           edgecolor='white', linewidth=0.5, alpha=0.9)
             ax1.set_title('Prediction Confidence', fontsize=14, pad=20, color='white', fontweight='bold')
@@ -66,7 +66,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             ax1.grid(axis='x', visible=False)
             
             # Modality pie chart (right) - Orange accent theme
-            pie_colors = ['#FFA726','#1E88E5', '#26A69A']  # Orange , Blue , Teal
+            pie_colors = ['#008080','#457b9d', '#e76f51']  # Teal, Blue,Orange
             wedges, texts, autotexts = ax2.pie(
                 gate_weights,
                 labels=modalities,
@@ -290,7 +290,6 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             </div>
             
           
-            
             <div class="details-grid">
                 <div class="detail-card">
                     <div class="detail-title">Prediction Confidence</div>
@@ -298,31 +297,31 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                         <div>Control</div>
                         <div class="modality-value">{prob_values[0]:.1f}%</div>
                     </div>
-                    <div class="modality-item" style="border-left: 4px solid var(--highlight);">
+                    <div class="modality-item" style="border-left: 4px solid #ede28c;">
                         <div>Mild Cognitive Impairment</div>
                         <div class="modality-value">{prob_values[1]:.1f}%</div>
                     </div>
-                    <div class="modality-item" style="border-left: 4px solid var(--accent-red);">
+                    <div class="modality-item" style="border-left: 4px solid #9c4940;">
                         <div>Alzheimer's Disease</div>
                         <div class="modality-value">{prob_values[2]:.1f}%</div>
                     </div>
                 </div>
-
+                
                 
                 <div class="detail-card">
                     <div class="detail-title">Modality Contributions</div>
                     <div class="modality-item">
-                        <div class="modality-color" style="background-color: var(--highlight);"></div>
+                        <div class="modality-color" style="background-color: #008080;"></div>
                         <div>Acoustic Analysis</div>
                         <div class="modality-value">{gate_weights[0]*100:.1f}%</div>
                     </div>
                     <div class="modality-item">
-                        <div class="modality-color" style="background-color: var( --accent-blue);"></div>
+                        <div class="modality-color" style="background-color: #457b9d;"></div>
                         <div>Linguistic Features</div>
                         <div class="modality-value">{gate_weights[1]*100:.1f}%</div>
                     </div>
                     <div class="modality-item">
-                        <div class="modality-color" style="background-color: var(--accent-teal);"></div>
+                        <div class="modality-color" style="background-color: #e76f51;"></div>
                         <div>Demographic Factors</div>
                         <div class="modality-value">{gate_weights[2]*100:.1f}%</div>
                     </div>
