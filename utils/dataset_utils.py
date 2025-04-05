@@ -178,8 +178,7 @@ def get_age_category(age: int) -> str:
     else:
         return "+80"
 
-def prepare_df(df: pd.DataFrame, 
-               audio_path: str,
+def prepare_df(audio_path: str,
                age: int,
                output_dir: str = "./processed_audio") -> pd.DataFrame:
     """
