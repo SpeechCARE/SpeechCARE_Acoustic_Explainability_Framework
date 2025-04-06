@@ -266,7 +266,7 @@ def generate_vocal_analysis_report(
                 
                 .reference-table th, .reference-table td {{
                     padding: 8px;
-                    text-align: center;
+                    text-align: left;
                     border-bottom: 1px solid var(--border-color);
                 }}
                 
@@ -296,7 +296,7 @@ def generate_vocal_analysis_report(
                 <div class="header">
                     <h1>Multimodal Audio Classification</h1>
                     <h2>Clinical Interpretation Report</h2>
-                    <p style="font-size: 15px; margin: 15px 0;">Analysis for sample: <strong style="font-size: 15px;">{sample_name}</strong></p>
+                    <p style="font-size: 20px; margin: 15px 0;">Analysis for sample: <strong style="font-size: 20px;">{sample_name}</strong></p>
                 </div>
                 <!-- Pause Analysis Section -->
                 <div class="feature-section">
