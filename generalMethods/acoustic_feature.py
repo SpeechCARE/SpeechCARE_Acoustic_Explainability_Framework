@@ -110,7 +110,7 @@ def compute_features(audio_path: str) -> Tuple[float, float, float, float]:
     # Extract shimmer features
     shimmer_mean = features['shimmerLocaldB_sma3nz_amean'].values[0]
     shimmer_std = features['shimmerLocaldB_sma3nz_stddevNorm'].values[0]
-    F3 = features['F3frequency_sma3nz_amean'].values[0]
+    F3 = features['F3frequency_sma3nz_stddevNorm'].values[0]
     F0 = features['F0semitoneFrom27.5Hz_sma3nz_stddevNorm'].values[0]
     
  
