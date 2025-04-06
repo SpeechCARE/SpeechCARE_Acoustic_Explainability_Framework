@@ -338,6 +338,7 @@ def generate_vocal_analysis_report(
                         <tr>
                             <th>Energy of Frequency Domain Range</th>
                             <th>Category</th>
+                            <th>Interpretation</th>
                         </tr>
                         {create_ranges_table(energy_analysis,'energy')}
                     </table>
@@ -389,6 +390,7 @@ def generate_vocal_analysis_report(
                         <tr>
                             <th>Shimmer Standard Deviation Range</th>
                             <th>Category</th>
+                            <th>Interpretation</th>
                         </tr>
                         {create_ranges_table(shimmer_analysis,'shimmer')}
                     </table>
@@ -411,6 +413,7 @@ def generate_vocal_analysis_report(
                         <tr>
                             <th>Frequency Range</th>
                             <th>Category</th>
+                            <th>Interpretation</th>
                         </tr>
                         {create_ranges_table(f0_analysis,'f0')}
                     </table>
@@ -434,6 +437,7 @@ def generate_vocal_analysis_report(
                         <tr>
                             <th>Frequency Range</th>
                             <th>Category</th>
+                            <th>Interpretation</th>
                         </tr>
                         {create_ranges_table(f3_analysis,'f3')}
                     </table>
