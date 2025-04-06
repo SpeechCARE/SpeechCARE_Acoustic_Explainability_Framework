@@ -374,7 +374,7 @@ def generate_vocal_analysis_report(
                 </div>
                 <!-- Shimmer Analysis Section-->
                 <div class="feature-section">
-                    <div class="feature-title">Shimmer Standard Deviation Analysis/div>
+                    <div class="feature-title">Shimmer Standard Deviation Analysis</div>
                     <div class="feature-grid">
                         <div class="feature-value">
                             <span>Measured Value:</span>
