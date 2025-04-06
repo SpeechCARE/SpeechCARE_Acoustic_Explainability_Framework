@@ -46,11 +46,12 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             # Prediction bar chart (left)
             bar_colors = ['#4CAF50','#ede28c', '#9c4940']    # accent green , orange , accent red
             bars = ax1.bar(class_names, prob_values, color=bar_colors, 
-                          edgecolor='white', linewidth=0.5, alpha=0.9)
+                          edgecolor='white', linewidth=0.5, alpha=1)
             ax1.set_title('Prediction Confidence', fontsize=14, pad=20, color='white', fontweight='bold')
-            ax1.set_ylabel('Probability (%)', fontsize=12, color='#b0b0b0')
+            ax1.set_ylabel('Probability (%)', fontsize=13, color='white')
             ax1.set_ylim(0, 100)
-            ax1.tick_params(axis='both', colors='#b0b0b0')
+            ax1.tick_params(axis='both', colors='white')
+            ax1.tick_params(axis='x', which='both', labelsize=13, colors='white')
             ax1.spines['bottom'].set_color('#404040')
             ax1.spines['left'].set_color('#404040')
             
@@ -333,10 +334,10 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             </div>
             
             <div class="audio-info">
-                <div class="detail-title">Audio Information</div>
-                <p><strong>Age:</strong> {demography_info}</p>
+                <div class="detail-title">Age</div>
+                <p><strong>Age Category:</strong> {demography_info}</p>
                 
-                <div class="detail-title" style="margin-top: 20px;">Transcript Analysis</div>
+                <div class="detail-title" style="margin-top: 20px;">Transcription of Audio File</div>
                 <div class="transcription">{model.transcription or "No transcription available"}</div>
             </div>
         </div>

@@ -18,12 +18,8 @@ from typing import Tuple, Dict, Union
 # Constants
 DEFAULT_CUTOFF_FREQ = 8000  # Hz
 DEFAULT_FILTER_ORDER = 5
-FEATURE_COLUMNS = [
-    'time_domain_energy',
-    'frequency_domain_energy',
-    'mean_shimmer',
-    'std_shimmer'
-]
+FEATURE_COLUMNS = ['shimmer_std','energy_frequency_domain', 'fundamental_frequency','formant_frequency']
+
 
 
 def remove_wav_extension(filename: str) -> str:
@@ -114,9 +110,11 @@ def compute_features(audio_path: str) -> Tuple[float, float, float, float]:
     # Extract shimmer features
     shimmer_mean = features['shimmerLocaldB_sma3nz_amean'].values[0]
     shimmer_std = features['shimmerLocaldB_sma3nz_stddevNorm'].values[0]
+    F3 = features['F3frequency_sma3nz_amean'].values[0]
+    F0 = features['F0semitoneFrom27.5Hz_sma3nz_stddevNorm'].values[0]
     
-    return time_energy_db, freq_energy_db, shimmer_mean, shimmer_std
-
+ 
+    return shimmer_std, freq_energy_db, F0, F3 #['shimmer_std','energy_frequency_domain', 'fundamental_frequency','formant_frequency']
 
 def _ensure_features_exist(
     data_df: pd.DataFrame,
@@ -152,24 +150,36 @@ def _calculate_value_ranges(values: np.ndarray, feature: str = None) -> Dict[str
     Returns:
         Dictionary mapping category names to (start, end) ranges
     """
-    feature = 'shimmer' if 'shimmer' in feature else 'vocal_energy'
+    
     min_value = values.min()
     max_value = values.max()
     category_width = (max_value - min_value) / 4
     
     # Define category naming schemes
     category_schemes = {
-        'shimmer': {
+        'shimmer_std': {
             'Q1': 'Stable',
             'Q2': 'Almost Stable',
             'Q3': 'Almost Unstable',
             'Q4': 'Unstable'
         },
-        'vocal_energy': {
-            'Q1': 'Low Energy',
-            'Q2': 'Mild Energy',
-            'Q3': 'Moderate Energy',
-            'Q4': 'Energetic'
+        'energy_frequency_domain': {
+            'Q1': 'Very Low',
+            'Q2': 'Low',
+            'Q3': 'Moderate',
+            'Q4': 'High'
+        },
+        'fundamental_frequency': {
+            'Q1': 'Very Flat',
+            'Q2': 'Slightly Flat',
+            'Q3': 'Natural',
+            'Q4': 'Dynamic'
+        },
+        'formant_frequency': {
+            'Q1': 'Very Limited Coordination',
+            'Q2': 'Limited Coordination',
+            'Q3': 'Normal Coordination',
+            'Q4': 'High Coordination'
         }
     }
     
@@ -195,8 +205,7 @@ def _calculate_value_ranges(values: np.ndarray, feature: str = None) -> Dict[str
 def analyze_column_single(
     data_df: pd.DataFrame,
     test_path: str,
-    column_name: str,
-    feature_columns: list = FEATURE_COLUMNS
+    column_name: str
 ) -> Dict[str, Union[str, float]]:
     """Analyze a test audio file relative to training data distribution.
     
@@ -204,7 +213,6 @@ def analyze_column_single(
         data_df: Reference DataFrame containing training data
         test_path: Path to test audio file
         column_name: Feature column to analyze
-        feature_columns: List of feature columns
         
     Returns:
         Dictionary containing analysis results:
@@ -221,6 +229,8 @@ def analyze_column_single(
     print(f"\nThe quartile ranges for '{column_name}' were calculated based on this reference distribution.")
     
     sample_name = test_path.split("/")[-1].split(".")[0]
+
+    feature_columns = FEATURE_COLUMNS
     
     # Input validation
     if column_name not in feature_columns:
