@@ -92,14 +92,14 @@ def generate_vocal_analysis_report(
             'shimmer': {
                 'Stable': 'Normal vocal fold vibration with minimal instability',
                 'Almost Stable': 'Mild vocal instability, typically not noticeable',
-                'Almost Unstable': 'Moderate instability that may affect voice quality',
-                'Unstable': 'Severe vocal instability, often clinically significant'
+                'Almost Unstable': 'Moderate vocal instability that may affect voice quality',
+                'Unstable': 'Severe vocal instability, often clinically noticable'
             },
             'energy': {
-                'Very Low': 'Reduced vocal intensity, may indicate weak phonation',
-                'Low': 'Slightly below average vocal power',
-                'Moderate': 'Normal speaking intensity range',
-                'High': 'Strong vocal projection'
+                'Very Low': 'Markedly reduced vocal intensity',
+                'Low': 'Below-average vocal intensity',
+                'Moderate': 'Typical vocal intensity range',
+                'High': 'Elevated vocal intensity'
             },
             'f0': {
                 'Very Flat': 'Extremely limited pitch variation (monotone)',
@@ -108,10 +108,10 @@ def generate_vocal_analysis_report(
                 'Dynamic': 'Exaggerated pitch changes'
             },
             'f3': {
-                'Very Limited Coordination': 'Very limited tongue–lip movement',
-                'Limited Coordination': 'Below-average coordination',
-                'Normal Coordination': 'Healthy tongue–lip timing and placement',
-                'High Coordination': 'Highly dynamic and well-controlled articulation'
+                'Very Limited Coordination': 'Very limited tongue–lip coordination',
+                'Limited Coordination': 'Below-average tongue-lip coordination',
+                'Normal Coordination': 'Healthy tongue–lip coordination',
+                'High Coordination': 'Healthy dynamic tongue–lip coordination and well-controlled articulation'
             }
         }
         
@@ -160,7 +160,7 @@ def generate_vocal_analysis_report(
             'Rhythmic': 'Normal speech rhythm with good prosody',
             'Relatively Rhythmic': 'Mild rhythm deviations, mostly natural',
             'Less Rhythmic': 'Noticeable rhythm disturbances',
-            'Non-Rhythmic': 'Severe rhythm impairment, potentially pathological'
+            'Non-Rhythmic': 'Severe rhythm disturbance, potentially pathological'
         }
         
         rows = []
@@ -296,7 +296,7 @@ def generate_vocal_analysis_report(
                 <div class="header">
                     <h1>Multimodal Audio Classification</h1>
                     <h2>Clinical Interpretation Report</h2>
-                    <p>Analysis for sample: <strong>{sample_name}</strong></p>
+                    <p style="font-size: 15px; margin: 15px 0;">Analysis for sample: <strong style="font-size: 15px;">{sample_name}</strong></p>
                 </div>
                 <!-- Pause Analysis Section -->
                 <div class="feature-section">
