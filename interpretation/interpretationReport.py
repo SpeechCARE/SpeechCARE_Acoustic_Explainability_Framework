@@ -141,7 +141,7 @@ def generate_vocal_analysis_report(
         
         rows = []
         for count, category in [('0 pauses', 'None'),
-                              ('1 pause', 'Single)'),
+                              ('1 pause', 'Single'),
                               ('2-3 pauses', 'Few'),
                               ('>3 pauses', 'Several')]:
             interpretation = pause_interpretations.get(category, '')
@@ -266,7 +266,7 @@ def generate_vocal_analysis_report(
                 
                 .reference-table th, .reference-table td {{
                     padding: 8px;
-                    text-align: left;
+                    text-align: center;
                     border-bottom: 1px solid var(--border-color);
                 }}
                 
