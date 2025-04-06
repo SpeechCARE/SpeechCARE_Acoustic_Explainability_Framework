@@ -102,10 +102,10 @@ def generate_vocal_analysis_report(
                 'High': 'Elevated vocal intensity'
             },
             'f0': {
-                'Very Flat': 'Extremely limited pitch variation (monotone)',
-                'Slightly Flat': 'Reduced but perceptible pitch changes',
-                'Natural': 'Normal pitch variation for speech',
-                'Dynamic': 'Exaggerated pitch changes'
+                'Very Flat': 'Monotonous speech',
+                'Slightly Flat': 'Reduced pitch variation',
+                'Natural': 'Natural pitch modulation',
+                'Dynamic': 'Strong pitch dynamics, energetic and engaging voice'
             },
             'f3': {
                 'Very Limited Coordination': 'Very limited tongue–lip coordination',
