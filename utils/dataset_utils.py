@@ -99,6 +99,10 @@ def lpfilter_audio_files(audio_path, output_dir):
     output_path = os.path.join(output_dir, audio_path.split("/")[-1].split(".")[0] + ".wav")
     try:
         noisy, sr = torchaudio.load(audio_path)
+        # Trim to 30 seconds
+        max_length = sr * 30  # Number of samples in 30 seconds
+        noisy = noisy[:, :max_length]  # Trim if longer than 30s
+        
         filtered_waveform = torch.tensor(lowpass(noisy, sr, 8000, 5))
         torchaudio.save(output_path, filtered_waveform, sr)
         return output_path
