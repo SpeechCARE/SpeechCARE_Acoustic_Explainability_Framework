@@ -645,6 +645,7 @@ def vocal_analysis_interpretation_report(sample_name: str, features: dict, pred_
                 position: relative;
                 list-style-type: none;
                 padding-left: 25px;
+                font-size: 17px;
             }}
             
             .interpretation-item:before {{
