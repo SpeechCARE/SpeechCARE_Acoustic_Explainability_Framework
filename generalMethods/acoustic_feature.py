@@ -72,7 +72,7 @@ def apply_lowpass_filter(
 
 
 
-def get_audio_files(root_dir: str, min_files: int = 1) -> pd.DataFrame:
+def get_audio_files(root_dir: str, min_files: int = 1168) -> pd.DataFrame:
     """
     Check if directory exists and contains enough audio files, then return their paths in a DataFrame.
     
