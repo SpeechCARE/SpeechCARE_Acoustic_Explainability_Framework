@@ -104,7 +104,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Model Decision Analysis</title>
+        <title style="color:#1a1c1f;" >Model Decision Analysis</title>
         <style>
             body {{
                 font-family: 'Segoe UI', system-ui, sans-serif;

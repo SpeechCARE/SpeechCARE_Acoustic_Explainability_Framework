@@ -284,8 +284,8 @@ def generate_vocal_analysis_report(
         <body>
             <div class="container">
                 <div class="header">
-                    <h1>Multimodal Audio Classification</h1>
-                    <h2>Clinical Interpretation Report</h2>
+                    <h1 style="color:#1a1c1f;" >Multimodal Audio Classification</h1>
+                    <h2 style="color:#1a1c1f;" >Clinical Interpretation Report</h2>
                     <p style="font-size: 20px; margin: 15px 0;">Analysis for sample: <strong style="font-size: 20px;">{sample_name}</strong></p>
                 </div>
                 <!-- Pause Analysis Section -->
@@ -510,39 +510,18 @@ def vocal_analysis_interpretation_report(sample_name: str, features: dict, pred_
         for feature in ['pause', 'energy', 'entropy', 'shimmer', 'f0', 'f3']
     ])
     
-    html = f"""
+    html =  f"""
     <!DOCTYPE html>
     <html>
     <head>
         <title>Vocal Feature Analysis Report</title>
         <style>
-            :root {{
-                --bg-color: #0d1117;
-                --text-color: #e6edf3;
-                --card-bg: #161b22;
-                --border-color: #30363d;
-                --highlight: #FFA726;
-                --accent-blue: #1E88E5;
-                --accent-green: #4CAF50;
-                --accent-teal: #26A69A;
-                --accent-red: #F44336;
-            }}
-            
-            [data-theme="light"] {{
-                --bg-color: #f8f9fa;
-                --text-color: #212529;
-                --card-bg: #ffffff;
-                --border-color: #dee2e6;
-                --highlight: #FF7043;
-            }}
-            
             body {{
                 font-family: 'Segoe UI', system-ui, sans-serif;
-                background-color: var(--bg-color);
-                color: var(--text-color);
+                background-color: #ffffff;
+                color: #212529;
                 margin: 0;
                 padding: 0;
-                transition: all 0.3s ease;
                 line-height: 1.6;
             }}
             
@@ -556,24 +535,24 @@ def vocal_analysis_interpretation_report(sample_name: str, features: dict, pred_
                 text-align: center;
                 margin-bottom: 30px;
                 padding-bottom: 20px;
-                border-bottom: 1px solid var(--border-color);
+                border-bottom: 1px solid #dee2e6;
             }}
             
             .feature-section {{
-                background-color: var(--card-bg);
+                background-color: #ffffff;
                 border-radius: 12px;
                 padding: 20px;
                 margin-bottom: 20px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                border: 1px solid var(--border-color);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+                border: 1px solid #dee2e6;
             }}
             
             .feature-title {{
                 font-size: 18px;
                 font-weight: 600;
                 margin-bottom: 15px;
-                color: var(--highlight);
-                border-bottom: 1px solid var(--border-color);
+                color: #FF7043;
+                border-bottom: 1px solid #dee2e6;
                 padding-bottom: 8px;
             }}
             
@@ -592,7 +571,7 @@ def vocal_analysis_interpretation_report(sample_name: str, features: dict, pred_
             
             .interpretation-item:before {{
                 content: "•";
-                color: var(--accent-teal);
+                color: #26A69A;
                 font-size: 24px;
                 position: absolute;
                 left: 0;
@@ -600,18 +579,20 @@ def vocal_analysis_interpretation_report(sample_name: str, features: dict, pred_
             }}
             
             .final-decision {{
-                background-color: var(--card-bg);
+                background-color: #ffffff;
                 border-radius: 12px;
                 padding: 25px;
                 margin-top: 30px;
-                border-left: 4px solid var(--highlight);
+                border-left: 4px solid #FF7043;
                 font-size: 17px;
                 line-height: 1.7;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+                border: 1px solid #dee2e6;
             }}
             
             .decision-label {{
                 font-weight: 600;
-                color: var(--highlight);
+                color: #FF7043;
                 margin-bottom: 10px;
                 display: block;
             }}
@@ -620,9 +601,9 @@ def vocal_analysis_interpretation_report(sample_name: str, features: dict, pred_
     <body>
         <div class="container">
             <div class="header">
-                <h1>Vocal Feature Analysis</h1>
-                <h2>Clinical Interpretation Report</h2>
-                <p style="font-size: 20px; margin: 15px 0;">Analysis for sample: <strong style="font-size: 20px;">{sample_name}</strong></p>
+                <h1 style="color:#1a1c1f;" >Vocal Feature Analysis</h1>
+                <h2 style="color:#1a1c1f;">Clinical Interpretation Report</h2>
+                <p style="font-size: 20px; margin: 15px 0; color:#1a1c1f;">Analysis for sample: <strong style="font-size: 20px;">{sample_name}</strong></p>
             </div>
             
             <!-- Vocal Feature Interpretations -->
@@ -639,40 +620,6 @@ def vocal_analysis_interpretation_report(sample_name: str, features: dict, pred_
                 {get_final_decision(pred_label)}
             </div>
         </div>
-        
-        <script>
-            function toggleTheme() {{
-                const html = document.documentElement;
-                const currentTheme = html.getAttribute('data-theme');
-                const toggleBtn = document.querySelector('.theme-toggle');
-                
-                if (currentTheme === 'light') {{
-                    html.removeAttribute('data-theme');
-                    toggleBtn.innerHTML = `
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                        <span>Dark Mode</span>
-                    `;
-                }} else {{
-                    html.setAttribute('data-theme', 'light');
-                    toggleBtn.innerHTML = `
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <span>Light Mode</span>
-                    `;
-                }}
-            }}
-        </script>
     </body>
     </html>
     """
