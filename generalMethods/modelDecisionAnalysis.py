@@ -64,7 +64,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                         color='white', fontsize=11, fontweight='bold',
                         path_effects=[patheffects.withStroke(linewidth=3, foreground='#333333')])
             # Remove vertical grid lines
-            ax1.grid(axis='x', visible=False)
+            ax1.grid(axis='both', visible=False)
             
             # Modality pie chart (right) - Orange accent theme
             pie_colors = ['#008080','#457b9d', '#e76f51']  # Teal, Blue,Orange
@@ -106,33 +106,12 @@ def generate_prediction_report(model, audio_path, demography_info, config):
     <head>
         <title>Model Decision Analysis</title>
         <style>
-            :root {{
-                --bg-color: #0d1117;
-                --text-color: #e6edf3;
-                --card-bg: #161b22;
-                --border-color: #30363d;
-                --highlight: #FFA726;
-                --accent-blue: #1E88E5;
-                --accent-green: #4CAF50;
-                --accent-teal: #26A69A;
-                --accent-red: #F44336;
-            }}
-            
-            [data-theme="light"] {{
-                --bg-color: #f8f9fa;
-                --text-color: #212529;
-                --card-bg: #ffffff;
-                --border-color: #dee2e6;
-                --highlight: #FF7043;
-            }}
-            
             body {{
                 font-family: 'Segoe UI', system-ui, sans-serif;
-                background-color: var(--bg-color);
-                color: var(--text-color);
+                background-color: #ffffff;
+                color: #212529;
                 margin: 0;
                 padding: 0;
-                transition: all 0.3s ease;
                 line-height: 1.6;
             }}
             
@@ -146,32 +125,16 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                 text-align: center;
                 margin-bottom: 30px;
                 padding-bottom: 20px;
-                border-bottom: 1px solid var(--border-color);
-                position: relative;
-            }}
-            
-            .theme-toggle {{
-                position: absolute;
-                right: 0;
-                top: 0;
-                background: var(--card-bg);
-                border: 1px solid var(--border-color);
-                border-radius: 20px;
-                padding: 5px 10px;
-                cursor: pointer;
-                font-size: 14px;
-                display: flex;
-                align-items: center;
-                gap: 8px;
+                border-bottom: 1px solid #dee2e6;
             }}
             
             .result-card {{
-                background-color: var(--card-bg);
+                background-color: #ffffff;
                 border-radius: 12px;
                 padding: 25px;
                 margin-bottom: 30px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                border: 1px solid var(--border-color);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+                border: 1px solid #dee2e6;
                 text-align: center;
             }}
             
@@ -179,22 +142,22 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                 font-size: 24px;
                 font-weight: 600;
                 margin-bottom: 10px;
-                color: var(--highlight);
+                color: #FF7043;
             }}
             
             .confidence {{
                 font-size: 18px;
-                color: var(--text-color);
+                color: #212529;
                 opacity: 0.9;
             }}
             
             .chart-container {{
-                background-color: var(--card-bg);
+                background-color: #ffffff;
                 border-radius: 12px;
                 padding: 20px;
                 margin-bottom: 30px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                border: 1px solid var(--border-color);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+                border: 1px solid #dee2e6;
             }}
             
             .details-grid {{
@@ -205,19 +168,19 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             }}
             
             .detail-card {{
-                background-color: var(--card-bg);
+                background-color: #ffffff;
                 border-radius: 12px;
                 padding: 20px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                border: 1px solid var(--border-color);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+                border: 1px solid #dee2e6;
             }}
             
             .detail-title {{
                 font-size: 18px;
                 font-weight: 600;
                 margin-bottom: 15px;
-                color: var(--highlight);
-                border-bottom: 1px solid var(--border-color);
+                color: #FF7043;
+                border-bottom: 1px solid #dee2e6;
                 padding-bottom: 8px;
             }}
             
@@ -227,7 +190,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                 margin: 12px 0;
                 padding: 10px;
                 border-radius: 8px;
-                background-color: rgba(255,255,255,0.05);
+                background-color: rgba(0,0,0,0.02);
             }}
             
             .modality-color {{
@@ -244,21 +207,21 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             }}
             
             .audio-info {{
-                background-color: var(--card-bg);
+                background-color: #ffffff;
                 border-radius: 12px;
                 padding: 20px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                border: 1px solid var(--border-color);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+                border: 1px solid #dee2e6;
             }}
             
             .info-title {{
                 font-weight: 600;
                 margin-bottom: 8px;
-                color: var(--accent-blue);
+                color: #1E88E5;
             }}
             
             .transcription {{
-                background-color: rgba(255,255,255,0.05);
+                background-color: rgba(0,0,0,0.02);
                 padding: 15px;
                 border-radius: 8px;
                 font-style: italic;
@@ -276,13 +239,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
         <div class="container">
             <div class="header">
                 <h1>Model Decision Analysis</h1>
-                <p style="text-align: center;">Comprehensive breakdown for: {os.path.basename(audio_path)}</p>
-                <div class="theme-toggle" onclick="toggleTheme()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <span>Dark Mode</span>
-                </div>
+                <p style="text-align: center; font-size: 18px;">Comprehensive breakdown for: {os.path.basename(audio_path)}</p>
             </div>
             
             <div class="result-card">
@@ -290,11 +247,10 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                 <div class="confidence">Confidence: {prob_values[predicted_label]:.1f}%</div>
             </div>
             
-          
             <div class="details-grid">
                 <div class="detail-card">
                     <div class="detail-title">Prediction Confidence</div>
-                    <div class="modality-item" style="border-left: 4px solid var(--accent-green);">
+                    <div class="modality-item" style="border-left: 4px solid #4CAF50;">
                         <div>Control</div>
                         <div class="modality-value">{prob_values[0]:.1f}%</div>
                     </div>
@@ -307,7 +263,6 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                         <div class="modality-value">{prob_values[2]:.1f}%</div>
                     </div>
                 </div>
-                
                 
                 <div class="detail-card">
                     <div class="detail-title">Modality Contributions</div>
@@ -341,40 +296,6 @@ def generate_prediction_report(model, audio_path, demography_info, config):
                 <div class="transcription">{model.transcription or "No transcription available"}</div>
             </div>
         </div>
-        
-        <script>
-            function toggleTheme() {{
-                const html = document.documentElement;
-                const currentTheme = html.getAttribute('data-theme');
-                const toggleBtn = document.querySelector('.theme-toggle');
-                
-                if (currentTheme === 'light') {{
-                    html.removeAttribute('data-theme');
-                    toggleBtn.innerHTML = `
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                        <span>Dark Mode</span>
-                    `;
-                }} else {{
-                    html.setAttribute('data-theme', 'light');
-                    toggleBtn.innerHTML = `
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <span>Light Mode</span>
-                    `;
-                }}
-            }}
-        </script>
     </body>
     </html>
     """
