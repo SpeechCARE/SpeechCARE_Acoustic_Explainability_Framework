@@ -4,7 +4,7 @@ This repository introduces a model-agnostic explainability framework designed fo
 
 - **Audio Spectrogram:** Visualizes the energy of frequency components over time.
 - **SHAP-based Spectrogram:** Highlights time spans that are most informative for the predicted outcome.
-- **Explainable Acoustic/Temporal Features:** Provides deeper insights into how key acoustic and temporal features relate to the desired outcome (e.g., cognitive status).
+- **Explainable Acoustic Features:** Provides deeper insights into how key acoustic features (Fundamental Frequency [F0] , Third Formant Frequency [F3], Shimmer, Energy of Frequency Domain, Rhythmic Structure, Pause count) relate to the desired outcome (e.g., cognitive status).
 
 The output of this framework is a spectrogram visualization that emphasizes informative acoustic and temporal features, accompanied by human-interpretable explanations.
 
@@ -14,117 +14,48 @@ Below is a sample output of our acoustic explainability framework applied to a c
 
 ![Example Output](figs/qnvo_spectrogram.png)
 
----
+## ⚙️ Setup
+
+To run this project successfully, you need to install **Python 3.10.0**.
+
+### ✅ Step 1: Install Python 3.10.0
+
+If you're using **Linux** or **macOS**, run the following commands:
+
+```bash
+sudo apt update
+sudo apt install -y software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install -y python3.10 python3.10-venv python3.10-dev
+```
+
+Then make sure to use Python 3.10:
+
+```bash
+python3.10 --version
+```
+
+If you're using **Windows**, download Python 3.10.0 from the official site:  
+📎 [https://www.python.org/downloads/release/python-3100/](https://www.python.org/downloads/release/python-3100/)
 
 ## 📁 Repository Structure
 
 ```
 ├── data/                       # Contains necessary data
-├── checkpoints/           # Contains checkpoints of the pretrained model
 ├── dataset/                    # Dataset architecture
+├── generalMethods/             # General-purpose methods used
+├── interpretation/             # Scripts for reporting interpretation results
 ├── model/                      # Model architecture
 ├── pauseExtraction/             # Contains code to extract pauses from audio input
-├── utils/                      # Utility scripts for preprocessing and evaluation
+├── SHAP/             # SHAP-based explainability methods for model interpretation
 ├── test/                 # A sample script for using the explanation on acoustic data
-├── result.ipynb                      # A notebook sample to show the output of the explanation method used
+├── utils/                      # Utility scripts for preprocessing and evaluation
 ├── requirements.txt              # Dependencies for the project
 ```
 
----
+## 📌 Notes
 
-## ⚙️ Configuration Files `*.yml`
+- Ensure that the dataset paths and model checkpoints are correctly set.
 
-Before running the project, you may need to adjust these configuration files:
-
-### ✅ data/model_config.yaml - Core Model Parameters
-
-When to modify: Change these if you want to:
-
-- Use different pretrained models
-
-- Adjust training hyperparameters (batch size, learning rate, etc.)
-
-- Modify model architecture settings
-
-### ✅ data/pause_config.yaml - Audio Processing
-
-When to modify: Only adjust these if you:
-
-- Need to process audio transcriptions (skip if you have existing transcripts)
-
-- Want to use GPU (device: "cuda")
-
-- Prefer a different Whisper model size
-
-**Default Note**: Both files come with working defaults - you can run the project immediately without changes for basic usage.
-
----
-
-## 🚀 Installation
-
-You can install the required dependencies using the `requirements.txt` file:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 🛠️ Explainability Testing
-
-Run SHAP-based explainability analysis on acoustic inputs using the provided test script. This generates model explanations and saves visualizations.
-
-### Quick Start
-
-```bash
-python test/test.py \
-  --model_checkpoint path/to/model.pt \
-  --audio_path path/to/audio.wav \
-  --demography_info 65 \          # Age of speaker
-  --fig_save_path results/result.png \      # Path to save result image
-  --min_pause_duration 0.15       # Minimum pause threshold (seconds)
-
-```
-
-#### 📋 Arguments Overview
-
-| Argument               | Required | Description                                                 |
-| ---------------------- | -------- | ----------------------------------------------------------- |
-| `--model_checkpoint`   | ✅       | Path to trained TBNet model weights (`.pt` file)            |
-| `--audio_path`         | ✅       | Input audio file path (WAV format recommended)              |
-| `--demography_info`    | ✅       | Speaker demographic value (e.g., age as integer)            |
-| `--fig_save_path`      | ✅       | Directory to save explanation visualizations                |
-| `--min_pause_duration` | ✅       | Minimum pause length (seconds) for detection                |
-| `--word_segments`      | ❌       | Optional JSON file with word timestamps: (see format below) |
-
-**_Word Segments JSON Format_**
-The script accepts the following format for word timestamps:
-
-```json
-{
-  "segments": [
-    {
-      "start": 0.0,
-      "end": 1.0,
-      "text": "Hello world",
-      "words": [
-        { "word": "Hello", "start": 0.0, "end": 0.5 },
-        { "word": "world", "start": 0.6, "end": 1.0 }
-      ]
-    }
-  ],
-  "word_segments": [
-    { "word": "Hello", "start": 0.0, "end": 0.5 },
-    { "word": "world", "start": 0.6, "end": 1.0 }
-  ]
-}
-```
-
-**_Note:_** When omitting --word_segments, the script automatically transcribes audio using the Whisper model specified in pause_config.yaml.
-
----
-
-## 📖 Detailed Tutorial & Examples
-
-For a complete step-by-step guide with sample data demonstrations and output visualizations, see the Jupyter notebook:
-`result.ipynb`
+## 🔗 References
