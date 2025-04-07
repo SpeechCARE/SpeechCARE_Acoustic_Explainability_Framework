@@ -13,7 +13,7 @@ from tqdm import tqdm
 import opensmile
 import scipy.signal as signal
 from typing import Tuple, Dict, Union
-
+from pathlib import Path
 
 # Constants
 DEFAULT_CUTOFF_FREQ = 8000  # Hz
@@ -69,6 +69,43 @@ def apply_lowpass_filter(
     normalized_cutoff = cutoff_freq / nyquist
     b, a = signal.butter(order, normalized_cutoff, btype='low', analog=False)
     return signal.lfilter(b, a, waveform)
+
+
+
+def get_audio_files(root_dir: str, min_files: int = 1) -> pd.DataFrame:
+    """
+    Check if directory exists and contains enough audio files, then return their paths in a DataFrame.
+    
+    Args:
+        root_dir (str): Path to directory to search
+        min_files (int): Minimum number of audio files required (default: 1)
+    
+    Returns:
+        pd.DataFrame: DataFrame with 'path' column containing audio file paths, 
+                      or None if conditions aren't met
+    
+    Raises:
+        ValueError: If root_dir doesn't exist
+    """
+    root_path = Path(root_dir)
+    
+    # Check if directory exists
+    if not root_path.exists() or not root_path.is_dir():
+        raise ValueError(f"Directory does not exist: {root_dir}")
+    
+    # Find all audio files
+    audio_extensions = {'.mp3', '.wav', '.WAV', '.MP3'}  # case-insensitive check
+    audio_files = [
+        str(file) for file in root_path.rglob('*')
+        if file.suffix.lower() in {ext.lower() for ext in audio_extensions}
+    ]
+    
+    # Check if meets threshold
+    if len(audio_files) < min_files:
+        raise ValueError(f"{len(audio_files)} audio samples are not enough for reference dataset.")
+    
+    # Create and return DataFrame
+    return pd.DataFrame({'path': audio_files})
 
 
 def compute_features(audio_path: str) -> Tuple[float, float, float, float]:

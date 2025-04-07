@@ -6,13 +6,13 @@ from typing import Optional, Tuple, Union, Any,List,Dict
 
 def categorize_pauses(num_pauses):
     if num_pauses == 0:
-        return "None"
+        return 0,"None"
     elif num_pauses == 1:
-        return "Single"
+        return 1,"Single"
     elif num_pauses in [2, 3]:
-        return "Few"
+        return 2,"Few"
     else:
-        return "Several"
+        return 3,"Several"
 
 def categorize_rhythmic_structure(flat_segments: List[Tuple[float, float]]) -> str:
     """
@@ -39,12 +39,12 @@ def categorize_rhythmic_structure(flat_segments: List[Tuple[float, float]]) -> s
     all_medium = all(5 <= d <= 6 for d in durations)
     
     if segment_count == 1 and 5 <= durations[0] <= 6:
-        return "Relatively Rhythmic"
+        return 1,"Relatively Rhythmic"
     elif (segment_count == 2 and all_medium) or has_medium_segment:
-        return "Less Rhythmic"
+        return 2,"Less Rhythmic"
     elif segment_count > 2 or has_long_segment:
-        return "Non-Rhythmic"
-    return "Rhythmic"
+        return 3, "Non-Rhythmic"
+    return 0,"Rhythmic"
 
 
 def generate_vocal_analysis_report(
@@ -74,8 +74,20 @@ def generate_vocal_analysis_report(
     # Calculate rhythm metrics
     total_flat_duration = sum(end - start for start, end in flat_segments)
     longest_flat = max([end - start for start, end in flat_segments] or [0])
-    rhythm_category = categorize_rhythmic_structure(flat_segments)
-    pause_category = categorize_pauses(pause_count)
+    rhythm_index , rhythm_category = categorize_rhythmic_structure(flat_segments)
+    pause_index , pause_category = categorize_pauses(pause_count)
+    shimmer_index = int(shimmer_analysis['category'].split(':')[0][1:]) - 1
+    energy_index = int(energy_analysis['category'].split(':')[0][1:]) - 1
+    f0_index = int(f0_analysis['category'].split(':')[0][1:]) - 1
+    f3_index = int(f3_analysis['category'].split(':')[0][1:]) - 1
+    features_index = {
+    'pause': pause_index,
+    'energy': energy_index,
+    'entropy': rhythm_index,
+    'shimmer': shimmer_index,
+    'f0': f0_index,
+    'f3': f3_index
+    }
         
     def create_ranges_table(ranges_dict: Dict, feature_type: str) -> str:
         """Generate HTML table rows for value ranges with interpretations
@@ -110,7 +122,7 @@ def generate_vocal_analysis_report(
             'f3': {
                 'Very Limited Coordination': 'Very limited tongue–lip coordination',
                 'Limited Coordination': 'Below-average tongue-lip coordination',
-                'Normal Coordination': 'Healthy tongue–lip coordination',
+                'Normal Coordination': 'Healthy tongu e–lip coordination',
                 'High Coordination': 'Healthy dynamic tongue–lip coordination and well-controlled articulation'
             }
         }
@@ -379,7 +391,7 @@ def generate_vocal_analysis_report(
                     <div class="feature-grid">
                         <div class="feature-value">
                             <span>Measured Value:</span>
-                            <span><strong>{shimmer_analysis['value']:.2f}%</strong></span>
+                            <span><strong>{shimmer_analysis['value']:.2f}</strong></span>
                         </div>
                         <div class="feature-value">
                             <span>Category:</span>
@@ -402,7 +414,7 @@ def generate_vocal_analysis_report(
                     <div class="feature-grid">
                         <div class="feature-value">
                             <span>Measured Value:</span>
-                            <span><strong>{f0_analysis['value']:.2f} Hz</strong></span>
+                            <span><strong>{f0_analysis['value']:.2f} KHz</strong></span>
                         </div>
                         <div class="feature-value">
                             <span>Category:</span>
@@ -422,11 +434,11 @@ def generate_vocal_analysis_report(
                 <!-- Formant Frequency Analysis -->
 
                 <div class="feature-section">
-                    <div class="feature-title">Formant Frequency Analysis</div>
+                    <div class="feature-title">Third Formant Frequency Analysis</div>
                     <div class="feature-grid">
                         <div class="feature-value">
                             <span>Measured Value:</span>
-                            <span><strong>{f3_analysis['value']:.2f} Hz</strong></span>
+                            <span><strong>{f3_analysis['value']:.2f} KHz</strong></span>
                         </div>
                         <div class="feature-value">
                             <span>Category:</span>
@@ -482,8 +494,243 @@ def generate_vocal_analysis_report(
         </html>
     """
 
+    return features_index , html
+
+
+
+
+def get_pause_interpret(quartile):
+    groups = ['No pauses', 'Single pause', 'Few pauses', 'Several pauses']
+    return f'{groups[quartile]} (e.g., pauses before nouns) were detected.'
+
+def get_energy_interpret(quartile):
+    groups = ['Very low', 'Low', 'Moderate', 'High']
+    return f'{groups[quartile]} energy level were observed in the voice (see Spectrogram highlighted in green).'
+
+def get_entropy_interpret(quartile):
+    groups = ['rhythmic, with no', 'relatively rhythmic, with minimal', 'less rhythmic, with some evidence of', 'non-rhythmic, with strong evidence of']
+    return f'Speech was {groups[quartile]} flat or monotonous segments (see Entropy curve)'
+
+def get_shimmer_interpret(quartile):
+    groups = [['stable', 'low'], ['almost stable', 'relatively low'], ['almost unstable', 'relatively high'], ['unstable', 'high']]
+    return f'The voice was {groups[quartile][0]} (standard deviation of Shimmer was {groups[quartile][1]}).'
+
+def get_f0_interpret(quartile):
+    groups = ['poor, with very flat or monotonous speech', 'limited, with slightly reduced pitch variation',
+              'relatively acceptable, with natural pitch modulation', 'acceptable, with strong pitch dynamics, energetic and engaging voice']
+    return f'Control over vocal folds was {groups[quartile]} (see F0 curve).'
+
+def get_f3_interpred(quartile):
+    groups = ['poor', 'limited', 'natural', 'precise']
+    return f'Tongue–lip coordination for phoneme and syllable production was {groups[quartile]} (see F3 curve).'
+
+def get_final_decision(pred_label):
+    if pred_label == 0:
+        return 'Overall, there were minimal signs of cognitive impairment, suggesting the individual is likely cognitively healthy.'
+    elif pred_label == 1:
+        return 'Overall, there were some signs of cognitive impairment, suggesting the individual has likely mild cognitive impairment.'
+    else:
+        return 'Overall, there were several signs of cognitive impairment, suggesting the individual is likely cognitively impaired.'
+    
+def vocal_analysis_interpretation_report(sample_name: str, features: dict, pred_label: int) -> str:
+    """
+    Generate an HTML report interpreting vocal features with bullet points.
+    
+    Args:
+        sample_name: Name of the sample being analyzed
+        features: Dictionary containing quartile indices for each feature:
+            {
+                'pause': int (0-3),
+                'energy': int (0-3),
+                'entropy': int (0-3),
+                'shimmer': int (0-3),
+                'f0': int (0-3),
+                'f3': int (0-3)
+            }
+        pred_label: Final prediction label (0-2)
+    
+    Returns:
+        str: HTML report as a string
+    """
+    # Generate interpretations
+    interpretations = {
+        'pause': get_pause_interpret(features['pause']),
+        'energy': get_energy_interpret(features['energy']),
+        'entropy': get_entropy_interpret(features['entropy']),
+        'shimmer': get_shimmer_interpret(features['shimmer']),
+        'f0': get_f0_interpret(features['f0']),
+        'f3': get_f3_interpred(features['f3'])
+    }
+    
+    # Generate bullet points HTML
+    bullet_points = "\n".join([
+        f'<li class="interpretation-item">{interpretations[feature]}</li>'
+        for feature in ['pause', 'energy', 'entropy', 'shimmer', 'f0', 'f3']
+    ])
+    
+    html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Vocal Feature Analysis Report</title>
+        <style>
+            :root {{
+                --bg-color: #0d1117;
+                --text-color: #e6edf3;
+                --card-bg: #161b22;
+                --border-color: #30363d;
+                --highlight: #FFA726;
+                --accent-blue: #1E88E5;
+                --accent-green: #4CAF50;
+                --accent-teal: #26A69A;
+                --accent-red: #F44336;
+            }}
+            
+            [data-theme="light"] {{
+                --bg-color: #f8f9fa;
+                --text-color: #212529;
+                --card-bg: #ffffff;
+                --border-color: #dee2e6;
+                --highlight: #FF7043;
+            }}
+            
+            body {{
+                font-family: 'Segoe UI', system-ui, sans-serif;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                margin: 0;
+                padding: 0;
+                transition: all 0.3s ease;
+                line-height: 1.6;
+            }}
+            
+            .container {{
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 20px;
+            }}
+            
+            .header {{
+                text-align: center;
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid var(--border-color);
+            }}
+            
+            .feature-section {{
+                background-color: var(--card-bg);
+                border-radius: 12px;
+                padding: 20px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border: 1px solid var(--border-color);
+            }}
+            
+            .feature-title {{
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 15px;
+                color: var(--highlight);
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 8px;
+            }}
+            
+            .interpretation-list {{
+                padding-left: 20px;
+                margin: 0;
+            }}
+            
+            .interpretation-item {{
+                margin-bottom: 10px;
+                position: relative;
+                list-style-type: none;
+                padding-left: 25px;
+            }}
+            
+            .interpretation-item:before {{
+                content: "•";
+                color: var(--accent-teal);
+                font-size: 24px;
+                position: absolute;
+                left: 0;
+                top: -2px;
+            }}
+            
+            .final-decision {{
+                background-color: var(--card-bg);
+                border-radius: 12px;
+                padding: 25px;
+                margin-top: 30px;
+                border-left: 4px solid var(--highlight);
+                font-size: 17px;
+                line-height: 1.7;
+            }}
+            
+            .decision-label {{
+                font-weight: 600;
+                color: var(--highlight);
+                margin-bottom: 10px;
+                display: block;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Vocal Feature Analysis</h1>
+                <h2>Clinical Interpretation Report</h2>
+                <p style="font-size: 20px; margin: 15px 0;">Analysis for sample: <strong style="font-size: 20px;">{sample_name}</strong></p>
+            </div>
+            
+            <!-- Vocal Feature Interpretations -->
+            <div class="feature-section">
+                <div class="feature-title">Vocal Feature Analysis Summary</div>
+                <ul class="interpretation-list">
+                    {bullet_points}
+                </ul>
+            </div>
+            
+            <!-- Final Decision -->
+            <div class="final-decision">
+                <span class="decision-label">Clinical Interpretation:</span>
+                {get_final_decision(pred_label)}
+            </div>
+        </div>
+        
+        <script>
+            function toggleTheme() {{
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-theme');
+                const toggleBtn = document.querySelector('.theme-toggle');
+                
+                if (currentTheme === 'light') {{
+                    html.removeAttribute('data-theme');
+                    toggleBtn.innerHTML = `
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                        <span>Dark Mode</span>
+                    `;
+                }} else {{
+                    html.setAttribute('data-theme', 'light');
+                    toggleBtn.innerHTML = `
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <span>Light Mode</span>
+                    `;
+                }}
+            }}
+        </script>
+    </body>
+    </html>
+    """
     return html
-
-
-
-

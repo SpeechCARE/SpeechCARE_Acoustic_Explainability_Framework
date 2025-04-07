@@ -3,6 +3,7 @@ import yaml
 from typing import Dict, Any
 import os
 
+
 def report(text, space = False):
     print(text)
     if space: print('-' * 50)
