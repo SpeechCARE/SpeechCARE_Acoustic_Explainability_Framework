@@ -109,7 +109,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
             body {{
                 font-family: 'Segoe UI', system-ui, sans-serif;
                 background-color: #ffffff;
-                color: #212529;
+                color: #131517;
                 margin: 0;
                 padding: 0;
                 line-height: 1.6;
