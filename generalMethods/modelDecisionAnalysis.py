@@ -238,7 +238,7 @@ def generate_prediction_report(model, audio_path, demography_info, config):
     <body>
         <div class="container">
             <div class="header">
-                <h1>Model Decision Analysis</h1>
+                <h1 style="color:#1a1c1f;" >Model Decision Analysis</h1>
                 <p style="text-align: center; font-size: 18px;">Comprehensive breakdown for: {os.path.basename(audio_path)}</p>
             </div>
             
